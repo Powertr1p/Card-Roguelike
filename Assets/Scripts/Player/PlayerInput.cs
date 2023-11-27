@@ -30,24 +30,29 @@ namespace DefaultNamespace.Player
                 
                 RaycastHit2D hit = _raycaster.GetRaycastHits();
                 
+                _lastClickedPosition = Input.mousePosition;
+                
                 if (hit)
                 {
                     if (hit.collider.TryGetComponent(out DragAndDropObject dndObject))
                     {
-                        _lastClickedPosition = Input.mousePosition;
                         _currentDraggingObject = dndObject;
                         dndObject.Grab();
                         _hasObject = true;
+                    }
+                    else if (hit.collider.TryGetComponent(out Card card))
+                    {
+                        EventCloseUp?.Invoke(card.transform.position);
+                        _isCloseUp = true;
                     }
                 }
             }
 
             if (!_hasObject) return;
-            
+                
             if (Input.GetMouseButton(0) && _lastClickedPosition != _lastMousePosition)
             {
-                _isDragging = true;
-                _currentDraggingObject.Drag();
+                PerformDragging();
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -82,6 +87,12 @@ namespace DefaultNamespace.Player
             }
 
             _lastMousePosition = Input.mousePosition;
+        }
+
+        private void PerformDragging()
+        {
+            _isDragging = true;
+            _currentDraggingObject.Drag();
         }
     }
 }
