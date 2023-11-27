@@ -78,7 +78,7 @@ namespace DefaultNamespace.Player
                     DisableDraggingState();
                 }
             }
-
+            
             _lastMousePosition = Input.mousePosition;
         }
 
