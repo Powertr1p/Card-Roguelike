@@ -36,14 +36,11 @@ namespace DefaultNamespace.Player
                 {
                     if (hit.collider.TryGetComponent(out DragAndDropObject dndObject))
                     {
-                        _currentDraggingObject = dndObject;
-                        dndObject.Grab();
-                        _hasObject = true;
+                        StartGrabState(dndObject);
                     }
                     else if (hit.collider.TryGetComponent(out Card card))
                     {
-                        EventCloseUp?.Invoke(card.transform.position);
-                        _isCloseUp = true;
+                        PerformCloseUp(card.transform.position);
                     }
                 }
             }
@@ -59,8 +56,7 @@ namespace DefaultNamespace.Player
             {
                 if (_lastClickedPosition == _lastMousePosition)
                 {
-                    EventCloseUp?.Invoke(_currentDraggingObject.transform.position);
-                    _isCloseUp = true;
+                    PerformCloseUp(_currentDraggingObject.transform.position);
                 }
                 
                 if (_isDragging)
@@ -69,24 +65,48 @@ namespace DefaultNamespace.Player
 
                     if (!ReferenceEquals(hit.collider,null))
                     {
-                        if (!hit.collider.TryGetComponent(out Card card)) return;
-                        
-                        Vector3 newPosition = card.transform.position;
-                        _currentDraggingObject.SetNewInitialPosition(newPosition);
-                        Destroy(card.gameObject);
+                        if (hit.collider.TryGetComponent(out Card card))
+                        {
+                            ConsumeCard(card);
+                        }
                     }
                     else
                     {
                         _currentDraggingObject.PlaceInitialPosition();
                     }
                     
-                    _isDragging = false;
-                    _currentDraggingObject = null;
-                    _hasObject = false;
+                    DisableDraggingState();
                 }
             }
 
             _lastMousePosition = Input.mousePosition;
+        }
+
+        private void StartGrabState(DragAndDropObject dndObject)
+        {
+            _currentDraggingObject = dndObject;
+            dndObject.Grab();
+            _hasObject = true;
+        }
+
+        private void DisableDraggingState()
+        {
+            _isDragging = false;
+            _currentDraggingObject = null;
+            _hasObject = false;
+        }
+
+        private void ConsumeCard(Card card)
+        {
+            Vector3 newPosition = card.transform.position;
+            _currentDraggingObject.SetNewInitialPosition(newPosition);
+            Destroy(card.gameObject);
+        }
+
+        private void PerformCloseUp(Vector3 position)
+        {
+            EventCloseUp?.Invoke(position);
+            _isCloseUp = true;
         }
 
         private void PerformDragging()
