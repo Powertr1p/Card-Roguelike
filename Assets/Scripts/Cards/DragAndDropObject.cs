@@ -1,19 +1,15 @@
-using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class DragAndDropObject : MonoBehaviour
 {
    private Camera _camera;
    private Vector3 _mousePosition;
-   private Vector3 _lastMouseUpPosition;
-   private Vector3 _lastMouseDownPosition;
-
-   private float _delta;
-   private bool _isDrag;
-   private bool _isDown;
+   private Vector3 _initialCardPosition;
 
    private void Awake()
    {
+      _initialCardPosition = transform.position;
       _camera = Camera.main;
    }
 
@@ -21,31 +17,29 @@ public class DragAndDropObject : MonoBehaviour
    {
       return _camera.WorldToScreenPoint(transform.position);
    }
-
-   private void OnMouseDown()
+   
+   public void Grab()
    {
-      _isDown = true;
       _mousePosition = Input.mousePosition - GetMousePosition();
-      _lastMouseDownPosition = Input.mousePosition;
+      gameObject.layer = 2;
    }
 
-   private void OnMouseUp()
-   {
-      _lastMouseUpPosition = Input.mousePosition;
-
-      if (_isDown && _lastMouseUpPosition == _lastMouseDownPosition)
-      {
-         Debug.Log("SHOW CARD");
-      }
+   public void PlaceInitialPosition()
+   { 
+      transform.DOMove(_initialCardPosition, 0.5f);
       
-      _isDrag = false;
-      _isDown = false;
+      gameObject.layer = 0;
    }
 
-   private void OnMouseDrag()
+   public void SetNewInitialPosition(Vector3 position)
    {
-      _isDrag = true;
+      _initialCardPosition = position;
+      transform.position = _initialCardPosition;
+      gameObject.layer = 0;
+   }
 
+   public void Drag()
+   {
       transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
    }
 }
