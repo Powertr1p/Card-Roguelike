@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class PlayerCard : Card, IDragAndDropable
+    public class PlayerHeroCard : HeroCard, IDragAndDropable
     {
         [SerializeField] private DragAndDropObject _dragBehaviour;
         
