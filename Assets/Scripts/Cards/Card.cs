@@ -3,13 +3,17 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class Card : MonoBehaviour
+    public abstract class Card : MonoBehaviour
     {
-        private CardData _data;
+        public CardData Data => _data;
+
+        protected CardData _data;
         
-        public void Initialize(Vector2Int position)
+        public virtual void Initialize(Vector2Int position)
         {
             _data = new CardData(position);
         }
+
+        protected abstract void Consume(Card consumeCard);
     }
 }

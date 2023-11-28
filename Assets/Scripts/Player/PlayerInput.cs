@@ -1,5 +1,6 @@
 using System;
 using Cards;
+using DefaultNamespace.Interfaces;
 using UnityEngine;
 
 namespace DefaultNamespace.Player
@@ -14,7 +15,7 @@ namespace DefaultNamespace.Player
         private bool _isDragging;
         private bool _isCloseUp;
         private bool _hasObject;
-        private DragAndDropObject _currentDraggingObject;
+        private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
 
@@ -34,7 +35,7 @@ namespace DefaultNamespace.Player
                 
                 if (hit)
                 {
-                    if (hit.collider.TryGetComponent(out DragAndDropObject dndObject))
+                    if (hit.collider.TryGetComponent(out IDragAndDropable dndObject))
                     {
                         StartGrabState(dndObject);
                     }
@@ -56,7 +57,7 @@ namespace DefaultNamespace.Player
             {
                 if (_lastClickedPosition == _lastMousePosition)
                 {
-                    PerformCloseUp(_currentDraggingObject.transform.position);
+                    PerformCloseUp(_currentDraggingObject.GetPosition());
                 }
                 
                 if (_isDragging)
@@ -82,7 +83,7 @@ namespace DefaultNamespace.Player
             _lastMousePosition = Input.mousePosition;
         }
 
-        private void StartGrabState(DragAndDropObject dndObject)
+        private void StartGrabState(IDragAndDropable dndObject)
         {
             _currentDraggingObject = dndObject;
             dndObject.Grab();

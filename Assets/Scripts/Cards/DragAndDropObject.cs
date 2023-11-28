@@ -6,10 +6,12 @@ public class DragAndDropObject : MonoBehaviour
    private Camera _camera;
    private Vector3 _mousePosition;
    private Vector3 _initialCardPosition;
+   private Transform _transform;
 
    private void Awake()
    {
-      _initialCardPosition = transform.position;
+      _transform = transform;
+      _initialCardPosition = _transform.position;
       _camera = Camera.main;
    }
 
@@ -26,7 +28,7 @@ public class DragAndDropObject : MonoBehaviour
 
    public void PlaceInitialPosition()
    { 
-      transform.DOMove(_initialCardPosition, 0.5f);
+      _transform.DOMove(_initialCardPosition, 0.5f);
       
       gameObject.layer = 0;
    }
@@ -34,12 +36,17 @@ public class DragAndDropObject : MonoBehaviour
    public void SetNewInitialPosition(Vector3 position)
    {
       _initialCardPosition = position;
-      transform.position = _initialCardPosition;
+      _transform.position = _initialCardPosition;
       gameObject.layer = 0;
    }
 
    public void Drag()
    {
-      transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
+      _transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
+   }
+
+   public Vector3 GetPosition()
+   {
+      return _transform.position;
    }
 }
