@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DefaultNamespace.Player
 {
-    public class CameraScrolling
+    public class CameraScrolling : MonoBehaviour
     {
         private Vector3 _diffCam;
         private bool _cameraDrag;
