@@ -8,6 +8,7 @@ namespace DefaultNamespace.Player
     public class PlayerInput : MonoBehaviour
     {
         [SerializeField] private Raycaster _raycaster;
+        [SerializeField] private CameraScrolling _cameraScrolling;
 
         public event Action<Vector2> EventCloseUp;
         public event Action<Action> EventReturnCamera;
@@ -45,9 +46,23 @@ namespace DefaultNamespace.Player
                     }
                 }
             }
-
-            if (!_hasObject) return;
+            
+            if (!_hasObject)
+            {
+                if (Input.GetMouseButton(0) && !_isCloseUp)
+                {
+                    _cameraScrolling.PerformScroll();
+                }
+                else
+                {
+                    _cameraScrolling.ExitScroll();
+                }
                 
+                return;
+            }
+
+            _cameraScrolling.ExitScroll();
+            
             if (Input.GetMouseButton(0) && _lastClickedPosition != _lastMousePosition)
             {
                 PerformDragging();
