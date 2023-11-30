@@ -4,27 +4,34 @@ namespace DefaultNamespace.Player
 {
     public class CameraScrolling : MonoBehaviour
     {
+        [SerializeField] private Camera _camera;
+
+        private Transform _cameraTransform;
+        
         private Vector3 _diffCam;
-        private bool _cameraDrag;
         private Vector3 _originCam;
+        
+        private bool _cameraDrag;
+
+        private void Awake()
+        {
+            _cameraTransform = _camera.transform;
+        }
 
         public void PerformScroll()
         {
-            Debug.Log("Sss");
-
-            _diffCam = Camera.main.ScreenToWorldPoint(Input.mousePosition) -
-                       Camera.main.transform.position;
+            _diffCam = _camera.ScreenToWorldPoint(Input.mousePosition) - _camera.transform.position;
 
             if (!_cameraDrag)
             {
                 _cameraDrag = true;
-                _originCam = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                _originCam = _camera.ScreenToWorldPoint(Input.mousePosition);
             }
 
             if (_cameraDrag)
             {
-                var pos = Camera.main.transform.position;
-                Camera.main.transform.position = new Vector3(pos.x, _originCam.y - _diffCam.y, pos.z);
+                var position = _cameraTransform.position;
+                _cameraTransform.position = new Vector3(position.x, _originCam.y - _diffCam.y, position.z);
             }
         }
 
