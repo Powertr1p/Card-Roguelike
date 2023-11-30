@@ -36,7 +36,8 @@ namespace DefaultNamespace
             _isPlaying = true;
             
             var targetPosition = new Vector3(position.x, position.y, _initialPosition.z);
-            
+            _initialPosition = _camera.transform.position;
+
             _camera.transform.DOMove(targetPosition, 0.5f);
             _camera.DOOrthoSize(1.1f, 0.5f).OnComplete(() =>
             {

@@ -77,7 +77,6 @@ namespace DefaultNamespace.Player
                 
                 if (_isDragging)
                 {
-
                     _currentDraggingObject.TryPlace();
                     
                     DisableDraggingState();
