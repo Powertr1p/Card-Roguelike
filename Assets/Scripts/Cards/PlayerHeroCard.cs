@@ -13,19 +13,15 @@ namespace Cards
         {
         }
 
-        public void Grab()
+        public void StartDragState()
         {
-            _dragBehaviour.Grab();
+            _dragBehaviour.EnterGrabState();
         }
 
-        public void PlaceInitialPosition()
+        public void ExitDragState()
         {
-            _dragBehaviour.PlaceInitialPosition();
-        }
-
-        public void SetNewInitialPosition(Vector3 position)
-        {
-            _dragBehaviour.SetNewInitialPosition(position);
+            TryPlaceSelf();
+            _dragBehaviour.ExitGrabState();
         }
 
         public void Drag()
@@ -33,12 +29,7 @@ namespace Cards
             _dragBehaviour.Drag();
         }
 
-        public Vector3 GetPosition()
-        {
-            return _dragBehaviour.GetPosition();
-        }
-
-        public void TryPlaceSelf()
+        private void TryPlaceSelf()
         {
             var hit = _raycaster.GetBoxcastNearestHit(transform);
             
@@ -51,6 +42,16 @@ namespace Cards
             {
                 PlaceInitialPosition();
             }
+        }
+        
+        private void PlaceInitialPosition()
+        {
+            _dragBehaviour.PlaceInitialPosition();
+        }
+
+        private void SetNewInitialPosition(Vector3 position)
+        {
+            _dragBehaviour.SetNewInitialPosition(position);
         }
 
         private void TryInteractWithOverlappedCard(RaycastHit2D hit)

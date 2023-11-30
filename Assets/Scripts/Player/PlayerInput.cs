@@ -15,11 +15,11 @@ namespace DefaultNamespace.Player
         
         private bool _isDragging;
         private bool _isCloseUp;
-        private bool _hasObject;
+        private bool _hasDraggingObject;
         private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
-        
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -38,43 +38,50 @@ namespace DefaultNamespace.Player
                 {
                     if (hit.collider.TryGetComponent(out IDragAndDropable dndObject))
                     {
-                        StartGrabState(dndObject);
-                    }
-                    else if (hit.collider.TryGetComponent(out Card card))
-                    {
-                        PerformCloseUp(card.transform.position);
+                        Grab(dndObject);
                     }
                 }
             }
             
-            if (!_hasObject) return;
-            
             if (Input.GetMouseButton(0) && _lastClickedPosition != _lastMousePosition)
             {
+                if (!_hasDraggingObject) return;
+                
                 PerformDragging();
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (_lastClickedPosition == _lastMousePosition)
+                if (_hasDraggingObject)
                 {
-                    PerformCloseUp(_currentDraggingObject.GetPosition());
+                    DisableDragging();
                 }
                 
-                if (_isDragging)
+                if (_lastClickedPosition == _lastMousePosition && !_isCloseUp && !_isDragging)
                 {
-                    _currentDraggingObject.TryPlaceSelf();
-                    
-                    DisableDraggingState();
+                    TryPerformCloseUp();
                 }
             }
             
             _lastMousePosition = Input.mousePosition;
         }
-        
+
+        private void TryPerformCloseUp()
+        {
+            RaycastHit2D hit = _raycaster.GetRaycastHit();
+
+            if (hit)
+            {
+                if (hit.collider.TryGetComponent(out Card card))
+                {
+                    PerformCloseUp(card.transform.position);
+                }
+            }
+        }
+
         private void LateUpdate()
         {
-            if (!_hasObject && !_isCloseUp)
+            if (!_hasDraggingObject && !_isCloseUp)
             {
                 _cameraScrolling.ListenToScrollMouse();
 
@@ -89,26 +96,20 @@ namespace DefaultNamespace.Player
             }
         }
 
-        private void StartGrabState(IDragAndDropable dndObject)
+        private void Grab(IDragAndDropable dndObject)
         {
             _currentDraggingObject = dndObject;
-            dndObject.Grab();
-            _hasObject = true;
+            dndObject.StartDragState();
+            _hasDraggingObject = true;
         }
 
-        private void DisableDraggingState()
+        private void DisableDragging()
         {
+            _currentDraggingObject.ExitDragState();
+
             _isDragging = false;
             _currentDraggingObject = null;
-            _hasObject = false;
-        }
-
-        private void ConsumeCard(Card card)
-        {
-            Vector3 newPosition = card.transform.position;
-            _currentDraggingObject.SetNewInitialPosition(newPosition);
-
-            Destroy(card.gameObject);
+            _hasDraggingObject = false;
         }
 
         private void PerformCloseUp(Vector3 position)

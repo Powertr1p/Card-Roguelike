@@ -4,11 +4,8 @@ namespace DefaultNamespace.Interfaces
 {
     public interface IDragAndDropable
     {
-        public void Grab();
-        public void PlaceInitialPosition();
-        public void SetNewInitialPosition(Vector3 position);
+        public void StartDragState();
         public void Drag();
-        public Vector3 GetPosition();
-        public void TryPlaceSelf();
+        public void ExitDragState();
     }
 }

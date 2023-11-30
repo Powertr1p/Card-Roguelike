@@ -20,7 +20,7 @@ public class DragAndDropObject : MonoBehaviour
       return _camera.WorldToScreenPoint(transform.position);
    }
    
-   public void Grab()
+   public void EnterGrabState()
    {
       _mousePosition = Input.mousePosition - GetMousePosition();
       gameObject.layer = 2;
@@ -29,8 +29,7 @@ public class DragAndDropObject : MonoBehaviour
    public void PlaceInitialPosition()
    { 
       _transform.DOMove(_initialCardPosition, 0.5f);
-      
-      gameObject.layer = 0;
+      ExitGrabState();
    }
 
    public void SetNewInitialPosition(Vector3 position)
@@ -43,6 +42,11 @@ public class DragAndDropObject : MonoBehaviour
    public void Drag()
    {
       _transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
+   }
+
+   public void ExitGrabState()
+   {
+      gameObject.layer = 0;
    }
 
    public Vector3 GetPosition()
