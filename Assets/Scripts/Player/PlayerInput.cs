@@ -19,7 +19,7 @@ namespace DefaultNamespace.Player
         private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
-
+        
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -46,26 +46,8 @@ namespace DefaultNamespace.Player
                     }
                 }
             }
-
-            if (!_hasObject)
-            {
-                if (_isCloseUp) return;
-                
-                _cameraScrolling.ListenToScrollMouse();
-                    
-                if (Input.GetMouseButton(0))
-                {
-                    _cameraScrolling.StartCameraScrolling();
-                }
-                else
-                {
-                    _cameraScrolling.StopCameraScrolling();
-                }
-
-                return;
-            }
-
-            _cameraScrolling.StopCameraScrolling();
+            
+            if (!_hasObject) return;
             
             if (Input.GetMouseButton(0) && _lastClickedPosition != _lastMousePosition)
             {
@@ -88,6 +70,23 @@ namespace DefaultNamespace.Player
             }
             
             _lastMousePosition = Input.mousePosition;
+        }
+        
+        private void LateUpdate()
+        {
+            if (!_hasObject && !_isCloseUp)
+            {
+                _cameraScrolling.ListenToScrollMouse();
+
+                if (Input.GetMouseButton(0))
+                {
+                    _cameraScrolling.StartCameraScrolling();
+                }
+                else
+                {
+                    _cameraScrolling.StopCameraScrolling();
+                }
+            }
         }
 
         private void StartGrabState(IDragAndDropable dndObject)
