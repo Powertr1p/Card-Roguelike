@@ -18,7 +18,7 @@ namespace DefaultNamespace.Player
             _cameraTransform = _camera.transform;
         }
 
-        public void PerformScroll()
+        public void StartCameraScrolling()
         {
             _diffCam = _camera.ScreenToWorldPoint(Input.mousePosition) - _camera.transform.position;
 
@@ -35,7 +35,7 @@ namespace DefaultNamespace.Player
             }
         }
 
-        public void ExitScroll()
+        public void StopCameraScrolling()
         {
             _cameraDrag = false;
         }

@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c605bfd2f64df7ba751305d63b6263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanScroll: 0
+  _camera: {fileID: 519420031}
 --- !u!1 &1555769700
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e60df203e7e94e43bef1db3a417b6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardPrefab: {fileID: 5448044238456122927, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
+  _cardPrefab: {fileID: 5294178869963137923, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
   _columns: 3
   _rows: 6
   _offset: {x: 2, y: 2.5}
@@ -741,6 +741,7 @@ GameObject:
   - component: {fileID: 1919648624}
   - component: {fileID: 1919648625}
   - component: {fileID: 1919648626}
+  - component: {fileID: 1919648627}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -833,7 +834,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317d4ad4a0b8461b9bd138bffe8bb506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 10
   _dragBehaviour: {fileID: 1919648624}
+  _raycaster: {fileID: 1919648627}
+--- !u!114 &1919648627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919648620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642b9aae46f24ff48bde5f032a834ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

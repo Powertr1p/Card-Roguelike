@@ -5,8 +5,20 @@ namespace Cards
 {
     public class HeroCard : Card
     {
-        protected override void Consume(Card consumeCard)
+        [SerializeField] protected int Hp = 10;
+        
+        public override void Interact(HeroCard interactorCard)
         {
+        }
+
+        public void Heal(int amount)
+        {
+            Hp += amount;
+        }
+
+        public void ApplyCardEffect()
+        {
+            
         }
     }
 }

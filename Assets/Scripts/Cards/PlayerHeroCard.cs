@@ -1,4 +1,5 @@
 using DefaultNamespace.Interfaces;
+using DefaultNamespace.Player;
 using UnityEngine;
 
 namespace Cards
@@ -6,10 +7,12 @@ namespace Cards
     public class PlayerHeroCard : HeroCard, IDragAndDropable
     {
         [SerializeField] private DragAndDropObject _dragBehaviour;
+        [SerializeField] private Raycaster _raycaster;
         
-        protected override void Consume(Card consumeCard)
+        public override void Interact(HeroCard interactorCard)
         {
-            
+            //сюда падает обычная карта
+            //спрашиваем
         }
 
         public void Grab()
@@ -35,6 +38,20 @@ namespace Cards
         public Vector3 GetPosition()
         {
             return _dragBehaviour.GetPosition();
+        }
+
+        public void TryPlace()
+        {
+            var hit = _raycaster.GetBoxcastNearestHit(transform);
+
+            if (hit)
+            {
+                SetNewInitialPosition(hit.collider.transform.position);
+            }
+            else
+            {
+                PlaceInitialPosition();
+            }
         }
     }
 }

@@ -1,9 +1,14 @@
+using UnityEngine;
+
 namespace Cards
 {
-    public class ItemCard : Card
+    public abstract class ItemCard : Card
     {
-        protected override void Consume(Card consumeCard)
+        public override void Interact(HeroCard interactor)
         {
+            ApplyItemEffectOnInteractor(interactor);
         }
+
+        protected abstract void ApplyItemEffectOnInteractor(HeroCard interactor);
     }
 }

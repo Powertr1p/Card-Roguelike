@@ -30,7 +30,7 @@ namespace DefaultNamespace.Player
                     return;
                 }
                 
-                RaycastHit2D hit = _raycaster.GetRaycastHits();
+                RaycastHit2D hit = _raycaster.GetRaycastHit();
                 
                 _lastClickedPosition = Input.mousePosition;
                 
@@ -51,17 +51,17 @@ namespace DefaultNamespace.Player
             {
                 if (Input.GetMouseButton(0) && !_isCloseUp)
                 {
-                    _cameraScrolling.PerformScroll();
+                    _cameraScrolling.StartCameraScrolling();
                 }
                 else
                 {
-                    _cameraScrolling.ExitScroll();
+                    _cameraScrolling.StopCameraScrolling();
                 }
                 
                 return;
             }
 
-            _cameraScrolling.ExitScroll();
+            _cameraScrolling.StopCameraScrolling();
             
             if (Input.GetMouseButton(0) && _lastClickedPosition != _lastMousePosition)
             {
@@ -77,19 +77,8 @@ namespace DefaultNamespace.Player
                 
                 if (_isDragging)
                 {
-                    RaycastHit2D hit = _raycaster.GetRaycastHits();
 
-                    if (!ReferenceEquals(hit.collider,null))
-                    {
-                        if (hit.collider.TryGetComponent(out Card card))
-                        {
-                            ConsumeCard(card);
-                        }
-                    }
-                    else
-                    {
-                        _currentDraggingObject.PlaceInitialPosition();
-                    }
+                    _currentDraggingObject.TryPlace();
                     
                     DisableDraggingState();
                 }
@@ -116,6 +105,7 @@ namespace DefaultNamespace.Player
         {
             Vector3 newPosition = card.transform.position;
             _currentDraggingObject.SetNewInitialPosition(newPosition);
+
             Destroy(card.gameObject);
         }
 

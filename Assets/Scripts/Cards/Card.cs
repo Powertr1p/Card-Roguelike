@@ -14,6 +14,6 @@ namespace Cards
             _data = new CardData(position);
         }
 
-        protected abstract void Consume(Card consumeCard);
+        public abstract void Interact(HeroCard heroCardConsumer);
     }
 }
