@@ -29,6 +29,7 @@ public class DragAndDropObject : MonoBehaviour
    public void PlaceInitialPosition()
    { 
       _transform.DOMove(_initialCardPosition, 0.5f);
+      
       ExitGrabState();
    }
 
@@ -36,7 +37,8 @@ public class DragAndDropObject : MonoBehaviour
    {
       _initialCardPosition = position;
       _transform.position = _initialCardPosition;
-      gameObject.layer = 0;
+      
+      ExitGrabState();
    }
 
    public void Drag()
@@ -47,10 +49,5 @@ public class DragAndDropObject : MonoBehaviour
    public void ExitGrabState()
    {
       gameObject.layer = 0;
-   }
-
-   public Vector3 GetPosition()
-   {
-      return _transform.position;
    }
 }

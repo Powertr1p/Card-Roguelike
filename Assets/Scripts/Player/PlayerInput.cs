@@ -66,30 +66,18 @@ namespace DefaultNamespace.Player
             _lastMousePosition = Input.mousePosition;
         }
 
-        private void TryPerformCloseUp()
-        {
-            RaycastHit2D hit = _raycaster.GetRaycastHit();
-
-            if (hit)
-            {
-                if (hit.collider.TryGetComponent(out Card card))
-                {
-                    PerformCloseUp(card.transform.position);
-                }
-            }
-        }
-
         private void LateUpdate()
         {
-            if (!_hasDraggingObject && !_isCloseUp)
+            if (!_hasDraggingObject)
             {
                 _cameraScrolling.ListenToScrollMouse();
 
                 if (Input.GetMouseButton(0))
                 {
-                    _cameraScrolling.StartCameraScrolling();
+                    if (!_isCloseUp)
+                        _cameraScrolling.StartCameraScrolling();
                 }
-                else
+                else if (Input.GetMouseButtonUp(0))
                 {
                     _cameraScrolling.StopCameraScrolling();
                 }
@@ -101,6 +89,19 @@ namespace DefaultNamespace.Player
             _currentDraggingObject = dndObject;
             dndObject.StartDragState();
             _hasDraggingObject = true;
+        }
+        
+        private void TryPerformCloseUp()
+        {
+            RaycastHit2D hit = _raycaster.GetRaycastHit();
+
+            if (hit)
+            {
+                if (hit.collider.TryGetComponent(out Card card))
+                {
+                    PerformCloseUp(card.transform.position);
+                }
+            }
         }
 
         private void DisableDragging()
