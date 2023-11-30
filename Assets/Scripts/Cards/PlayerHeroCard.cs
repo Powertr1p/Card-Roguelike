@@ -11,8 +11,6 @@ namespace Cards
         
         public override void Interact(HeroCard interactorCard)
         {
-            //сюда падает обычная карта
-            //спрашиваем
         }
 
         public void Grab()
@@ -40,18 +38,32 @@ namespace Cards
             return _dragBehaviour.GetPosition();
         }
 
-        public void TryPlace()
+        public void TryPlaceSelf()
         {
             var hit = _raycaster.GetBoxcastNearestHit(transform);
-
+            
             if (hit)
             {
                 SetNewInitialPosition(hit.collider.transform.position);
+                TryInteractWithOverlappedCard(hit);
             }
             else
             {
                 PlaceInitialPosition();
             }
+        }
+
+        private void TryInteractWithOverlappedCard(RaycastHit2D hit)
+        {
+            if (hit.collider.TryGetComponent(out ItemCard overlappedCard))
+            {
+                InteractWithOverlappedCard(overlappedCard);
+            }
+        }
+
+        private void InteractWithOverlappedCard(Card card)
+        {
+            card.Interact(this);
         }
     }
 }

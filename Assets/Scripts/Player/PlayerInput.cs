@@ -46,10 +46,14 @@ namespace DefaultNamespace.Player
                     }
                 }
             }
-            
+
             if (!_hasObject)
             {
-                if (Input.GetMouseButton(0) && !_isCloseUp)
+                if (_isCloseUp) return;
+                
+                _cameraScrolling.ListenToScrollMouse();
+                    
+                if (Input.GetMouseButton(0))
                 {
                     _cameraScrolling.StartCameraScrolling();
                 }
@@ -57,7 +61,7 @@ namespace DefaultNamespace.Player
                 {
                     _cameraScrolling.StopCameraScrolling();
                 }
-                
+
                 return;
             }
 
@@ -77,7 +81,7 @@ namespace DefaultNamespace.Player
                 
                 if (_isDragging)
                 {
-                    _currentDraggingObject.TryPlace();
+                    _currentDraggingObject.TryPlaceSelf();
                     
                     DisableDraggingState();
                 }

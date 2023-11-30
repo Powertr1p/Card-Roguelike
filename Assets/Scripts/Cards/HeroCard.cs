@@ -15,10 +15,5 @@ namespace Cards
         {
             Hp += amount;
         }
-
-        public void ApplyCardEffect()
-        {
-            
-        }
     }
 }

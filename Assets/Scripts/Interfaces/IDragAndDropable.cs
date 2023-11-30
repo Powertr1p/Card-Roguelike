@@ -9,6 +9,6 @@ namespace DefaultNamespace.Interfaces
         public void SetNewInitialPosition(Vector3 position);
         public void Drag();
         public Vector3 GetPosition();
-        public void TryPlace();
+        public void TryPlaceSelf();
     }
 }

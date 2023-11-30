@@ -7,9 +7,11 @@ namespace DefaultNamespace.Player
         [SerializeField] private Camera _camera;
 
         private Transform _cameraTransform;
-        
+
         private Vector3 _diffCam;
         private Vector3 _originCam;
+        
+        public float _scrollSpeed = 2.0f;
         
         private bool _cameraDrag;
 
@@ -38,6 +40,16 @@ namespace DefaultNamespace.Player
         public void StopCameraScrolling()
         {
             _cameraDrag = false;
+        }
+
+        public void ListenToScrollMouse()
+        {
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+            if (scroll == 0) return;
+            
+            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * _scrollSpeed);
+            _cameraTransform.position = newPosition;
         }
     }
 }
