@@ -39,7 +39,7 @@ namespace DefaultNamespace
             _initialPosition = _camera.transform.position;
 
             _camera.transform.DOMove(targetPosition, 0.5f);
-            _camera.DOOrthoSize(1.1f, 0.5f).OnComplete(() =>
+            _camera.DOFieldOfView(10f, 0.5f).OnComplete(() =>
             {
                 _isPlaying = false;
             });
@@ -52,7 +52,7 @@ namespace DefaultNamespace
             _isPlaying = true;
             
             _camera.transform.DOMove(_initialPosition, 0.5f);
-            _camera.DOOrthoSize(5f, 0.5f).OnComplete(() =>
+            _camera.DOFieldOfView(34f, 0.5f).OnComplete(() =>
             {
                 _isPlaying = false;
                 onCompleteCallback?.Invoke();
