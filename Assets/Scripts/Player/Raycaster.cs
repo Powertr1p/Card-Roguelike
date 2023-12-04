@@ -9,8 +9,8 @@ namespace DefaultNamespace.Player
         public RaycastHit2D GetRaycastHit()
         {
             Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = -Camera.main.transform.position.z; // Set the z-coordinate based on the camera's position
-            Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            mousePosition.z = -_camera.transform.position.z; // Set the z-coordinate based on the camera's position
+            Vector2 worldMousePosition = _camera.ScreenToWorldPoint(mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(worldMousePosition, Vector2.zero);
 

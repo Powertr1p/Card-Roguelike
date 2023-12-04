@@ -22,18 +22,19 @@ namespace DefaultNamespace.Player
 
         public void StartCameraScrolling()
         {
-            _diffCam = _camera.ScreenToWorldPoint(Input.mousePosition) - _camera.transform.position;
+            _diffCam = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _cameraTransform.position.z * -1f)) - _cameraTransform.position;
 
             if (!_cameraDrag)
             {
                 _cameraDrag = true;
-                _originCam = _camera.ScreenToWorldPoint(Input.mousePosition);
+                _originCam = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _cameraTransform.position.z * -1f));
             }
 
             if (_cameraDrag)
             {
                 var position = _cameraTransform.position;
-                _cameraTransform.position = new Vector3(position.x, _originCam.y - _diffCam.y, position.z);
+                var diff = _originCam.y - _diffCam.y;
+                _cameraTransform.position = new Vector3(position.x, diff, position.z);
             }
         }
 
