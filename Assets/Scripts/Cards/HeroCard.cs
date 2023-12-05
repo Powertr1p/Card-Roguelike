@@ -1,7 +1,4 @@
-using System;
 using DefaultNamespace.Effects;
-using DefaultNamespace.Effects.Enums;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Cards
@@ -34,7 +31,6 @@ namespace Cards
 
         public void IncreaseHp()
         {
-            Debug.Log("SSSS");
         }
 
         public void DecreaseHp(int amount)
