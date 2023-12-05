@@ -56,7 +56,7 @@ namespace Cards
 
         private void TryInteractWithOverlappedCard(RaycastHit2D hit)
         {
-            if (hit.collider.TryGetComponent(out ItemCard overlappedCard))
+            if (hit.collider.TryGetComponent(out EffectCard overlappedCard))
             {
                 InteractWithOverlappedCard(overlappedCard);
             }

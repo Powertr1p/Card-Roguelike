@@ -291,6 +291,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _scrollSpeed: 2
+--- !u!1 &588084464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588084465}
+  m_Layer: 0
+  m_Name: EffectsRepository
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &588084465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588084464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4572893, y: -1.4163436, z: -15.698894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e60df203e7e94e43bef1db3a417b6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardPrefab: {fileID: 5294178869963137923, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
+  _cardPrefab: {fileID: 8528698518851208355, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}
@@ -665,6 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 10
+  Shield: 0
   _dragBehaviour: {fileID: 1919648624}
   _raycaster: {fileID: 1919648627}
 --- !u!114 &1919648627
@@ -804,3 +836,4 @@ SceneRoots:
   - {fileID: 1731515873}
   - {fileID: 1555769703}
   - {fileID: 725052639}
+  - {fileID: 588084465}

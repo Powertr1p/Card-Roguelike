@@ -15,3 +15,5 @@ MonoBehaviour:
   _effectType: 0
   _affectParameter: 0
   _affectType: 0
+  _duration: 0
+  _amount: 5
