@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cards;
 using UnityEngine;
 
@@ -8,24 +9,24 @@ public class DeckSpawner : MonoBehaviour
     [SerializeField] private int _rows = 4;
     [SerializeField] private Vector2 _offset;
 
-    private void Start()
+    public List<Card> SpawnCards()
     {
-       SpawnCards();
-    }
-
-    private void SpawnCards()
-    {
+        List<Card> instancedCards = new List<Card>();
+        
         for (int i = 0; i < _rows; i++)
         {
             int nextPosition = GetStartPosition();
             
             for (int j = 0; j < _columns; j++)
             {
-                CreateCard(i,j, nextPosition);
+                var card =  CreateCard(i,j, nextPosition);
+                instancedCards.Add(card);
                 
                 nextPosition += (int)_offset.x;
             }
         }
+
+        return instancedCards;
     }
 
     private int GetStartPosition()
@@ -33,10 +34,12 @@ public class DeckSpawner : MonoBehaviour
         return -(_columns / 2) * (int)_offset.x;
     }
 
-    private void CreateCard(int row, int col, int position)
+    private Card CreateCard(int row, int col, int position)
     {
         var instance = Instantiate(_cardPrefab);
         instance.Initialize(new Vector2Int(row, col));
         instance.transform.position = new Vector3(position, row * _offset.y);
+
+        return instance;
     }
 }
