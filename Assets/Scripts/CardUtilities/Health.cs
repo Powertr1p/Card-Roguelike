@@ -1,4 +1,5 @@
 using System;
+using DefaultNamespace.Effects.Enums;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -15,12 +16,22 @@ public class Health : MonoBehaviour
         _shieldPoints = _maxShieldValue;
     }
 
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(int amount, AffectType type)
     {
         _healthPoints = Math.Max(_healthPoints - amount, 0);
     }
 
-    public void IncreaseHealth(int amount)
+    public void IncreaseHealth(int amount, AffectType type)
+    {
+        _healthPoints += amount;
+    }
+
+    public void IncreaseShield(int amount, AffectType type)
+    {
+        _shieldPoints += amount;
+    }
+    
+    public void DecreaseShield(int amount, AffectType type)
     {
         _shieldPoints = Math.Max(_shieldPoints - amount, 0);
     }

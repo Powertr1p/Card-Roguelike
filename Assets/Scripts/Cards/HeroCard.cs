@@ -1,17 +1,19 @@
 using DefaultNamespace.Effects;
+using DefaultNamespace.Effects.Enums;
 using UnityEngine;
 
 namespace Cards
 {
+    [RequireComponent(typeof(Health))]
     public class HeroCard : Card
     {
-        [SerializeField] protected int Hp = 10;
-        [SerializeField] protected int Shield = 0;
-
+        private Health _health;
         private EffectMapper _effectMapper;
 
         private void Awake()
         {
+            _health = GetComponent<Health>();
+            
             _effectMapper = new EffectMapper(this);
         }
 
@@ -21,31 +23,27 @@ namespace Cards
 
         public void ApplyEffect(Effect effect)
         {
-            _effectMapper.GetEffect(effect).Invoke(effect.Amount);
+            _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect.AffectType);
         }
 
-        public void IncreaseHp(int amount)
+        public void Heal(int amount, AffectType affectType)
         {
-            Hp += amount;
+            _health.IncreaseHealth(amount, affectType);
         }
 
-        public void IncreaseHp()
+        public void GetHpDamage(int amount, AffectType affectType)
         {
+            _health.DecreaseHealth(amount, affectType);
         }
 
-        public void DecreaseHp(int amount)
+        public void AddShield(int amount, AffectType affectType)
         {
-            Hp -= amount;
+            _health.IncreaseShield(amount, affectType);
         }
 
-        public void IncreaseShield(int amount)
+        public void GetShieldDamage(int amount, AffectType affectType)
         {
-            Shield += amount;
-        }
-
-        public void DecreaseShield(int amount)
-        {
-            Shield -= amount;
+            _health.DecreaseShield(amount, affectType);
         }
     }
 }

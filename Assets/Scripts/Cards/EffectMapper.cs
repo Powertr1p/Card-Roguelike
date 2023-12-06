@@ -7,22 +7,22 @@ namespace Cards
 {
     public class EffectMapper
     {
-        private Dictionary<(AffectParameter, EffectType), Action<int>> _effectMethods;
+        private Dictionary<(AffectParameter, EffectType), Action<int, AffectType>> _effectMethods;
 
         public EffectMapper(HeroCard player)
         {
-            _effectMethods = new Dictionary<(AffectParameter, EffectType), Action<int>>
+            _effectMethods = new Dictionary<(AffectParameter, EffectType), Action<int, AffectType>>
             {
-                {(AffectParameter.Health, EffectType.Positive), player.IncreaseHp },
-                {(AffectParameter.Shield, EffectType.Positive), player.IncreaseShield },
-                {(AffectParameter.Health, EffectType.Negative), player.DecreaseHp },
-                {(AffectParameter.Shield, EffectType.Negative), player.DecreaseShield },
+                {(AffectParameter.Health, EffectType.Positive), player.Heal },
+                {(AffectParameter.Shield, EffectType.Positive), player.AddShield },
+                {(AffectParameter.Health, EffectType.Negative), player.GetHpDamage },
+                {(AffectParameter.Shield, EffectType.Negative), player.GetShieldDamage },
             };
         }
 
-        public Action<int> GetEffect(Effect effect)
+        public Action<int, AffectType> GetEffect(Effect effect)
         {
-            return _effectMethods.TryGetValue((effect.AffectParameter, effect.EffectType), out Action<int> method) ? method : null;
+            return _effectMethods.TryGetValue((effect.AffectParameter, effect.EffectType), out Action<int, AffectType> method) ? method : null;
         }
     }
 }
