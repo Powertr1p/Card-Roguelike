@@ -1,3 +1,4 @@
+using System;
 using DefaultNamespace.Effects;
 using DefaultNamespace.Effects.Enums;
 using UnityEngine;

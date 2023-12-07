@@ -1,3 +1,4 @@
+using System;
 using DefaultNamespace.Interfaces;
 using DefaultNamespace.Player;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Cards
     {
         [SerializeField] private DragAndDropObject _dragBehaviour;
         [SerializeField] private Raycaster _raycaster;
+        
+        public event Action<Vector2Int, Card> TurnEnded;
         
         public override void Interact(HeroCard interactorCard)
         {
@@ -65,6 +68,8 @@ namespace Cards
         private void InteractWithOverlappedCard(Card card)
         {
             card.Interact(this);
+            Initialize(card.Data.Position);
+            TurnEnded?.Invoke(this.Data.Position, card);
         }
     }
 }
