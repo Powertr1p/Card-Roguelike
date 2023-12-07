@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cards;
+using DefaultNamespace.Player;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace DeckMaster
     public class DeckMaster : MonoBehaviour
     {
         [SerializeField] private PlayerHeroCard _player;
+        [SerializeField] private PlayerInput _input;
         [SerializeField] private DeckSpawner _spawner;
 
         private List<Card> _deckCards;
@@ -19,21 +21,18 @@ namespace DeckMaster
 
         private void OnEnable()
         {
-            _player.TurnEnded += ApplyConsequences;
+            _player.TurnEnded += ConsequencesState;
         }
 
         private void OnDisable()
         {
-            _player.TurnEnded -= ApplyConsequences;
+            _player.TurnEnded -= ConsequencesState;
         }
 
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
             _placements = _spawner.SpawnPlacementsForPlayer();
-            
-            //GetPositionedCard(new Vector2(0, 0), new Vector2(6, 0));
-            //StartCoroutine(OpenCards());
         }
 
         private IEnumerator OpenCards(List<Card> cardsToOpen)
@@ -66,28 +65,44 @@ namespace DeckMaster
             return pickedCards;
         }
         
-        private void ApplyConsequences(Vector2Int position, Card arg2)
+        //TODO: отрефакторить в стейт-машину
+        private void ConsequencesState(Vector2Int position, Card arg2)
         {
-            // if (_currentState == TurnState.PlayerPositioningTurn)
-            // {
+            if (_currentState == TurnState.PlayerPositioningTurn)
+            {
                 foreach (var placement in _placements)
                 {
                     placement.gameObject.SetActive(false);
                 }
                 
-                //TODO: брать позицию игрока из даты и плюсовать, проверять открыты ли карты уже или нет и не открытые открывать
-                
-               var cards =  GetPositionedCard(new Vector2(_player.Data.Position.x - 2, _player.Data.Position.y - 2), new Vector2(_player.Data.Position.x + 2, _player.Data.Position.y + 2));
-               StartCoroutine(OpenCards(cards));
-               
-               ChangeState(TurnState.PlayerTurn);
-            //}
-               
+                OpenCardsState();
+                ChangeState(TurnState.PlayerTurn);
+                return;
+            }
+
+            ChangeState(TurnState.DeckMasterTurn);
+            _input.DisableInput();
+            
+            DeckMasterTurn();
+            
+            ChangeState(TurnState.PlayerTurn);
+            _input.EnableInput();
         }
 
         private void ChangeState(TurnState nextState)
         {
             _currentState = nextState;
+        }
+
+        private void OpenCardsState()
+        {
+            var cards =  GetPositionedCard(new Vector2(_player.Data.Position.x - 2, _player.Data.Position.y - 2), new Vector2(_player.Data.Position.x + 2, _player.Data.Position.y + 2));
+            StartCoroutine(OpenCards(cards));
+        }
+
+        private void DeckMasterTurn()
+        {
+            
         }
     }
 }

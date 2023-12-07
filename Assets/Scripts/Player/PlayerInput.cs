@@ -16,12 +16,15 @@ namespace DefaultNamespace.Player
         private bool _isDragging;
         private bool _isCloseUp;
         private bool _hasDraggingObject;
+        private bool _isInputEnabled = true;
         private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
 
         private void Update()
         {
+            if (!_isInputEnabled) return;
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (_isCloseUp)
@@ -82,6 +85,16 @@ namespace DefaultNamespace.Player
                     _cameraScrolling.StopCameraScrolling();
                 }
             }
+        }
+        
+        public void DisableInput()
+        {
+            _isInputEnabled = false;
+        }
+
+        public void EnableInput()
+        {
+            _isInputEnabled = true;
         }
 
         private void Grab(IDragAndDropable dndObject)

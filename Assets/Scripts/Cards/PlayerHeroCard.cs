@@ -9,8 +9,15 @@ namespace Cards
     {
         [SerializeField] private DragAndDropObject _dragBehaviour;
         [SerializeField] private Raycaster _raycaster;
+
+        private bool _positioningTurn;
         
         public event Action<Vector2Int, Card> TurnEnded;
+
+        private void Start()
+        {
+            _positioningTurn = true;
+        }
         
         public override void Interact(HeroCard interactorCard)
         {
@@ -38,8 +45,14 @@ namespace Cards
             
             if (hit)
             {
-                SetNewInitialPosition(hit.collider.transform.position);
-                TryInteractWithOverlappedCard(hit);
+                if (TryInteractWithOverlappedCard(hit))
+                {
+                    SetNewInitialPosition(hit.collider.transform.position);
+                }
+                else
+                {
+                    PlaceInitialPosition();
+                }
             }
             else
             {
@@ -57,12 +70,34 @@ namespace Cards
             _dragBehaviour.SetNewInitialPosition(position);
         }
 
-        private void TryInteractWithOverlappedCard(RaycastHit2D hit)
+        private bool TryInteractWithOverlappedCard(RaycastHit2D hit)
         {
             if (hit.collider.TryGetComponent(out EffectCard overlappedCard))
             {
-                InteractWithOverlappedCard(overlappedCard);
+                if (CanPlaceCard(overlappedCard.Data.Position))
+                {
+                    InteractWithOverlappedCard(overlappedCard);
+                    return true;
+                }
+
+                return false;
             }
+
+            return false;
+        }
+
+        private bool CanPlaceCard(Vector2Int desiredPosition)
+        {
+            //TODO: вынести все это отсюда
+            
+            if (_positioningTurn)
+            {
+                _positioningTurn = false;
+                
+                return desiredPosition.y == Data.Position.y - 1;
+            }
+            
+            return (desiredPosition.x == Data.Position.x - 1 || desiredPosition.x == Data.Position.x + 1) && (desiredPosition.y == Data.Position.y - 1 || desiredPosition.y == Data.Position.y + 1);
         }
 
         private void InteractWithOverlappedCard(Card card)

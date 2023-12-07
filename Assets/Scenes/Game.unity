@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1919648626}
+  _input: {fileID: 725052638}
   _spawner: {fileID: 1731515874}
 --- !u!1 &1919648620
 GameObject:
