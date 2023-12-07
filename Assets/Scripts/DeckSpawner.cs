@@ -13,11 +13,11 @@ public class DeckSpawner : MonoBehaviour
     {
         List<Card> instancedCards = new List<Card>();
         
-        for (int i = 0; i < _rows; i++)
+        for (int i = 0; i < _columns; i++)
         {
             int nextPosition = GetStartPosition();
             
-            for (int j = 0; j < _columns; j++)
+            for (int j = 0; j < _rows; j++)
             {
                 var card =  CreateCard(i,j, nextPosition);
                 instancedCards.Add(card);
@@ -31,14 +31,14 @@ public class DeckSpawner : MonoBehaviour
 
     private int GetStartPosition()
     {
-        return -(_columns / 2) * (int)_offset.x;
+        return -(_rows / 2) * (int)_offset.x;
     }
 
-    private Card CreateCard(int row, int col, int position)
+    private Card CreateCard(int col, int row, int position)
     {
         var instance = Instantiate(_cardPrefab);
         instance.Initialize(new Vector2Int(row, col));
-        instance.transform.position = new Vector3(position, row * _offset.y);
+        instance.transform.position = new Vector3(position, col * _offset.y);
 
         return instance;
     }
