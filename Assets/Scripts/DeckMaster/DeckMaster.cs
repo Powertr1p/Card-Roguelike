@@ -12,11 +12,13 @@ namespace DeckMaster
         [SerializeField] private DeckSpawner _spawner;
 
         private List<Card> _deckCards;
+        private List<Card> _placements;
 
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
-
+            _placements = _spawner.SpawnPlacementsForPlayer();
+            
             GetPositionedCard(new Vector2(0, 0), new Vector2(6, 0));
 
             //StartCoroutine(OpenCards());
@@ -34,7 +36,7 @@ namespace DeckMaster
             }
         }
 
-        private List<Card> GetPositionedCard(Vector2 startPosition, Vector2 endPosition)
+        public List<Card> GetPositionedCard(Vector2 startPosition, Vector2 endPosition)
         {
             var pickedCards = new List<Card>();
 

@@ -8,7 +8,7 @@ namespace Cards
         public CardData Data => _data;
 
         protected CardData _data;
-        
+
         public virtual void Initialize(Vector2Int position)
         {
             _data = new CardData(position);

@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using DefaultNamespace.Effects;
-using DefaultNamespace.Effects.Enums;
 using UnityEngine;
 
 namespace Cards
 {
-    public class EffectCard : Card
+    public class EffectCard : DeckCard
     {
         [SerializeField] private List<Effect> _effects;
-        
+
         public override void Interact(HeroCard interactor)
         {
             ApplyItemEffectOnInteractor(interactor);
