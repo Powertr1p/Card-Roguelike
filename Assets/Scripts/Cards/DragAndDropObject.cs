@@ -1,53 +1,56 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class DragAndDropObject : MonoBehaviour
+namespace Cards
 {
-   private Camera _camera;
-   private Vector3 _mousePosition;
-   private Vector3 _initialCardPosition;
-   private Transform _transform;
-
-   private void Awake()
+   public class DragAndDropObject : MonoBehaviour
    {
-      _transform = transform;
-      _initialCardPosition = _transform.position;
-      _camera = Camera.main;
-   }
+      private Camera _camera;
+      private Vector3 _mousePosition;
+      private Vector3 _initialCardPosition;
+      private Transform _transform;
 
-   private Vector3 GetMousePosition()
-   {
-      return _camera.WorldToScreenPoint(transform.position);
-   }
+      private void Awake()
+      {
+         _transform = transform;
+         _initialCardPosition = _transform.position;
+         _camera = Camera.main;
+      }
+
+      private Vector3 GetMousePosition()
+      {
+         return _camera.WorldToScreenPoint(transform.position);
+      }
    
-   public void EnterGrabState()
-   {
-      _mousePosition = Input.mousePosition - GetMousePosition();
-      gameObject.layer = 2;
-   }
+      public void EnterGrabState()
+      {
+         _mousePosition = Input.mousePosition - GetMousePosition();
+         gameObject.layer = 2;
+      }
 
-   public void PlaceInitialPosition()
-   { 
-      _transform.DOMove(_initialCardPosition, 0.5f);
+      public void PlaceInitialPosition()
+      { 
+         _transform.DOMove(_initialCardPosition, 0.5f);
       
-      ExitGrabState();
-   }
+         ExitGrabState();
+      }
 
-   public void SetNewInitialPosition(Vector3 position)
-   {
-      _initialCardPosition = position;
-      _transform.position = _initialCardPosition;
+      public void SetNewInitialPosition(Vector3 position)
+      {
+         _initialCardPosition = position;
+         _transform.position = _initialCardPosition;
       
-      ExitGrabState();
-   }
+         ExitGrabState();
+      }
 
-   public void Drag()
-   {
-      _transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
-   }
+      public void Drag()
+      {
+         _transform.position = _camera.ScreenToWorldPoint(Input.mousePosition - _mousePosition);
+      }
 
-   public void ExitGrabState()
-   {
-      gameObject.layer = 0;
+      public void ExitGrabState()
+      {
+         gameObject.layer = 0;
+      }
    }
 }

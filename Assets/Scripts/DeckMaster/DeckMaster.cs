@@ -13,8 +13,9 @@ namespace DeckMaster
         [SerializeField] private PlayerHeroCard _player;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private DeckSpawner _spawner;
+        [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
 
-        private List<Card> _deckCards;
+        private List<DeckCard> _deckCards;
         private List<Card> _placements;
 
         private TurnState _currentState = TurnState.PlayerPositioningTurn;
@@ -35,24 +36,24 @@ namespace DeckMaster
             _placements = _spawner.SpawnPlacementsForPlayer();
         }
 
-        private IEnumerator OpenCards(List<Card> cardsToOpen)
+        private IEnumerator OpenCards(List<DeckCard> cardsToOpen)
         {
             foreach (var card in cardsToOpen)
             {
-                //TODO: если карты открыты, то не открывать
-                
-                card.transform.DORotate(new Vector3(0, 0, 0), 0.25f);
+                card.OpenCard();
 
                 yield return new WaitForSeconds(0.1f);;
             }
         }
 
-        private List<Card> GetPositionedCard(Vector2 startPosition, Vector2 endPosition)
+        private List<DeckCard> GetCardsToOpen(Vector2Int startPosition, Vector2Int endPosition)
         {
-            var pickedCards = new List<Card>();
+            var pickedCards = new List<DeckCard>();
 
             foreach (var card in _deckCards)
             {
+                if (card.Facing == FaceSate.FaceUp) continue;
+                
                 if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
                 {
                     if (card.Data.Position.x >= startPosition.x && card.Data.Position.x <= endPosition.x)
@@ -97,7 +98,7 @@ namespace DeckMaster
 
         private void OpenCardsState()
         {
-            var cards =  GetPositionedCard(new Vector2(_player.Data.Position.x - 2, _player.Data.Position.y - 2), new Vector2(_player.Data.Position.x + 2, _player.Data.Position.y + 2));
+            var cards =  GetCardsToOpen(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone);
             StartCoroutine(OpenCards(cards));
         }
 

@@ -1,6 +1,7 @@
 using System;
 using Cards;
 using DefaultNamespace.Interfaces;
+using Player;
 using UnityEngine;
 
 namespace DefaultNamespace.Player

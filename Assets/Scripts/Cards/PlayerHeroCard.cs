@@ -2,6 +2,7 @@ using System;
 using DeckMaster;
 using DefaultNamespace.Interfaces;
 using DefaultNamespace.Player;
+using Player;
 using UnityEngine;
 
 namespace Cards

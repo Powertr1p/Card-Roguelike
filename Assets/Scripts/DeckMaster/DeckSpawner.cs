@@ -2,76 +2,79 @@ using System.Collections.Generic;
 using Cards;
 using UnityEngine;
 
-public class DeckSpawner : MonoBehaviour
+namespace DeckMaster
 {
-    [SerializeField] private Card _cardPrefab;
-    [SerializeField] private Card _placementPrefab;
-    [SerializeField] private int _columns = 5;
-    [SerializeField] private int _rows = 4;
-    [SerializeField] private Vector2 _offset;
-
-    public List<Card> SpawnCards()
+    public class DeckSpawner : MonoBehaviour
     {
-        List<Card> instancedCards = new List<Card>();
-        
-        for (int i = 0; i < _columns; i++)
+        [SerializeField] private DeckCard _cardPrefab;
+        [SerializeField] private Card _placementPrefab;
+        [SerializeField] private int _columns = 5;
+        [SerializeField] private int _rows = 4;
+        [SerializeField] private Vector2 _offset;
+
+        public List<DeckCard> SpawnCards()
         {
-            int nextPosition = GetStartPosition();
+            List<DeckCard> instancedCards = new List<DeckCard>();
+        
+            for (int i = 0; i < _columns; i++)
+            {
+                int nextPosition = GetStartPosition();
             
-            for (int j = 0; j < _rows; j++)
-            {
-                var card = CreateCard();
-                PlaceObjectOnDeck(card,i, j, nextPosition);
-                instancedCards.Add(card);
+                for (int j = 0; j < _rows; j++)
+                {
+                    var card = CreateCard();
+                    PlaceObjectOnDeck(card,i, j, nextPosition);
+                    instancedCards.Add(card);
                 
-                nextPosition += (int)_offset.x;
+                    nextPosition += (int)_offset.x;
+                }
             }
+
+            return instancedCards;
         }
 
-        return instancedCards;
-    }
-
-    public List<Card> SpawnPlacementsForPlayer()
-    {
-        List<Card> instancedPlacements = new List<Card>();
-        
-        for (int i = 0; i < 1; i++)
+        public List<Card> SpawnPlacementsForPlayer()
         {
-            int nextPosition = GetStartPosition();
-
-            for (int j = 0; j < _rows; j++)
+            List<Card> instancedPlacements = new List<Card>();
+        
+            for (int i = 0; i < 1; i++)
             {
-                var placement = CreatePlayerPlacement();
-                PlaceObjectOnDeck(placement,i - 1, j, nextPosition);
-                instancedPlacements.Add(placement);
+                int nextPosition = GetStartPosition();
 
-                nextPosition += (int) _offset.x;
+                for (int j = 0; j < _rows; j++)
+                {
+                    var placement = CreatePlayerPlacement();
+                    PlaceObjectOnDeck(placement,i - 1, j, nextPosition);
+                    instancedPlacements.Add(placement);
+
+                    nextPosition += (int) _offset.x;
+                }
             }
+
+            return instancedPlacements;
         }
 
-        return instancedPlacements;
-    }
+        private int GetStartPosition()
+        {
+            return -(_rows / 2) * (int)_offset.x;
+        }
 
-    private int GetStartPosition()
-    {
-        return -(_rows / 2) * (int)_offset.x;
-    }
+        private DeckCard CreateCard()
+        {
+            var instance = Instantiate(_cardPrefab);
+            return instance;
+        }
 
-    private Card CreateCard()
-    {
-        var instance = Instantiate(_cardPrefab);
-        return instance;
-    }
+        private Card CreatePlayerPlacement()
+        {
+            var instance = Instantiate(_placementPrefab);
+            return instance;
+        }
 
-    private Card CreatePlayerPlacement()
-    {
-        var instance = Instantiate(_placementPrefab);
-        return instance;
-    }
-
-    private void PlaceObjectOnDeck(Card instance, int col, int row, int position)
-    {
-        instance.Initialize(new Vector2Int(row, col));
-        instance.transform.position = new Vector3(position, col * _offset.y);
+        private void PlaceObjectOnDeck(Card instance, int col, int row, int position)
+        {
+            instance.Initialize(new Vector2Int(row, col));
+            instance.transform.position = new Vector3(position, col * _offset.y);
+        }
     }
 }

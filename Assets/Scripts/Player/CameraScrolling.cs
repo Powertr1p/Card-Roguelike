@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DefaultNamespace.Player
+namespace Player
 {
     public class CameraScrolling : MonoBehaviour
     {
