@@ -1,4 +1,3 @@
-using System;
 using DefaultNamespace.Effects;
 using DefaultNamespace.Effects.Enums;
 using UnityEngine;
@@ -11,10 +10,9 @@ namespace Cards
         private Health _health;
         private EffectMapper _effectMapper;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _health = GetComponent<Health>();
-            
             _effectMapper = new EffectMapper(this);
         }
 

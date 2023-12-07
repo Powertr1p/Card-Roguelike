@@ -21,12 +21,12 @@ namespace DeckMaster
 
         private void OnEnable()
         {
-            _player.TurnEnded += ConsequencesState;
+            _player.EventTurnEnded += OnPlayerTurnEnded;
         }
 
         private void OnDisable()
         {
-            _player.TurnEnded -= ConsequencesState;
+            _player.EventTurnEnded -= OnPlayerTurnEnded;
         }
 
         private void Start()
@@ -66,13 +66,13 @@ namespace DeckMaster
         }
         
         //TODO: отрефакторить в стейт-машину
-        private void ConsequencesState(Vector2Int position, Card arg2)
+        private void OnPlayerTurnEnded(Vector2Int position, Card arg2)
         {
             if (_currentState == TurnState.PlayerPositioningTurn)
             {
                 foreach (var placement in _placements)
                 {
-                    placement.gameObject.SetActive(false);
+                    Destroy(placement.gameObject);
                 }
                 
                 OpenCardsState();

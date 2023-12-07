@@ -3,60 +3,57 @@ using DefaultNamespace.Player;
 using DG.Tweening;
 using UnityEngine;
 
-namespace DefaultNamespace
+public class CardCloseUp : MonoBehaviour
 {
-    public class CardCloseUp : MonoBehaviour
+    [SerializeField] private Camera _camera;
+    [SerializeField] private PlayerInput _input;
+
+    private Vector3 _initialPosition;
+    private bool _isPlaying;
+        
+    private void Awake()
     {
-        [SerializeField] private Camera _camera;
-        [SerializeField] private PlayerInput _input;
+        _initialPosition = _camera.transform.position;
+    }
 
-        private Vector3 _initialPosition;
-        private bool _isPlaying;
-        
-        private void Awake()
-        {
-            _initialPosition = _camera.transform.position;
-        }
+    private void OnEnable()
+    {
+        _input.EventCloseUp += CloseUpCard;
+        _input.EventReturnCamera += EventReturnCamera;
+    }
 
-        private void OnEnable()
-        {
-            _input.EventCloseUp += CloseUpCard;
-            _input.EventReturnCamera += EventReturnCamera;
-        }
+    private void OnDisable()
+    {
+        _input.EventCloseUp -= CloseUpCard;
+        _input.EventReturnCamera -= EventReturnCamera;
+    }
 
-        private void OnDisable()
-        {
-            _input.EventCloseUp -= CloseUpCard;
-            _input.EventReturnCamera -= EventReturnCamera;
-        }
-
-        private void CloseUpCard(Vector2 position)
-        {
-            if (_isPlaying) return;
-            _isPlaying = true;
+    private void CloseUpCard(Vector2 position)
+    {
+        if (_isPlaying) return;
+        _isPlaying = true;
             
-            var targetPosition = new Vector3(position.x, position.y, _initialPosition.z);
-            _initialPosition = _camera.transform.position;
+        var targetPosition = new Vector3(position.x, position.y, _initialPosition.z);
+        _initialPosition = _camera.transform.position;
 
-            _camera.transform.DOMove(targetPosition, 0.5f);
-            _camera.DOFieldOfView(10f, 0.5f).OnComplete(() =>
-            {
-                _isPlaying = false;
-            });
-        }
-        
-        private void EventReturnCamera(Action onCompleteCallback)
+        _camera.transform.DOMove(targetPosition, 0.5f);
+        _camera.DOFieldOfView(10f, 0.5f).OnComplete(() =>
         {
-            //переделать в секвенцию и проверять пока играется
-            if (_isPlaying) return;
-            _isPlaying = true;
+            _isPlaying = false;
+        });
+    }
+        
+    private void EventReturnCamera(Action onCompleteCallback)
+    {
+        //переделать в секвенцию и проверять пока играется
+        if (_isPlaying) return;
+        _isPlaying = true;
             
-            _camera.transform.DOMove(_initialPosition, 0.5f);
-            _camera.DOFieldOfView(34f, 0.5f).OnComplete(() =>
-            {
-                _isPlaying = false;
-                onCompleteCallback?.Invoke();
-            });
-        }
+        _camera.transform.DOMove(_initialPosition, 0.5f);
+        _camera.DOFieldOfView(34f, 0.5f).OnComplete(() =>
+        {
+            _isPlaying = false;
+            onCompleteCallback?.Invoke();
+        });
     }
 }

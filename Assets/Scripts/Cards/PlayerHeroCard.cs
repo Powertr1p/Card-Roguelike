@@ -1,4 +1,5 @@
 using System;
+using DeckMaster;
 using DefaultNamespace.Interfaces;
 using DefaultNamespace.Player;
 using UnityEngine;
@@ -12,8 +13,18 @@ namespace Cards
 
         private bool _positioningTurn;
         
-        public event Action<Vector2Int, Card> TurnEnded;
+        public event Action<Vector2Int, Card> EventTurnEnded;
+        public event Action<Vector2Int> EventPlacing;
 
+        private CardPositionChecker _positionChecker;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            _positionChecker = new CardPositionChecker();
+        }
+        
         private void Start()
         {
             _positioningTurn = true;
@@ -74,8 +85,11 @@ namespace Cards
         {
             if (hit.collider.TryGetComponent(out EffectCard overlappedCard))
             {
+                EventPlacing?.Invoke(overlappedCard.Data.Position);
+                
                 if (CanPlaceCard(overlappedCard.Data.Position))
                 {
+                    _positioningTurn = false;
                     InteractWithOverlappedCard(overlappedCard);
                     return true;
                 }
@@ -86,25 +100,21 @@ namespace Cards
             return false;
         }
 
-        private bool CanPlaceCard(Vector2Int desiredPosition)
+        private bool CanPlaceCard(Vector2Int desirePosition)
         {
-            //TODO: вынести все это отсюда
-            
             if (_positioningTurn)
             {
-                _positioningTurn = false;
-                
-                return desiredPosition.y == Data.Position.y - 1;
+                return desirePosition.y == Data.Position.y - 1;
             }
-            
-            return (desiredPosition.x >= Data.Position.x - 1 && desiredPosition.x <= Data.Position.x + 1) && (desiredPosition.y >= Data.Position.y - 1 && desiredPosition.y <= Data.Position.y + 1);
+
+            return _positionChecker.CanPositionCard(desirePosition, Data.Position);
         }
 
         private void InteractWithOverlappedCard(Card card)
         {
             card.Interact(this);
             Initialize(card.Data.Position);
-            TurnEnded?.Invoke(this.Data.Position, card);
+            EventTurnEnded?.Invoke(this.Data.Position, card);
         }
     }
 }
