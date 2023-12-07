@@ -37,13 +37,13 @@ namespace DeckMaster
 
         private IEnumerator OpenCards(List<Card> cardsToOpen)
         {
-            var waitForOneSecond = new WaitForSeconds(0.1f);
-
             foreach (var card in cardsToOpen)
             {
+                //TODO: если карты открыты, то не открывать
+                
                 card.transform.DORotate(new Vector3(0, 0, 0), 0.25f);
 
-                yield return waitForOneSecond;
+                yield return new WaitForSeconds(0.1f);;
             }
         }
 
@@ -84,6 +84,7 @@ namespace DeckMaster
             _input.DisableInput();
             
             DeckMasterTurn();
+            OpenCardsState();
             
             ChangeState(TurnState.PlayerTurn);
             _input.EnableInput();

@@ -97,7 +97,7 @@ namespace Cards
                 return desiredPosition.y == Data.Position.y - 1;
             }
             
-            return (desiredPosition.x == Data.Position.x - 1 || desiredPosition.x == Data.Position.x + 1) && (desiredPosition.y == Data.Position.y - 1 || desiredPosition.y == Data.Position.y + 1);
+            return (desiredPosition.x >= Data.Position.x - 1 && desiredPosition.x <= Data.Position.x + 1) && (desiredPosition.y >= Data.Position.y - 1 && desiredPosition.y <= Data.Position.y + 1);
         }
 
         private void InteractWithOverlappedCard(Card card)
