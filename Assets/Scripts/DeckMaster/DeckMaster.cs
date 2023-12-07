@@ -16,8 +16,6 @@ namespace DeckMaster
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
-            
-            Debug.Log(_deckCards.Count);
 
             StartCoroutine(OpenCards());
         }
