@@ -52,7 +52,7 @@ namespace DeckMaster
 
             foreach (var card in _deckCards)
             {
-                if (card.Facing == FaceSate.FaceUp) continue;
+                if (card.Facing == FaceSate.FaceUp && card.Condition == CardCondition.Dead) continue;
                 
                 if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
                 {
