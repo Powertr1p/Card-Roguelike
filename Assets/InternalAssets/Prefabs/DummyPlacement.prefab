@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b718765d298541d7be1f4921abbde93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deathSpritesContainer: {fileID: 7533385192099581532}
+  _mainSpritesContainer: {fileID: 7533385192099581532}
   _effects: []
 --- !u!1 &7533385192099581532
 GameObject:

@@ -5,10 +5,16 @@ namespace Cards
 {
     public abstract class DeckCard : Card
     {
+        [SerializeField] private GameObject _mainSpritesContainer;
+        [SerializeField] private GameObject _deathSpritesContainer;
+
         private Transform _transform;
 
         public FaceSate Facing => _facing;
+        public CardCondition Condition => _condition;
+        
         private FaceSate _facing = FaceSate.FaceDown;
+        private CardCondition _condition = CardCondition.Alive;
 
         private void Awake()
         {
@@ -21,6 +27,14 @@ namespace Cards
             {
                 _facing = FaceSate.FaceUp;
             });
+        }
+
+        protected void PerformDeath()
+        {
+            _mainSpritesContainer.SetActive(false);
+            _deathSpritesContainer.SetActive(true);
+            
+            _condition = CardCondition.Dead;
         }
     }
 }
