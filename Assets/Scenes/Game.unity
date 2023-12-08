@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 5229332580041227260, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1555769703
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e60df203e7e94e43bef1db3a417b6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardPrefab: {fileID: 8528698518851208355, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
+  _cardPrefab: {fileID: 5418021560702126794, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
   _placementPrefab: {fileID: -1771234892179650904, guid: ccb6ea4932389467d902a86c577ea0ab, type: 3}
   _columns: 7
   _rows: 7
@@ -480,6 +480,7 @@ MonoBehaviour:
   _player: {fileID: 1919648626}
   _input: {fileID: 725052638}
   _spawner: {fileID: 1731515874}
+  _visibleZone: {x: 2, y: 2}
 --- !u!1 &1919648620
 GameObject:
   m_ObjectHideFlags: 0

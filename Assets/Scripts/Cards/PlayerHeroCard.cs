@@ -84,8 +84,10 @@ namespace Cards
 
         private bool TryInteractWithOverlappedCard(RaycastHit2D hit)
         {
-            if (hit.collider.TryGetComponent(out EffectCard overlappedCard))
+            if (hit.collider.TryGetComponent(out DeckCard overlappedCard))
             {
+                var type = overlappedCard.GetType();
+                
                 EventPlacing?.Invoke(overlappedCard.Data.Position);
                 
                 if (CanPlaceCard(overlappedCard.Data.Position))
@@ -113,6 +115,15 @@ namespace Cards
 
         private void InteractWithOverlappedCard(Card card)
         {
+            if (card.TryGetComponent(out EnemyCard enemy))
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
             card.Interact(this);
             Initialize(card.Data.Position);
             EventTurnEnded?.Invoke(this.Data.Position, card);

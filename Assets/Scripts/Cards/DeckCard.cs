@@ -16,12 +16,12 @@ namespace Cards
         private FaceSate _facing = FaceSate.FaceDown;
         private CardCondition _condition = CardCondition.Alive;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _transform = transform;
         }
 
-        public void OpenCard()
+        public virtual void OpenCard()
         {
             _transform.DORotate(Vector3.zero, 0.25f).OnComplete(() =>
             {
