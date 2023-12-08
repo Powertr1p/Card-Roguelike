@@ -23,10 +23,9 @@ namespace Cards
 
         public virtual void OpenCard()
         {
-            _transform.DORotate(Vector3.zero, 0.25f).OnComplete(() =>
-            {
-                _facing = FaceSate.FaceUp;
-            });
+            _facing = FaceSate.FaceUp;
+
+            _transform.DORotate(Vector3.zero, 0.25f);
         }
 
         protected void PerformDeath()

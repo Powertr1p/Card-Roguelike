@@ -86,8 +86,6 @@ namespace Cards
         {
             if (hit.collider.TryGetComponent(out DeckCard overlappedCard))
             {
-                var type = overlappedCard.GetType();
-                
                 EventPlacing?.Invoke(overlappedCard.Data.Position);
                 
                 if (CanPlaceCard(overlappedCard.Data.Position))

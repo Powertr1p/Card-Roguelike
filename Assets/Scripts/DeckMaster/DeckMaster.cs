@@ -46,13 +46,15 @@ namespace DeckMaster
             }
         }
 
-        private List<DeckCard> GetCardsToOpen(Vector2Int startPosition, Vector2Int endPosition)
+        private List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition)
         {
             var pickedCards = new List<DeckCard>();
 
             foreach (var card in _deckCards)
             {
-                if (card.Facing == FaceSate.FaceUp && card.Condition == CardCondition.Dead) continue;
+                if (card.Facing == FaceSate.FaceUp || card.Condition == CardCondition.Dead) continue;
+                
+                Debug.Log(card.Facing == FaceSate.FaceUp);
                 
                 if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
                 {
@@ -98,13 +100,13 @@ namespace DeckMaster
 
         private void OpenCardsState()
         {
-            var cards =  GetCardsToOpen(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone);
+            var cards =  GetCardsAroundPlayer(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone);
             StartCoroutine(OpenCards(cards));
         }
 
         private void DeckMasterTurn()
         {
-            
+           
         }
     }
 }
