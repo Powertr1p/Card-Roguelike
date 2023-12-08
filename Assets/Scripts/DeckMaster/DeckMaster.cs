@@ -53,9 +53,7 @@ namespace DeckMaster
             foreach (var card in _deckCards)
             {
                 if (card.Facing == FaceSate.FaceUp || card.Condition == CardCondition.Dead) continue;
-                
-                Debug.Log(card.Facing == FaceSate.FaceUp);
-                
+
                 if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
                 {
                     if (card.Data.Position.x >= startPosition.x && card.Data.Position.x <= endPosition.x)
@@ -106,7 +104,9 @@ namespace DeckMaster
 
         private void DeckMasterTurn()
         {
-           
+            var nearestCards = GetCardsAroundPlayer(_player.Data.Position - Vector2Int.one, _player.Data.Position + Vector2Int.one);
+            
+            
         }
     }
 }
