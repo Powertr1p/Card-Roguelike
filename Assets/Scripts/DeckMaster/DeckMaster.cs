@@ -46,13 +46,13 @@ namespace DeckMaster
             }
         }
 
-        private List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition)
+        private List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
         {
             var pickedCards = new List<DeckCard>();
 
             foreach (var card in _deckCards)
             {
-                if (card.Facing == FaceSate.FaceUp || card.Condition == CardCondition.Dead) continue;
+                if (card.Facing == skipCondition || card.Condition == CardCondition.Dead) continue;
 
                 if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
                 {
@@ -65,7 +65,7 @@ namespace DeckMaster
 
             return pickedCards;
         }
-        
+
         //TODO: отрефакторить в стейт-машину
         private void OnPlayerTurnEnded(Vector2Int position, Card arg2)
         {
@@ -81,6 +81,8 @@ namespace DeckMaster
                 return;
             }
 
+            Debug.Log("ss");
+            
             ChangeState(TurnState.DeckMasterTurn);
             _input.DisableInput();
             
@@ -98,15 +100,18 @@ namespace DeckMaster
 
         private void OpenCardsState()
         {
-            var cards =  GetCardsAroundPlayer(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone);
+            var cards =  GetCardsAroundPlayer(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone, FaceSate.FaceUp);
             StartCoroutine(OpenCards(cards));
         }
 
         private void DeckMasterTurn()
         {
-            var nearestCards = GetCardsAroundPlayer(_player.Data.Position - Vector2Int.one, _player.Data.Position + Vector2Int.one);
-            
-            
+            var nearestCards = GetCardsAroundPlayer(_player.Data.Position - Vector2Int.one, _player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
+
+            foreach (var card in nearestCards)
+            {
+                Debug.Log(card, card.gameObject);
+            }
         }
     }
 }

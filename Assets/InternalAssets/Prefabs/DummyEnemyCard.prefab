@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 8087694594754018774}
   - component: {fileID: 5955524111173822516}
   - component: {fileID: 5418021560702126794}
+  - component: {fileID: 6431167648432870239}
   m_Layer: 0
   m_Name: DummyEnemyCard
   m_TagString: Untagged
@@ -536,6 +537,36 @@ MonoBehaviour:
   - {fileID: 1769307383220660899}
   - {fileID: 1609978871168870482}
   - {fileID: 7940225742899487333}
+--- !u!114 &6431167648432870239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229332580041227260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b8971609d34af0a50a599723eb1ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDirectionsList:
+  - _arrowSprite: {fileID: 420447977063703125}
+    _attackDirection: 0
+  - _arrowSprite: {fileID: 8708887344597715220}
+    _attackDirection: 1
+  - _arrowSprite: {fileID: 9037598806204408395}
+    _attackDirection: 2
+  - _arrowSprite: {fileID: 3748717134984449415}
+    _attackDirection: 3
+  _attackPositionList:
+  - _attackDirection: 0
+    _attackPosition: {x: 0, y: 1}
+  - _attackDirection: 1
+    _attackPosition: {x: -1, y: 0}
+  - _attackDirection: 2
+    _attackPosition: {x: 0, y: -1}
+  - _attackDirection: 3
+    _attackPosition: {x: 1, y: 0}
 --- !u!1 &5766251529153276125
 GameObject:
   m_ObjectHideFlags: 0
