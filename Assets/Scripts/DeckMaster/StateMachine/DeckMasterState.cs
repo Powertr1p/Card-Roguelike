@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cards;
+using DefaultNamespace.Player;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
 {
     public class DeckMasterState : State
     {
-        private List<DeckCard> _deckCards;
-        private PlayerHeroCard _player;
-        private MonoBehaviour _mono;
-
-        private Vector2Int _visibleZone = new Vector2Int(2,2);
+        private readonly Vector2Int _visibleZone = new Vector2Int(2,2);
         
-        public DeckMasterState(List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono)
+        public DeckMasterState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
+            : base(input, spawner, deckCards, playerCard, mono)
         {
             Name = TurnState.DeckMasterTurn;
             _deckCards = deckCards;
@@ -23,16 +21,13 @@ namespace DeckMaster.StateMachine
 
         public override void Enter()
         {
+            _input.DisableInput();
             base.Enter();
         }
 
         public override void Execute()
         {
             OpenCardsState();
-            
-            NextState = new PlayerTurnState(_deckCards, _player, _mono);
-            Stage = Event.Exit;
-            
             base.Execute();
         }
 
@@ -73,8 +68,10 @@ namespace DeckMaster.StateMachine
             {
                 card.OpenCard();
 
-                yield return new WaitForSeconds(0.1f);;
+                yield return new WaitForSeconds(0.1f);
             }
+            
+            NextState = new PlayerTurnState(_input, _spawner, _deckCards, _player, _mono).Process();
         }
     }
 }

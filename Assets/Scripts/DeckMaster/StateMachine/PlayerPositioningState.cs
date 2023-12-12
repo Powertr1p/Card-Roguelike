@@ -1,47 +1,39 @@
 using System.Collections.Generic;
 using Cards;
+using DefaultNamespace.Player;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
 {
     public class PlayerPositioningState : State
     {
-        private List<Card> _positionPlacements;
-        private List<DeckCard> _deckCards;
-        private DeckSpawner _spawner;
-        private PlayerHeroCard _player;
-        private MonoBehaviour _mono;
-
-        public PlayerPositioningState(DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono)
+        public PlayerPositioningState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
+            : base(input, spawner, deckCards, playerCard, mono)
         {
             Name = TurnState.PlayerPositioningTurn;
-            _deckCards = deckCards;
-            _spawner = spawner;
-            _player = playerCard;
         }
 
         public override void Enter()
         {
-            _positionPlacements = _spawner.SpawnPlacementsForPlayer();
-            
             base.Enter();
         }
 
         public override void Execute()
         {
-            foreach (var placement in _positionPlacements)
-            {
-                Object.Destroy(placement.gameObject);
-            }
-            
-            NextState = new DeckMasterState(_deckCards, _player, _mono);
-            Stage = Event.Exit;
+            _positionPlacements = _spawner.SpawnPlacementsForPlayer();
+
+            NextState = new DeckMasterState(_input, _spawner, _deckCards, _player, _mono);
             
             base.Execute();
         }
 
         public override void Exit()
         {
+            foreach (var placement in _positionPlacements)
+            {
+                Object.Destroy(placement.gameObject);
+            }
+            
             base.Exit();
         }
     }

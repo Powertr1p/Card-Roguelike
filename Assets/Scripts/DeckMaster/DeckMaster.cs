@@ -33,7 +33,7 @@ namespace DeckMaster
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
-            _currentState = new PlayerPositioningState(_spawner, _deckCards, _player, this);
+            _currentState = new PlayerPositioningState(_input, _spawner, _deckCards, _player, this);
             _currentState.Process();
         }
 
@@ -70,9 +70,9 @@ namespace DeckMaster
         //TODO: отрефакторить в стейт-машину
         private void OnPlayerTurnEnded(Vector2Int position, Card arg2)
         {
-            Debug.Log("ENDED");
-            _currentState.Process();
-            
+            Debug.Log("Player Turn Callback");
+            _currentState = _currentState.Process();
+
             //OpenCardsState();
             //_input.DisableInput();
             //DeckMasterTurn();

@@ -1,31 +1,31 @@
 using System.Collections.Generic;
 using Cards;
+using DefaultNamespace.Player;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
 {
     public class PlayerTurnState : State
     {
-        private List<DeckCard> _deckCards;
-        private PlayerHeroCard _player;
-        private MonoBehaviour _mono;
-
-        public PlayerTurnState(List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono)
+        public PlayerTurnState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
+            : base(input, spawner, deckCards, playerCard, mono)
         {
             Name = TurnState.PlayerTurn;
             _deckCards = deckCards;
             _player = playerCard;
             _mono = mono;
+            _input = input;
         }
 
         public override void Enter()
         {
+            _input.EnableInput();
             base.Enter();
         }
 
         public override void Execute()
         {
-            NextState = new DeckMasterState(_deckCards, _player, _mono);
+            NextState = new DeckMasterState(_input, _spawner, _deckCards, _player, _mono);
             Stage = Event.Exit;
             
             base.Execute();
