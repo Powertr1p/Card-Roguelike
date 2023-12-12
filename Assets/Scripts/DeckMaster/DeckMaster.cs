@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cards;
+using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
-using DG.Tweening;
 using UnityEngine;
 
 namespace DeckMaster
@@ -18,7 +18,7 @@ namespace DeckMaster
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
 
-        private TurnState _currentState = TurnState.PlayerPositioningTurn;
+        private State _currentState;
 
         private void OnEnable()
         {
@@ -33,7 +33,8 @@ namespace DeckMaster
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
-            _placements = _spawner.SpawnPlacementsForPlayer();
+            _currentState = new PlayerPositioningState(_spawner, _deckCards, _player, this);
+            _currentState.Process();
         }
 
         private IEnumerator OpenCards(List<DeckCard> cardsToOpen)
@@ -69,33 +70,14 @@ namespace DeckMaster
         //TODO: отрефакторить в стейт-машину
         private void OnPlayerTurnEnded(Vector2Int position, Card arg2)
         {
-            if (_currentState == TurnState.PlayerPositioningTurn)
-            {
-                foreach (var placement in _placements)
-                {
-                    Destroy(placement.gameObject);
-                }
-                
-                OpenCardsState();
-                ChangeState(TurnState.PlayerTurn);
-                return;
-            }
-
-            Debug.Log("ss");
+            Debug.Log("ENDED");
+            _currentState.Process();
             
-            ChangeState(TurnState.DeckMasterTurn);
-            _input.DisableInput();
-            
-            DeckMasterTurn();
-            OpenCardsState();
-            
-            ChangeState(TurnState.PlayerTurn);
-            _input.EnableInput();
-        }
-
-        private void ChangeState(TurnState nextState)
-        {
-            _currentState = nextState;
+            //OpenCardsState();
+            //_input.DisableInput();
+            //DeckMasterTurn();
+            //penCardsState();
+            //_input.EnableInput();
         }
 
         private void OpenCardsState()

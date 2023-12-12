@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using DeckMaster;
 using UnityEngine;
 using Event = DeckMaster.Event;
@@ -17,26 +16,32 @@ public class State
 
     public virtual void Enter()
     {
+        Debug.Log("ENTER");
+        
         Stage = Event.Execute;
     }
 
     public virtual void Execute()
     {
+        Debug.Log("EXEC");
         Stage = Event.Execute;
     }
 
     public virtual void Exit()
     {
+        Debug.Log("EXIT");
         Stage = Event.Exit;
     }
 
     public State Process()
     {
+        Debug.Log("PROCESS");
+        
         if (Stage == Event.Enter)
             Enter();
-        if (Stage == Event.Execute)
+        else if (Stage == Event.Execute)
             Execute();
-        if (Stage == Event.Exit)
+        else if (Stage == Event.Exit)
         {
             Exit();
             return NextState;
