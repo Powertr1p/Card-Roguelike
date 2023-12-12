@@ -22,12 +22,12 @@ namespace DeckMaster
 
         private void OnEnable()
         {
-            _player.EventTurnEnded += OnPlayerTurnEnded;
+            _player.EventTurnEnded += ChangeGameState;
         }
 
         private void OnDisable()
         {
-            _player.EventTurnEnded -= OnPlayerTurnEnded;
+            _player.EventTurnEnded -= ChangeGameState;
         }
 
         private void Start()
@@ -37,7 +37,7 @@ namespace DeckMaster
             _currentState.Process();
         }
         
-        private void OnPlayerTurnEnded(Vector2Int position, Card arg2)
+        private void ChangeGameState(Vector2Int position, Card arg2)
         {
             _currentState = _currentState.Process();
         }
