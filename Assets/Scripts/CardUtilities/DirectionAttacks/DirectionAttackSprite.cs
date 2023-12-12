@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CardUtilities
 {
     [System.Serializable]
-    public struct DirectionAttackSpriteMatcher
+    public struct DirectionAttackSprite
     {
         [SerializeField] private SpriteRenderer _arrowSprite;
         [SerializeField] private AttackDirection _attackDirection;
