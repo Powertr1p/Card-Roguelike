@@ -66,4 +66,24 @@ public class State
 
         return this;
     }
+    
+    protected List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
+    {
+        var pickedCards = new List<DeckCard>();
+
+        foreach (var card in DeckCards)
+        {
+            if (card.Facing == skipCondition || card.Condition == CardCondition.Dead) continue;
+
+            if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
+            {
+                if (card.Data.Position.x >= startPosition.x && card.Data.Position.x <= endPosition.x)
+                {
+                    pickedCards.Add(card);
+                }
+            }
+        }
+
+        return pickedCards;
+    }
 }

@@ -26,5 +26,18 @@ namespace Cards
             _directionAttacker.SetAttackDirection();
             base.OpenCard();
         }
+
+        public List<Vector2Int> GetTargetAttackPositions()
+        {
+            List<Vector2Int> positionToAttack = new List<Vector2Int>();
+            
+            foreach (var attackDirecton in _directionAttacker.AttackDirections)
+            {
+                var targetPosition = Data.Position + attackDirecton.GetAttackPosition;
+                positionToAttack.Add(targetPosition);
+            }
+
+            return positionToAttack;
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace DeckMaster
     {
         PlayerPositioningTurn,
         PlayerTurn,
-        DeckMasterTurn,
+        OpenCardsState,
+        CardsAttackState,
     }
 }
