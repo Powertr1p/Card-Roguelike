@@ -10,18 +10,14 @@ namespace DeckMaster.StateMachine
     {
         private readonly Vector2Int _visibleZone = new Vector2Int(2,2);
         
-        public DeckMasterState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
-            : base(input, spawner, deckCards, playerCard, mono)
+        public DeckMasterState(PlayerInput input, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) : base(input, deckCards, playerCard, mono)
         {
             Name = TurnState.DeckMasterTurn;
-            _deckCards = deckCards;
-            _player = playerCard;
-            _mono = mono;
         }
 
         public override void Enter()
         {
-            _input.DisableInput();
+            Input.DisableInput();
             base.Enter();
         }
 
@@ -38,15 +34,15 @@ namespace DeckMaster.StateMachine
         
         private void OpenCardsState()
         {
-            var cards =  GetCardsAroundPlayer(_player.Data.Position - _visibleZone, _player.Data.Position + _visibleZone, FaceSate.FaceUp);
-            _mono.StartCoroutine(OpenCards(cards));
+            var cards =  GetCardsAroundPlayer(Player.Data.Position - _visibleZone, Player.Data.Position + _visibleZone, FaceSate.FaceUp);
+            Mono.StartCoroutine(OpenCards(cards));
         }
         
         private List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
         {
             var pickedCards = new List<DeckCard>();
 
-            foreach (var card in _deckCards)
+            foreach (var card in DeckCards)
             {
                 if (card.Facing == skipCondition || card.Condition == CardCondition.Dead) continue;
 
@@ -71,7 +67,7 @@ namespace DeckMaster.StateMachine
                 yield return new WaitForSeconds(0.1f);
             }
             
-            NextState = new PlayerTurnState(_input, _spawner, _deckCards, _player, _mono).Process();
+            NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono).Process();
         }
     }
 }

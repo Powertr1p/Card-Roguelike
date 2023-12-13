@@ -31,7 +31,7 @@ namespace DeckMaster
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
-            _currentState = new PlayerPositioningState(_input, _spawner, _deckCards, _player, this);
+            _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState.Process();
         }
         

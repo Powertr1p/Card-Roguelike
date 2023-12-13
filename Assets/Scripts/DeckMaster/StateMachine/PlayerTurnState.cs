@@ -7,25 +7,20 @@ namespace DeckMaster.StateMachine
 {
     public class PlayerTurnState : State
     {
-        public PlayerTurnState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
-            : base(input, spawner, deckCards, playerCard, mono)
+        public PlayerTurnState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) : base(input, deckCards, playerCard, mono)
         {
             Name = TurnState.PlayerTurn;
-            _deckCards = deckCards;
-            _player = playerCard;
-            _mono = mono;
-            _input = input;
         }
 
         public override void Enter()
         {
-            _input.EnableInput();
+            Input.EnableInput();
             base.Enter();
         }
 
         public override void Execute()
         {
-            NextState = new DeckMasterState(_input, _spawner, _deckCards, _player, _mono);
+            NextState = new DeckMasterState(Input, DeckCards, Player, Mono);
             Stage = Event.Exit;
             
             base.Execute();

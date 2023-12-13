@@ -11,21 +11,21 @@ public class State
     public TurnState Name;
     protected Event Stage;
     protected State NextState;
-    protected PlayerInput _input;
-    protected List<Card> _positionPlacements;
-    protected List<DeckCard> _deckCards;
-    protected DeckSpawner _spawner;
-    protected PlayerHeroCard _player;
-    protected MonoBehaviour _mono;
+    protected readonly PlayerInput Input;
+    protected List<Card> PositionPlacements;
+    protected readonly List<DeckCard> DeckCards;
+    protected readonly DeckSpawner Spawner;
+    protected readonly PlayerHeroCard Player;
+    protected readonly MonoBehaviour Mono;
 
-    public State(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono)
+    public State(PlayerInput input, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono, DeckSpawner spawner = null)
     {
         Stage = Event.Enter;
-        _input = input;
-        _deckCards = deckCards;
-        _spawner = spawner;
-        _player = playerCard;
-        _mono = mono;
+        Input = input;
+        DeckCards = deckCards;
+        Spawner = spawner;
+        Player = playerCard;
+        Mono = mono;
     }
 
     public virtual void Enter()

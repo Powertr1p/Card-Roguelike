@@ -7,8 +7,7 @@ namespace DeckMaster.StateMachine
 {
     public class PlayerPositioningState : State
     {
-        public PlayerPositioningState(PlayerInput input, DeckSpawner spawner, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) 
-            : base(input, spawner, deckCards, playerCard, mono)
+        public PlayerPositioningState(PlayerInput input, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono, DeckSpawner spawner) : base(input, deckCards, playerCard, mono)
         {
             Name = TurnState.PlayerPositioningTurn;
         }
@@ -20,16 +19,16 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            _positionPlacements = _spawner.SpawnPlacementsForPlayer();
+            PositionPlacements = Spawner.SpawnPlacementsForPlayer();
 
-            NextState = new DeckMasterState(_input, _spawner, _deckCards, _player, _mono);
+            NextState = new DeckMasterState(Input, DeckCards, Player, Mono);
             
             base.Execute();
         }
 
         public override void Exit()
         {
-            foreach (var placement in _positionPlacements)
+            foreach (var placement in PositionPlacements)
             {
                 Object.Destroy(placement.gameObject);
             }
