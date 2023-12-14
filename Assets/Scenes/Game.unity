@@ -393,8 +393,8 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 0.15
-  easeType: 33
+  duration: 0.25
+  easeType: 26
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -502,9 +502,9 @@ MonoBehaviour:
   targetIsSelf: 1
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
-  delay: 0.15
+  delay: 0.25
   duration: 0.15
-  easeType: 6
+  easeType: 34
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -573,6 +573,10 @@ PrefabInstance:
     - target: {fileID: 5229332580041227260, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
       propertyPath: m_Name
       value: DummyEnemyCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5229332580041227260, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8087694594754018774, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
       propertyPath: m_LocalPosition.x
