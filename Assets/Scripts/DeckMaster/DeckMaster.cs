@@ -33,11 +33,13 @@ namespace DeckMaster
             _deckCards = _spawner.SpawnCards();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState.Process();
+            GameStateGetter.UpdateState(_currentState);
         }
         
         private void ChangeGameState(Vector2Int position, Card arg2)
         {
             _currentState = _currentState.Process();
+            GameStateGetter.UpdateState(_currentState);
         }
     }
 }

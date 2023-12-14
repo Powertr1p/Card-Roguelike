@@ -11,8 +11,6 @@ namespace Cards
         [SerializeField] private DragAndDropObject _dragBehaviour;
         [SerializeField] private Raycaster _raycaster;
 
-        private bool _positioningTurn;
-        
         public event Action<Vector2Int, Card> EventTurnEnded;
         public event Action<Vector2Int> EventPlacing;
 
@@ -24,12 +22,7 @@ namespace Cards
             
             _positionChecker = new CardPositionChecker();
         }
-        
-        private void Start()
-        {
-            _positioningTurn = true;
-        }
-        
+
         public override void Interact(HeroCard interactorCard)
         {
         }
@@ -89,7 +82,6 @@ namespace Cards
                 
                 if (CanPlaceCard(overlappedCard.Data.Position))
                 {
-                    _positioningTurn = false;
                     InteractWithOverlappedCard(overlappedCard);
                     return true;
                 }
@@ -102,7 +94,7 @@ namespace Cards
 
         private bool CanPlaceCard(Vector2Int desirePosition)
         {
-            if (_positioningTurn)
+            if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
                 return desirePosition.y == Data.Position.y - 1;
             }
@@ -114,13 +106,9 @@ namespace Cards
         {
             if (card.TryGetComponent(out EnemyCard enemy))
             {
-                
+                //TODO: жрем карту + монетки
             }
-            else
-            {
-                
-            }
-            
+
             card.Interact(this);
             Initialize(card.Data.Position);
             EventTurnEnded?.Invoke(this.Data.Position, card);
