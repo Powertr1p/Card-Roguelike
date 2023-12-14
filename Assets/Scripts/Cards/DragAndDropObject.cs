@@ -37,7 +37,7 @@ namespace Cards
 
       public void SetNewInitialPosition(Vector3 position)
       {
-         _initialCardPosition = position;
+         _initialCardPosition = new Vector3(position.x, position.y, _initialCardPosition.z);
          _transform.position = _initialCardPosition;
       
          ExitGrabState();

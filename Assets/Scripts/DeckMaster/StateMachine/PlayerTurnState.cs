@@ -20,7 +20,7 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
+            NextState = new CardsAttackState(Input, DeckCards, Player, Mono).Process();
             Stage = Event.Exit;
             
             base.Execute();

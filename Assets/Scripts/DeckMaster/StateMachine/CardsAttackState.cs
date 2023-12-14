@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cards;
 using DefaultNamespace.Player;
+using DG.Tweening;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
@@ -21,7 +23,7 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.Data.Position - Vector2Int.one, Player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
-            GetCardsThatCanAttackPlayer(cardsWithPossibleAttack);
+            Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack));
             
             NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
             
@@ -33,17 +35,17 @@ namespace DeckMaster.StateMachine
             base.Exit();
         }
 
-        private void GetCardsThatCanAttackPlayer(List<DeckCard> cardsAround)
+        private IEnumerator GetCardsThatCanAttackPlayer(List<DeckCard> cardsAround)
         {
             foreach (var card in cardsAround)
             {
-                if (!card.TryGetComponent(out EnemyCard enemy)) continue;
+                if (!card.TryGetComponent(out EnemyCard enemy)) yield return null;
                 
-                var attackPositions =  enemy.GetTargetAttackPositions();
+                var attackPositions = enemy.GetTargetAttackPositions();
 
                 if (IsPlayerInAttackPosition(attackPositions))
                 {
-                    Debug.LogError("PLAYER GOT DAMAGED!");
+                    yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position));
                 }
             }
         }

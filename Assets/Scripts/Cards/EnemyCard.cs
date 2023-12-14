@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
 using DefaultNamespace.Effects;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Cards
@@ -38,6 +40,22 @@ namespace Cards
             }
 
             return positionToAttack;
+        }
+
+        public IEnumerator PerformAttack(Vector3 position)
+        {
+            var animationEnded = false;
+            var cachedTransform = transform;
+            var initialPosition = cachedTransform.position;
+            var offset = new Vector3(0, 0f, -0.15f);
+
+            cachedTransform.DOMove(position + offset, 0.25f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                transform.DOMove(initialPosition, 0.15f).SetEase(Ease.OutFlash);
+                animationEnded = true;
+            });
+
+            yield return new WaitUntil(() => animationEnded);
         }
     }
 }
