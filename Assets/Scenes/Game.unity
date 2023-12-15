@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: 5418021560702126794, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
-  _placementPrefab: {fileID: -1771234892179650904, guid: ccb6ea4932389467d902a86c577ea0ab, type: 3}
+  _placementPrefab: {fileID: 1165252638641002743, guid: ccb6ea4932389467d902a86c577ea0ab, type: 3}
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}
@@ -887,6 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317d4ad4a0b8461b9bd138bffe8bb506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coins: 0
   _dragBehaviour: {fileID: 1919648624}
   _raycaster: {fileID: 1919648627}
 --- !u!114 &1919648627

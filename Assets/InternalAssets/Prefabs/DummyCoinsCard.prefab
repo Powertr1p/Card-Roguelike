@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &743782295643586483
 Transform:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2458039713280859367
 Transform:
   m_ObjectHideFlags: 0
@@ -359,8 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b718765d298541d7be1f4921abbde93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainSpritesContainer: {fileID: 482395458714422085}
-  _deathSpritesContainer: {fileID: 856518488478221778}
+  MainSpritesContainer: {fileID: 482395458714422085}
+  DeathSpritesContainer: {fileID: 856518488478221778}
   _effects:
   - {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
 --- !u!1 &7533385192099581532
