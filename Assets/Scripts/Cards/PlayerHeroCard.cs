@@ -15,12 +15,18 @@ namespace Cards
         public event Action<Vector2Int> EventPlacing;
 
         private CardPositionChecker _positionChecker;
+        private readonly Vector2Int _initialPosition = new Vector2Int(-2, -2);
 
         protected override void Awake()
         {
             base.Awake();
             
             _positionChecker = new CardPositionChecker();
+        }
+
+        private void Start()
+        {
+            Initialize(_initialPosition);
         }
 
         public override void Interact(HeroCard interactorCard)
@@ -96,7 +102,7 @@ namespace Cards
         {
             if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
-                return desirePosition.y == Data.Position.y - 1;
+                return desirePosition.y == -1;
             }
 
             return _positionChecker.CanPositionCard(desirePosition, Data.Position);

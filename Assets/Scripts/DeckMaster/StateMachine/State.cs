@@ -31,7 +31,6 @@ public class State
     public virtual void Enter()
     {
         Debug.Log( Name + " ENTER");
-        
         Stage = Event.Execute;
     }
 
@@ -49,10 +48,10 @@ public class State
 
     public State Process()
     {
-        Debug.Log(Name + " PROCESS");
+        //Debug.Log(Name + " PROCESS");
 
         if (Stage == Event.Execute)
-            Stage = Event.Exit;
+             Stage = Event.Exit;
 
         if (Stage == Event.Enter)
             Enter();

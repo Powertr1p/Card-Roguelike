@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Cards;
 using DefaultNamespace.Player;
@@ -20,8 +21,10 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             PositionPlacements = Spawner.SpawnPlacementsForPlayer();
-
-            NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
+            var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(Spawner.Rows - 1,0), FaceSate.FaceUp);
+            Mono.StartCoroutine(OpenCards(cards));
+            
+            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
             
             base.Execute();
         }
@@ -34,6 +37,16 @@ namespace DeckMaster.StateMachine
             }
             
             base.Exit();
+        }
+        
+        private IEnumerator OpenCards(List<DeckCard> cardsToOpen)
+        {
+            foreach (var card in cardsToOpen)
+            {
+                card.OpenCard();
+
+                yield return new WaitForSeconds(0.1f);
+            }
         }
     }
 }

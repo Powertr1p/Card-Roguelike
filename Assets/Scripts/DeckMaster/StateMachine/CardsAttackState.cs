@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Cards;
 using DefaultNamespace.Player;
-using DG.Tweening;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
@@ -17,6 +16,7 @@ namespace DeckMaster.StateMachine
         
         public override void Enter()
         {
+            Input.DisableInput();
             base.Enter();
         }
 
@@ -24,9 +24,7 @@ namespace DeckMaster.StateMachine
         {
             var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.Data.Position - Vector2Int.one, Player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
             Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack));
-            
-            NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
-            
+
             base.Execute();
         }
 
@@ -48,6 +46,9 @@ namespace DeckMaster.StateMachine
                     yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position));
                 }
             }
+
+            NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
+            Process();
         }
 
         private bool IsPlayerInAttackPosition(List<Vector2Int> attackPositions)

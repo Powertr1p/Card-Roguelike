@@ -12,6 +12,8 @@ namespace DeckMaster
         [SerializeField] private int _rows = 4;
         [SerializeField] private Vector2 _offset;
 
+        public int Rows => _rows;
+
         public List<DeckCard> SpawnCards()
         {
             List<DeckCard> instancedCards = new List<DeckCard>();

@@ -43,7 +43,8 @@ namespace DeckMaster.StateMachine
                 yield return new WaitForSeconds(0.1f);
             }
 
-            NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono).Process();
+            NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono);
+            Process();
         }
     }
 }
