@@ -364,7 +364,8 @@ MonoBehaviour:
   _mainSpritesContainer: {fileID: 482395458714422085}
   _deathSpritesContainer: {fileID: 856518488478221778}
   _directionAttacker: {fileID: 6431167648432870239}
-  _effects: []
+  _effects:
+  - {fileID: 11400000, guid: c898fbdeca5b2480d8d86e582c5b272e, type: 2}
 --- !u!114 &6431167648432870239
 MonoBehaviour:
   m_ObjectHideFlags: 0

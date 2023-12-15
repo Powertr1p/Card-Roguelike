@@ -57,5 +57,10 @@ namespace Cards
 
             yield return new WaitUntil(() => animationEnded);
         }
+
+        public List<Effect> GetEffects()
+        {
+            return _effects;
+        }
     }
 }
