@@ -50,8 +50,8 @@ public class State
     {
         //Debug.Log(Name + " PROCESS");
 
-        if (Stage == Event.Execute)
-             Stage = Event.Exit;
+          if (Stage == Event.Execute)
+               Stage = Event.Exit;
 
         if (Stage == Event.Enter)
             Enter();

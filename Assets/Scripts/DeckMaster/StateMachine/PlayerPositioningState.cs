@@ -23,10 +23,6 @@ namespace DeckMaster.StateMachine
             PositionPlacements = Spawner.SpawnPlacementsForPlayer();
             var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(Spawner.Rows - 1,0), FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards));
-            
-            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
-            
-            base.Execute();
         }
 
         public override void Exit()
@@ -47,6 +43,9 @@ namespace DeckMaster.StateMachine
 
                 yield return new WaitForSeconds(0.1f);
             }
+            
+            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
+            base.Execute();
         }
     }
 }

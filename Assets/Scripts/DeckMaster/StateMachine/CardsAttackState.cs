@@ -24,8 +24,6 @@ namespace DeckMaster.StateMachine
         {
             var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.Data.Position - Vector2Int.one, Player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
             Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack));
-
-            base.Execute();
         }
 
         public override void Exit()
@@ -46,8 +44,9 @@ namespace DeckMaster.StateMachine
                     yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position));
                 }
             }
-
+            
             NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
+            base.Execute();
             Process();
         }
 

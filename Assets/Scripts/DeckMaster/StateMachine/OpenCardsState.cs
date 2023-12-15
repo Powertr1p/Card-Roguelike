@@ -25,8 +25,6 @@ namespace DeckMaster.StateMachine
         {
             var cards =  GetCardsAroundPlayer(Player.Data.Position - _visibleZone, Player.Data.Position + _visibleZone, FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards));
-            
-            base.Execute();
         }
 
         public override void Exit()
@@ -42,8 +40,9 @@ namespace DeckMaster.StateMachine
 
                 yield return new WaitForSeconds(0.1f);
             }
-
+            
             NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono);
+            base.Execute();
             Process();
         }
     }
