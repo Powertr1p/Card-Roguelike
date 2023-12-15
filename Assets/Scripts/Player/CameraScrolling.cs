@@ -5,6 +5,7 @@ namespace Player
     public class CameraScrolling : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
+        [SerializeField] private Material _backgroundMaterial;
 
         private Transform _cameraTransform;
 
@@ -17,6 +18,7 @@ namespace Player
 
         private void Awake()
         {
+            ScrollBackgroundMaterial(_originCam.y, _diffCam.y);
             _cameraTransform = _camera.transform;
         }
 
@@ -35,6 +37,7 @@ namespace Player
                 var position = _cameraTransform.position;
                 var diff = _originCam.y - _diffCam.y;
                 _cameraTransform.position = new Vector3(position.x, diff, position.z);
+                ScrollBackgroundMaterial(diff);
             }
         }
 
@@ -51,6 +54,16 @@ namespace Player
             
             Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * _scrollSpeed);
             _cameraTransform.position = newPosition;
+        }
+        private void ScrollBackgroundMaterial(float subtracted)
+        {
+            _backgroundMaterial.SetFloat("_TimeValue", subtracted + 10);
+        }
+
+        private void ScrollBackgroundMaterial(float origin, float difference)
+        {
+            var subtracted = origin - difference;
+            _backgroundMaterial.SetFloat("_TimeValue", subtracted + 10);
         }
     }
 }
