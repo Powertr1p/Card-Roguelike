@@ -108,13 +108,8 @@ namespace Cards
             return _positionChecker.CanPositionCard(desirePosition, Data.Position);
         }
 
-        private void InteractWithOverlappedCard(Card card)
+        private void InteractWithOverlappedCard(DeckCard card)
         {
-            if (card.TryGetComponent(out EnemyCard enemy))
-            {
-                //TODO: жрем карту + монетки
-            }
-
             card.Interact(this);
             Initialize(card.Data.Position);
             EventTurnEnded?.Invoke(this.Data.Position, card);

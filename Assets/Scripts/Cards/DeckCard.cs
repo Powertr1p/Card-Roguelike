@@ -1,12 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Cards
 {
     public abstract class DeckCard : Card
     {
-        [SerializeField] private GameObject _mainSpritesContainer;
-        [SerializeField] private GameObject _deathSpritesContainer;
+        [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
+        [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
 
         private Transform _transform;
 
@@ -21,6 +22,12 @@ namespace Cards
             _transform = transform;
         }
 
+        protected virtual void Start()
+        {
+            MainSpritesContainer.SetActive(true);
+            DeathSpritesContainer.SetActive(false);
+        }
+
         public virtual void OpenCard()
         {
             _facing = FaceSate.FaceUp;
@@ -28,10 +35,10 @@ namespace Cards
             _transform.DORotate(Vector3.zero, 0.25f);
         }
 
-        protected void PerformDeath()
+        protected virtual void PerformDeath()
         {
-            _mainSpritesContainer.SetActive(false);
-            _deathSpritesContainer.SetActive(true);
+            DeathSpritesContainer.SetActive(true);
+            MainSpritesContainer.SetActive(false);
             
             _condition = CardCondition.Dead;
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8087694594754018774}
   - component: {fileID: 5955524111173822516}
-  - component: {fileID: -1771234892179650904}
+  - component: {fileID: 1165252638641002743}
   m_Layer: 0
   m_Name: DummyPlacement
   m_TagString: Untagged
@@ -79,7 +79,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 2}
   m_EdgeRadius: 0
---- !u!114 &-1771234892179650904
+--- !u!114 &1165252638641002743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,12 +88,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5229332580041227260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b718765d298541d7be1f4921abbde93a, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5a86b7c7e547708842656e0815dae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathSpritesContainer: {fileID: 7533385192099581532}
-  _mainSpritesContainer: {fileID: 7533385192099581532}
-  _effects: []
+  MainSpritesContainer: {fileID: 7533385192099581532}
+  DeathSpritesContainer: {fileID: 0}
 --- !u!1 &7533385192099581532
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace Cards
     [RequireComponent(typeof(Health))]
     public class HeroCard : Card
     {
+        [SerializeField] private int _coins;
         private Health _health;
         private EffectMapper _effectMapper;
 
@@ -43,6 +44,11 @@ namespace Cards
         public void GetShieldDamage(int amount, AffectType affectType)
         {
             _health.DecreaseShield(amount, affectType);
+        }
+
+        public void AddCoins(int amount, AffectType affectType)
+        {
+            _coins += amount;
         }
     }
 }

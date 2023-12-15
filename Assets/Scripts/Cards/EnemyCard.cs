@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
@@ -12,6 +13,7 @@ namespace Cards
     {
         [SerializeField] private DirectionAttacker _directionAttacker;
         [SerializeField] private List<Effect> _effects;
+        [SerializeField] private EffectCard _coinsPrefab;
 
         protected override void Awake()
         {
@@ -20,6 +22,7 @@ namespace Cards
 
         public override void Interact(HeroCard heroCardConsumer)
         {
+            _coinsPrefab.Interact(heroCardConsumer);
             PerformDeath();
         }
 
@@ -49,20 +52,30 @@ namespace Cards
             var initialPosition = cachedTransform.position;
             var offset = new Vector3(0, 0f, -0.15f);
 
+            //TODO: секвенция
+            
             cachedTransform.DOMove(position + offset, 0.25f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 DealDamage(target);
                 
-                transform.DOMove(initialPosition, 0.15f).SetEase(Ease.OutFlash);
-                animationEnded = true;
+                transform.DOMove(initialPosition, 0.15f).SetEase(Ease.OutFlash).OnComplete(() =>
+                {
+                    animationEnded = true;
+                });
             });
 
             yield return new WaitUntil(() => animationEnded);
+            
+            SpawnCoins();
+            PerformDeath();
+            
+            gameObject.SetActive(false);
         }
-
-        public List<Effect> GetEffects()
+        
+        private void SpawnCoins()
         {
-            return _effects;
+            var instance = Instantiate(_coinsPrefab, transform.position, Quaternion.identity);
+            instance.Initialize(_data.Position);
         }
 
         private void DealDamage(HeroCard target)

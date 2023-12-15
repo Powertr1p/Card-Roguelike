@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f66e26bc404a4d57807fcbea58bfa8e6, type: 3}
-  m_Name: Healing
+  m_Name: +5 Healing
   m_EditorClassIdentifier: 
   _effectType: 0
   _affectParameter: 0

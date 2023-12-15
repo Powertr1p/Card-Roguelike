@@ -4,5 +4,6 @@ namespace DefaultNamespace.Effects.Enums
     {
         Health,
         Shield,
+        Coins,
     }
 }

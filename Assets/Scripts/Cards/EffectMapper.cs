@@ -15,6 +15,7 @@ namespace Cards
             {
                 {(AffectParameter.Health, EffectType.Positive), player.Heal },
                 {(AffectParameter.Shield, EffectType.Positive), player.AddShield },
+                {(AffectParameter.Coins, EffectType.Positive), player.AddCoins },
                 {(AffectParameter.Health, EffectType.Negative), player.GetHpDamage },
                 {(AffectParameter.Shield, EffectType.Negative), player.GetShieldDamage },
             };
