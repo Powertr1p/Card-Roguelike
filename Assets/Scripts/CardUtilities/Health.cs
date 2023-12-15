@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
 
     public event Action<int> HealthValueChanged;
     
-    private void Awake()
+    private void Start()
     {
         _healthPoints = _maxHealthValue;
         _shieldPoints = _maxShieldValue;

@@ -43,7 +43,7 @@ namespace DeckMaster.StateMachine
 
                 if (IsPlayerInAttackPosition(attackPositions))
                 {
-                    yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position));
+                    yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position, Player));
                 }
             }
             

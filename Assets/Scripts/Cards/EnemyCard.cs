@@ -42,7 +42,7 @@ namespace Cards
             return positionToAttack;
         }
 
-        public IEnumerator PerformAttack(Vector3 position)
+        public IEnumerator PerformAttack(Vector3 position, HeroCard target)
         {
             var animationEnded = false;
             var cachedTransform = transform;
@@ -51,6 +51,8 @@ namespace Cards
 
             cachedTransform.DOMove(position + offset, 0.25f).SetEase(Ease.InBack).OnComplete(() =>
             {
+                DealDamage(target);
+                
                 transform.DOMove(initialPosition, 0.15f).SetEase(Ease.OutFlash);
                 animationEnded = true;
             });
@@ -61,6 +63,12 @@ namespace Cards
         public List<Effect> GetEffects()
         {
             return _effects;
+        }
+
+        private void DealDamage(HeroCard target)
+        {
+            for (int i = 0; i < _effects.Count; i++)
+                target.ApplyEffect(_effects[i]);
         }
     }
 }
