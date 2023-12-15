@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cards;
 using DefaultNamespace.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
@@ -23,7 +25,7 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.Data.Position - Vector2Int.one, Player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
-            Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack));
+            Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack, MoveToNextState));
         }
 
         public override void Exit()
@@ -31,7 +33,7 @@ namespace DeckMaster.StateMachine
             base.Exit();
         }
 
-        private IEnumerator GetCardsThatCanAttackPlayer(List<DeckCard> cardsAround)
+        private IEnumerator GetCardsThatCanAttackPlayer(List<DeckCard> cardsAround, Action completeCallback)
         {
             foreach (var card in cardsAround)
             {
@@ -45,6 +47,11 @@ namespace DeckMaster.StateMachine
                 }
             }
             
+            completeCallback?.Invoke();
+        }
+
+        private void MoveToNextState()
+        { 
             NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
             base.Execute();
             Process();

@@ -70,7 +70,7 @@ public class State
     {
         return this;
     }
-    
+
     protected List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
     {
         var pickedCards = new List<DeckCard>();
