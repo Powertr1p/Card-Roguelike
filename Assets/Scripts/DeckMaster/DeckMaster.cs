@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cards;
 using DeckMaster.StateMachine;
@@ -32,7 +33,7 @@ namespace DeckMaster
         {
             _deckCards = _spawner.SpawnCards();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
-            _currentState.Process();
+            _currentState =_currentState.Process();
             GameStateGetter.UpdateState(_currentState);
         }
         
@@ -40,6 +41,11 @@ namespace DeckMaster
         {
             _currentState = _currentState.Process();
             GameStateGetter.UpdateState(_currentState);
+        }
+
+        private void Update()
+        {
+            _currentState = _currentState.GetActualState();
         }
     }
 }

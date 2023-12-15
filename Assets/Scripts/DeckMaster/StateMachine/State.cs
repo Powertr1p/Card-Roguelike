@@ -57,12 +57,17 @@ public class State
             Enter();
         if (Stage == Event.Execute)
             Execute();
-        if (Stage == Event.Exit)
+        else if (Stage == Event.Exit)
         {
             Exit();
             return NextState.Process();
         }
 
+        return this;
+    }
+
+    public State GetActualState()
+    {
         return this;
     }
     
