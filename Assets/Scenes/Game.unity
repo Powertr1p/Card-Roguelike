@@ -246,7 +246,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _backgroundMaterial: {fileID: 2100000, guid: ad0a94cfc497ff745a2e308c6d42d824, type: 2}
+  _input: {fileID: 725052638}
   _scrollSpeed: 2
+  _targetTransform: {fileID: 0}
+  _lerpSpeed: 3
+  _positionThreshold: 0.1
 --- !u!1 &588084464
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +784,7 @@ MonoBehaviour:
   _input: {fileID: 725052638}
   _spawner: {fileID: 1731515874}
   _visibleZone: {x: 2, y: 2}
+  _cameraScrolling: {fileID: 519420034}
 --- !u!1 &1919648620
 GameObject:
   m_ObjectHideFlags: 0
