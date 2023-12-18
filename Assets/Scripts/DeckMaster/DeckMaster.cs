@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cards;
 using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
+using Player;
 using UnityEngine;
 
 namespace DeckMaster
@@ -12,6 +13,7 @@ namespace DeckMaster
         [SerializeField] private PlayerInput _input;
         [SerializeField] private DeckSpawner _spawner;
         [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
+        [SerializeField] private CameraScrolling _cameraScrolling;
 
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
@@ -41,6 +43,7 @@ namespace DeckMaster
             _currentState.GetActualState();
             _currentState = _currentState.Process();
             GameStateGetter.UpdateState(_currentState);
+            _cameraScrolling.SetTarget(_player.transform);
         }
     }
 }

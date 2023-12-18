@@ -72,6 +72,8 @@ namespace DefaultNamespace.Player
 
         private void LateUpdate()
         {
+            if (!_isInputEnabled) return;
+            
             if (!_hasDraggingObject)
             {
                 _cameraScrolling.ListenToScrollMouse();
