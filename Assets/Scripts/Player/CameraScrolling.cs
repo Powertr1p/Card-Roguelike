@@ -7,6 +7,8 @@ namespace Player
         [SerializeField] private Camera _camera;
         [SerializeField] private Material _backgroundMaterial;
 
+        private static readonly int TimeValue = Shader.PropertyToID("_TimeValue");
+        
         private Transform _cameraTransform;
 
         private Vector3 _diffCam;
@@ -15,10 +17,9 @@ namespace Player
         public float _scrollSpeed = 2.0f;
         
         private bool _cameraDrag;
-
+        
         private void Awake()
         {
-            ScrollBackgroundMaterial(_originCam.y, _diffCam.y);
             _cameraTransform = _camera.transform;
         }
 
@@ -30,6 +31,7 @@ namespace Player
             {
                 _cameraDrag = true;
                 _originCam = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _cameraTransform.position.z * -1f));
+                ScrollBackgroundMaterial(_originCam.y, _diffCam.y);
             }
 
             if (_cameraDrag)
@@ -57,13 +59,15 @@ namespace Player
         }
         private void ScrollBackgroundMaterial(float subtracted)
         {
-            _backgroundMaterial.SetFloat("_TimeValue", subtracted + 10);
+            _backgroundMaterial.SetFloat(TimeValue, subtracted + 10);
         }
 
         private void ScrollBackgroundMaterial(float origin, float difference)
         {
             var subtracted = origin - difference;
-            _backgroundMaterial.SetFloat("_TimeValue", subtracted + 10);
+            
+            Debug.Log(subtracted);
+            _backgroundMaterial.SetFloat(TimeValue, subtracted + 10);
         }
     }
 }
