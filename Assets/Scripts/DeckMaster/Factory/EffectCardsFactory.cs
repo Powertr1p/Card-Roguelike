@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using Cards;
 using DefaultNamespace.Effects;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace DeckMaster.Factory
 {
     public class EffectCardsFactory<T> : GenericFactory<T> where T : DeckCard
     {
+        [BoxGroup("Effects Params")]
+        [Space(5)]
         [SerializeField] protected int MaxEffects = 1;
+        [BoxGroup("Effects Params")]
         [SerializeField] protected List<Effect> PossibleEffects;
         
         protected List<Effect> SetRandomizeEffects()
