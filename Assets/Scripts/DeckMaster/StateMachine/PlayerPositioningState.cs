@@ -17,6 +17,8 @@ namespace DeckMaster.StateMachine
 
         public override void Enter()
         {
+            Input.DisableInput();
+            Player.EventTurnEnded += ProcessState;
             base.Enter();
         }
 
@@ -29,12 +31,15 @@ namespace DeckMaster.StateMachine
 
         public override void Exit()
         {
+            Player.EventTurnEnded -= ProcessState;
+            
             foreach (var placement in PositionPlacements)
             {
                 Object.Destroy(placement.gameObject);
             }
             
             base.Exit();
+            
         }
         
         private IEnumerator OpenCards(List<DeckCard> cardsToOpen, Action completeCallback)
@@ -53,6 +58,12 @@ namespace DeckMaster.StateMachine
         {
             NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
             base.Execute();
+            Input.EnableInput();
+        }
+
+        private void ProcessState()
+        {
+            Process();
         }
     }
 }

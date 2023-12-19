@@ -48,6 +48,7 @@ public class State
 
     public State Process()
     {
+        SetActualState();
         //Debug.Log(Name + " PROCESS");
 
           if (Stage == Event.Execute)
@@ -62,13 +63,13 @@ public class State
             Exit();
             return NextState.Process();
         }
-
+        
         return this;
     }
 
-    public State GetActualState()
+    private void SetActualState()
     {
-        return this;
+        GameStateGetter.UpdateState(this);
     }
 
     protected List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)

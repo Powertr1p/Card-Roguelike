@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace DeckMaster
 {
     public static class GameStateGetter

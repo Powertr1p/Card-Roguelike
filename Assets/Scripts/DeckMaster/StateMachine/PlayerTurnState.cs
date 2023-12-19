@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cards;
 using DefaultNamespace.Player;
+using UnityEditor.MPE;
 using UnityEngine;
 
 namespace DeckMaster.StateMachine
@@ -14,6 +15,8 @@ namespace DeckMaster.StateMachine
 
         public override void Enter()
         {
+            Player.EventTurnEnded += ProcessState;
+            
             Input.EnableInput();
             base.Enter();
         }
@@ -26,7 +29,14 @@ namespace DeckMaster.StateMachine
 
         public override void Exit()
         {
+            Player.EventTurnEnded -= ProcessState;
+            
             base.Exit();
+        }
+
+        private void ProcessState()
+        {
+            Process();
         }
     }
 }
