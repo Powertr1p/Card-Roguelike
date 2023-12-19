@@ -38,7 +38,7 @@ namespace DeckMaster
             GameStateGetter.UpdateState(_currentState);
         }
         
-        private void ChangeGameState(Vector2Int position, Card arg2)
+        private void ChangeGameState()
         {
             _currentState.GetActualState();
             _currentState = _currentState.Process();

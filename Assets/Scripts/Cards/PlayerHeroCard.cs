@@ -11,7 +11,7 @@ namespace Cards
         [SerializeField] private DragAndDropObject _dragBehaviour;
         [SerializeField] private Raycaster _raycaster;
 
-        public event Action<Vector2Int, Card> EventTurnEnded;
+        public event Action EventTurnEnded;
         public event Action<Vector2Int> EventPlacing;
 
         private CardPositionChecker _positionChecker;
@@ -112,7 +112,7 @@ namespace Cards
         {
             card.Interact(this);
             Initialize(card.Data.Position);
-            EventTurnEnded?.Invoke(this.Data.Position, card);
+            EventTurnEnded?.Invoke();
         }
     }
 }

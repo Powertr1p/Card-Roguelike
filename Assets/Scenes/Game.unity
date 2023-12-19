@@ -1045,6 +1045,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerNewVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 6087709400464125410, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
+      propertyPath: m_MotionVectors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087709400464125410, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6564067648709631831, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
