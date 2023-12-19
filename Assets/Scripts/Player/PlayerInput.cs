@@ -25,6 +25,7 @@ namespace DefaultNamespace.Player
         private void Update()
         {
             if (!_isInputEnabled) return;
+            if (_cameraScrolling.IsCameraMoving) return;
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -73,6 +74,7 @@ namespace DefaultNamespace.Player
         private void LateUpdate()
         {
             if (!_isInputEnabled) return;
+            if (_cameraScrolling.IsCameraMoving) return;
             
             if (!_hasDraggingObject)
             {

@@ -7,23 +7,23 @@ namespace Player
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private Material _backgroundMaterial;
-        [SerializeField] private PlayerInput _input;
 
+        [Header("Automatic Camera Scrolling")]
+        [SerializeField] private float _scrollSpeed = 2.0f;
+        [SerializeField] private float _lerpSpeed = 3.0f; 
+        [SerializeField] private float _positionThreshold = 0.1f;
+
+        public bool IsCameraMoving => _isMoving;
+        
         private static readonly int TimeValue = Shader.PropertyToID("_TimeValue");
         
         private Transform _cameraTransform;
+        private Transform _targetTransform;
 
         private Vector3 _diffCam;
         private Vector3 _originCam;
-
-        public float _scrollSpeed = 2.0f;
         
         private bool _cameraDrag;
-        
-        public Transform _targetTransform; 
-        public float _lerpSpeed = 3.0f; 
-        public float _positionThreshold = 0.1f; 
-
         private bool _isMoving = false;
 
         private void Awake()
@@ -35,7 +35,7 @@ namespace Player
         {
             if (_isMoving)
             {
-                var cameraPosition = transform.position;
+                var cameraPosition = _cameraTransform.position;
                 var targetPosition = _targetTransform.position;
 
                 var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
@@ -59,6 +59,8 @@ namespace Player
 
         public void StartCameraScrolling()
         {
+            if (_isMoving) return;
+            
             var cameraPosition = _cameraTransform.position;
             _diffCam = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraPosition.z * -1f)) - cameraPosition;
 
@@ -86,6 +88,8 @@ namespace Player
 
         public void ListenToScrollMouse()
         {
+            if (_isMoving) return;
+            
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
             if (scroll == 0) return;
