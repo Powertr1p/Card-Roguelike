@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Cards;
+using DeckMaster.Factory;
 using UnityEngine;
 
 namespace DeckMaster
 {
     public class DeckSpawner : MonoBehaviour
     {
-        [SerializeField] private DeckCard _cardPrefab;
+        [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private Card _placementPrefab;
         [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
@@ -24,8 +25,7 @@ namespace DeckMaster
             
                 for (int j = 0; j < _rows; j++)
                 {
-                    var card = CreateCard();
-                    PlaceObjectOnDeck(card,i, j, nextPosition);
+                    var card = CreateCard(i, j, nextPosition);
                     instancedCards.Add(card);
                 
                     nextPosition += (int)_offset.x;
@@ -61,10 +61,9 @@ namespace DeckMaster
             return -(_rows / 2) * (int)_offset.x;
         }
 
-        private DeckCard CreateCard()
+        private DeckCard CreateCard(int col, int row, int position)
         {
-            var instance = Instantiate(_cardPrefab);
-            return instance;
+            return _enemyFactory.CreateNewInstance(col, row, position, _offset);
         }
 
         private Card CreatePlayerPlacement()

@@ -19,7 +19,17 @@ namespace Cards
         protected override void Awake()
         {
             base.Awake();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
             CalculateAllDamage();
+        }
+
+        public void SetEffects(List<Effect> effects)
+        {
+            _effects = effects;
         }
 
         public override void Interact(HeroCard heroCardConsumer)

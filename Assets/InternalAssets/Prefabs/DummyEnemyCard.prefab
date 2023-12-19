@@ -366,8 +366,7 @@ MonoBehaviour:
   MainSpritesContainer: {fileID: 482395458714422085}
   DeathSpritesContainer: {fileID: 856518488478221778}
   _directionAttacker: {fileID: 6431167648432870239}
-  _effects:
-  - {fileID: 11400000, guid: c898fbdeca5b2480d8d86e582c5b272e, type: 2}
+  _effects: []
   _coinsPrefab: {fileID: 8528698518851208355, guid: d0944207309fd4141a79e071885501df, type: 3}
 --- !u!114 &6431167648432870239
 MonoBehaviour:
