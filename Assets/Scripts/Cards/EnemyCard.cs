@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
@@ -15,9 +14,12 @@ namespace Cards
         [SerializeField] private List<Effect> _effects;
         [SerializeField] private EffectCard _coinsPrefab;
 
+        public int SummDamage { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
+            CalculateAllDamage();
         }
 
         public override void Interact(HeroCard heroCardConsumer)
@@ -82,6 +84,14 @@ namespace Cards
         {
             for (int i = 0; i < _effects.Count; i++)
                 target.ApplyEffect(_effects[i]);
+        }
+
+        private void CalculateAllDamage()
+        {
+            for (int i = 0; i < _effects.Count; i++)
+            {
+                SummDamage += _effects[i].Amount;
+            }
         }
     }
 }

@@ -246,9 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _backgroundMaterial: {fileID: 2100000, guid: ad0a94cfc497ff745a2e308c6d42d824, type: 2}
-  _input: {fileID: 725052638}
   _scrollSpeed: 2
-  _targetTransform: {fileID: 0}
   _lerpSpeed: 3
   _positionThreshold: 0.1
 --- !u!1 &588084464
@@ -1003,10 +1001,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1919648622}
     m_Modifications:
-    - target: {fileID: 2413044505194067965, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
-      propertyPath: m_text
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3785427540999382378, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
