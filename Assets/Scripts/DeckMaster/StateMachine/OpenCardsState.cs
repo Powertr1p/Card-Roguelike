@@ -24,7 +24,7 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            var cards =  GetCardsAroundPlayer(Player.Data.Position - _visibleZone, Player.Data.Position + _visibleZone, FaceSate.FaceUp);
+            var cards =  GetCardsAroundPlayer(Player.PositionData.Position - _visibleZone, Player.PositionData.Position + _visibleZone, FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
         }
 

@@ -945,7 +945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyFactory: {fileID: 57666094}
   _placementFactory: {fileID: 1376340091}
-  _itemFactory: {fileID: 0}
+  _itemFactory: {fileID: 1381529589}
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}

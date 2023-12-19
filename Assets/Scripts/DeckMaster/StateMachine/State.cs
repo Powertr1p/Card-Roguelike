@@ -80,9 +80,9 @@ public class State
         {
             if (card.Facing == skipCondition || card.Condition == CardCondition.Dead) continue;
 
-            if (card.Data.Position.y >= startPosition.y && card.Data.Position.y <= endPosition.y)
+            if (card.PositionData.Position.y >= startPosition.y && card.PositionData.Position.y <= endPosition.y)
             {
-                if (card.Data.Position.x >= startPosition.x && card.Data.Position.x <= endPosition.x)
+                if (card.PositionData.Position.x >= startPosition.x && card.PositionData.Position.x <= endPosition.x)
                 {
                     pickedCards.Add(card);
                 }

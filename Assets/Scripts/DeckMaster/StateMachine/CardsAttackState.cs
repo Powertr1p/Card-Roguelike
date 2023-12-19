@@ -24,7 +24,7 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.Data.Position - Vector2Int.one, Player.Data.Position + Vector2Int.one, FaceSate.FaceDown);
+            var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.PositionData.Position - Vector2Int.one, Player.PositionData.Position + Vector2Int.one, FaceSate.FaceDown);
             Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack, MoveToNextState));
         }
 
@@ -59,7 +59,7 @@ namespace DeckMaster.StateMachine
 
         private bool IsPlayerInAttackPosition(List<Vector2Int> attackPositions)
         {
-            return attackPositions.Any(attackPosition => Player.Data.Position == attackPosition);
+            return attackPositions.Any(attackPosition => Player.PositionData.Position == attackPosition);
         }
     }
 }

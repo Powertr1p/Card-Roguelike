@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using DefaultNamespace.Effects;
 using DG.Tweening;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,8 +9,12 @@ namespace Cards
 {
     public abstract class DeckCard : Card
     {
+        [BoxGroup("Visual Dependencies")] 
+        [SerializeField] private SpriteRenderer _iconRenderer;
+        
         [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
         [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
+        [SerializeField] protected List<Effect> Effects;
 
         private Transform _transform;
 
@@ -26,6 +33,16 @@ namespace Cards
         {
             MainSpritesContainer.SetActive(true);
             DeathSpritesContainer.SetActive(false);
+        }
+
+        public void InitializeVisuals(Sprite sprite)
+        {
+            _iconRenderer.sprite = sprite;
+        }
+        
+        public void SetEffects(List<Effect> effects)
+        {
+            Effects = effects;
         }
 
         public virtual void OpenCard()

@@ -13,7 +13,18 @@ namespace DeckMaster.Factory
         [BoxGroup("Effects Params")]
         [SerializeField] protected List<Effect> PossibleEffects;
         
-        protected List<Effect> SetRandomizeEffects()
+        public override T CreateNewInstance(int col, int row, int position, Vector2 offset)
+        {
+            var instance = base.CreateNewInstance(col, row, position, offset);
+            var effects = SetRandomizeEffects();
+            
+            instance.SetEffects(effects);
+            instance.InitializeVisuals(effects[0].VisualData.Icon);
+
+            return instance;
+        }
+
+        private List<Effect> SetRandomizeEffects()
         {
             var effectsCount = Random.Range(1, MaxEffects);
             List<Effect> pickedEffects = new List<Effect>();

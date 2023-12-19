@@ -3,13 +3,13 @@ using UnityEngine;
 namespace Data
 {
     [System.Serializable]
-    public struct CardData
+    public struct CardPositionData
     {
         public Vector2Int Position => _position;
         
         private Vector2Int _position;
 
-        public CardData(Vector2Int position)
+        public CardPositionData(Vector2Int position)
         {
             _position = position;
         }

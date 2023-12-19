@@ -5,13 +5,18 @@ namespace Cards
 {
     public abstract class Card : MonoBehaviour
     {
-        public CardData Data => _data;
+        public CardPositionData PositionData => positionData;
 
-        protected CardData _data;
+        protected CardPositionData positionData;
 
-        public virtual void Initialize(Vector2Int position)
+        public virtual void InitializePosition(Vector2Int position)
         {
-            _data = new CardData(position);
+            positionData = new CardPositionData(position);
+        }
+
+        protected void SetPosition(Vector2Int position)
+        {
+            positionData = new CardPositionData(position);
         }
 
         public abstract void Interact(HeroCard heroCardConsumer);

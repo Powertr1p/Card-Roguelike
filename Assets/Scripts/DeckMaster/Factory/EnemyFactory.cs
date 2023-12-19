@@ -26,7 +26,7 @@ namespace DeckMaster.Factory
         public override EnemyCard CreateNewInstance(int col, int row, int position, Vector2 offset)
         {
             var instance = base.CreateNewInstance(col, row, position, offset);
-            instance.SetEffects(SetRandomizeEffects());
+            
             instance.SetAttackDirections(GetRandomAttackDirections());
 
             return instance;

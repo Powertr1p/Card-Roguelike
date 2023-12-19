@@ -363,10 +363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07a0e8362b042bcbe28918e389269bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _iconRenderer: {fileID: 8101477187065821077}
   MainSpritesContainer: {fileID: 482395458714422085}
   DeathSpritesContainer: {fileID: 856518488478221778}
+  Effects: []
   _directionAttacker: {fileID: 6431167648432870239}
-  _effects: []
   _coinsPrefab: {fileID: 8528698518851208355, guid: d0944207309fd4141a79e071885501df, type: 3}
 --- !u!114 &6431167648432870239
 MonoBehaviour:
@@ -380,7 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b8971609d34af0a50a599723eb1ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackData: {fileID: 11400000, guid: dff8862931af24281b30df9452b20884, type: 2}
   _arrowSprites: {fileID: 3891077231072215192}
 --- !u!114 &5716338252732451070
 MonoBehaviour:

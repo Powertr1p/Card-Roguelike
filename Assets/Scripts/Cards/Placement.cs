@@ -1,19 +1,9 @@
 namespace Cards
 {
-    public class Placement : DeckCard
+    public class Placement : Card
     {
-        protected override void Start()
-        {
-            MainSpritesContainer.SetActive(true);
-        }
-
         public override void Interact(HeroCard heroCardConsumer)
         {
-        }
-
-        protected override void PerformDeath()
-        {
-            MainSpritesContainer.SetActive(false);
         }
     }
 }

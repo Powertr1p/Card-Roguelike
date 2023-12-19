@@ -17,3 +17,4 @@ MonoBehaviour:
   _affectType: 0
   _duration: 0
   _amount: 4
+  _visual: {fileID: 11400000, guid: 2d7d603bdf8714e19bed8fb4a67ea057, type: 2}

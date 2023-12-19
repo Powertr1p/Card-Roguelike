@@ -26,7 +26,7 @@ namespace Cards
 
         private void Start()
         {
-            Initialize(_initialPosition);
+            SetPosition(_initialPosition);
         }
 
         public override void Interact(HeroCard interactorCard)
@@ -82,11 +82,11 @@ namespace Cards
 
         private bool TryInteractWithOverlappedCard(RaycastHit2D hit)
         {
-            if (hit.collider.TryGetComponent(out DeckCard overlappedCard))
+            if (hit.collider.TryGetComponent(out Card overlappedCard))
             {
-                EventPlacing?.Invoke(overlappedCard.Data.Position);
+                EventPlacing?.Invoke(overlappedCard.PositionData.Position);
                 
-                if (CanPlaceCard(overlappedCard.Data.Position))
+                if (CanPlaceCard(overlappedCard.PositionData.Position))
                 {
                     InteractWithOverlappedCard(overlappedCard);
                     return true;
@@ -105,13 +105,13 @@ namespace Cards
                 return desirePosition.y == -1;
             }
 
-            return _positionChecker.CanPositionCard(desirePosition, Data.Position);
+            return _positionChecker.CanPositionCard(desirePosition, PositionData.Position);
         }
 
-        private void InteractWithOverlappedCard(DeckCard card)
+        private void InteractWithOverlappedCard(Card card)
         {
             card.Interact(this);
-            Initialize(card.Data.Position);
+            SetPosition(card.PositionData.Position);
             EventTurnEnded?.Invoke();
         }
     }

@@ -11,7 +11,6 @@ namespace Cards
     public class EnemyCard : DeckCard
     {
         [SerializeField] private DirectionAttacker _directionAttacker;
-        [SerializeField] private List<Effect> _effects;
         [SerializeField] private EffectCard _coinsPrefab;
 
         public int SummDamage { get; private set; }
@@ -25,11 +24,6 @@ namespace Cards
         {
             base.Start();
             CalculateAllDamage();
-        }
-
-        public void SetEffects(List<Effect> effects)
-        {
-            _effects = effects;
         }
 
         public void SetAttackDirections(List<DirectionAttackPosition> attacks)
@@ -55,7 +49,7 @@ namespace Cards
             
             foreach (var attackDirecton in _directionAttacker.AttackDirections)
             {
-                var targetPosition = Data.Position + attackDirecton.GetAttackPosition;
+                var targetPosition = PositionData.Position + attackDirecton.GetAttackPosition;
                 positionToAttack.Add(targetPosition);
             }
 
@@ -92,20 +86,20 @@ namespace Cards
         private void SpawnCoins()
         {
             var instance = Instantiate(_coinsPrefab, transform.position, Quaternion.identity);
-            instance.Initialize(_data.Position);
+            instance.InitializePosition(positionData.Position);
         }
 
         private void DealDamage(HeroCard target)
         {
-            for (int i = 0; i < _effects.Count; i++)
-                target.ApplyEffect(_effects[i]);
+            for (int i = 0; i < Effects.Count; i++)
+                target.ApplyEffect(Effects[i]);
         }
 
         private void CalculateAllDamage()
         {
-            for (int i = 0; i < _effects.Count; i++)
+            for (int i = 0; i < Effects.Count; i++)
             {
-                SummDamage += _effects[i].Amount;
+                SummDamage += Effects[i].Amount;
             }
         }
     }
