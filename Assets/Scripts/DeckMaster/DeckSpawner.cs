@@ -34,7 +34,7 @@ namespace DeckMaster
             
                 for (int j = 0; j < _rows; j++)
                 {
-                    var card = _enemyFactory.CreateNewInstance(i, j, nextPosition, _offset);
+                    DeckCard card = CreateNewRandomCard(i, j, nextPosition);
                     instancedCards.Add(card);
                 
                     nextPosition += (int)_offset.x;
@@ -67,6 +67,24 @@ namespace DeckMaster
         private int GetStartPosition()
         {
             return -(_rows / 2) * (int)_offset.x;
+        }
+        
+        private DeckCard CreateNewRandomCard(int col, int row, int position)
+        {
+            var rnd = Random.Range(0, 10);
+            var instance = rnd > 5 ? CreateNewEnemyCard(col, row, position) : CreateNewItemCard(col, row, position);
+
+            return instance;
+        }
+
+        private DeckCard CreateNewEnemyCard(int col, int row, int position)
+        {
+            return _enemyFactory.CreateNewInstance(col, row, position, _offset);
+        }
+
+        private DeckCard CreateNewItemCard(int col, int row, int position)
+        { 
+            return _itemFactory.CreateNewInstance(col, row, position, _offset);
         }
     }
 }

@@ -359,9 +359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b718765d298541d7be1f4921abbde93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _iconRenderer: {fileID: 8101477187065821077}
   MainSpritesContainer: {fileID: 482395458714422085}
   DeathSpritesContainer: {fileID: 856518488478221778}
-  _effects: []
+  Effects: []
 --- !u!1 &7533385192099581532
 GameObject:
   m_ObjectHideFlags: 0

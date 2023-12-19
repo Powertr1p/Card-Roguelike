@@ -9,7 +9,7 @@ namespace CardUtilities
 
         public List<DirectionAttackPosition> AttackDirections => _attackDirections;
 
-        private List<DirectionAttackPosition> _attackDirections;
+        private List<DirectionAttackPosition> _attackDirections = new List<DirectionAttackPosition>();
 
         public void SetAttackDirection(List<DirectionAttackPosition> attackDirections)
         {

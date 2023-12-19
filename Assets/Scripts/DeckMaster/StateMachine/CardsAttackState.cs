@@ -37,10 +37,9 @@ namespace DeckMaster.StateMachine
         {
             foreach (var card in cardsAround)
             {
-                if (!card.TryGetComponent(out EnemyCard enemy)) yield return null;
+                if (!card.TryGetComponent(out EnemyCard enemy)) continue;
                 
                 var attackPositions = enemy.GetTargetAttackPositions();
-
                 if (IsPlayerInAttackPosition(attackPositions))
                 {
                     yield return Mono.StartCoroutine(enemy.PerformAttack(Player.transform.position, Player));
