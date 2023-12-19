@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 5955524111173822516}
   - component: {fileID: 8528698518851208355}
   m_Layer: 0
-  m_Name: DummyItemCard
+  m_Name: DummyHealingCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
