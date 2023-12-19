@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Cards;
+using DefaultNamespace.Effects;
 using UnityEngine;
 
-public abstract class GenericFactory<T> : MonoBehaviour where T : DeckCard
+public class GenericFactory<T> : MonoBehaviour where T : Card
 {
     [SerializeField] private T _prefab;
 
