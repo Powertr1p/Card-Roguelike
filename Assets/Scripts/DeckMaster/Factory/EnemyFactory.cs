@@ -10,7 +10,6 @@ namespace DeckMaster.Factory
     public class EnemyFactory : EffectCardsFactory<EnemyCard>
     {
         [BoxGroup("Attack Params")]
-        [Space(5)]
         [SerializeField] private DirectionAttackPositionaData _attackData;
         [BoxGroup("Attack Params")]
         [SerializeField] private int _maxDirections = 3;
