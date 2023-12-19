@@ -1,25 +1,27 @@
 using System.Collections.Generic;
-using Cards;
 using UnityEngine;
 
 namespace CardUtilities
 {
     public class DirectionAttacker : MonoBehaviour
     {
-        [SerializeField] private DirectionAttackPositionaData _attackData;
         [SerializeField] private DirectionAttackSpriteRenderer _arrowSprites;
 
         public List<DirectionAttackPosition> AttackDirections => _attackDirections;
 
-        private List<DirectionAttackPosition> _attackDirections = new List<DirectionAttackPosition>();
+        private List<DirectionAttackPosition> _attackDirections;
 
-        public void SetAttackDirection()
+        public void SetAttackDirection(List<DirectionAttackPosition> attackDirections)
         {
-            AttackDirection direction = (AttackDirection)Random.Range(0, _attackData.GetPossibleDirectionsCount());
-            Vector2Int positionAttack = _attackData.GetAttackPosition(direction);
-            
-            _attackDirections.Add(new DirectionAttackPosition(direction, positionAttack));
-            _arrowSprites.EnableArrow(direction);
+            _attackDirections = new List<DirectionAttackPosition>(attackDirections);
+        }
+
+        public void EnableSprites()
+        {
+            for (int i = 0; i < _attackDirections.Count; i++)
+            {
+                _arrowSprites.EnableArrow(_attackDirections[i].Direction);
+            }
         }
     }
 }

@@ -1,17 +1,18 @@
-using System.Collections.Generic;
 using Cards;
-using DefaultNamespace.Effects;
 using UnityEngine;
 
 public class GenericFactory<T> : MonoBehaviour where T : Card
 {
     [SerializeField] private T _prefab;
 
+    private readonly Vector3 _initialRotation = new Vector3(0, 180f, 0);
+    
     public virtual T CreateNewInstance(int col, int row, int position, Vector2 offset)
     {
         var instance = Instantiate(_prefab);
         instance.Initialize(new Vector2Int(row, col));
         instance.transform.position = new Vector3(position, col * offset.y);
+        instance.transform.rotation = Quaternion.Euler(_initialRotation);
 
         return instance;
     }

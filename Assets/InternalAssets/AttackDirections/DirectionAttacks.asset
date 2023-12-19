@@ -21,3 +21,11 @@ MonoBehaviour:
     _attackPosition: {x: 0, y: -1}
   - _attackDirection: 3
     _attackPosition: {x: 1, y: 0}
+  - _attackDirection: 4
+    _attackPosition: {x: 1, y: 1}
+  - _attackDirection: 5
+    _attackPosition: {x: -1, y: 1}
+  - _attackDirection: 6
+    _attackPosition: {x: 1, y: -1}
+  - _attackDirection: 7
+    _attackPosition: {x: -1, y: -1}

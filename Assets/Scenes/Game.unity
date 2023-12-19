@@ -160,6 +160,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bffc7732e1792451fac71378c939e450, type: 2}
   - {fileID: 11400000, guid: c898fbdeca5b2480d8d86e582c5b272e, type: 2}
   - {fileID: 11400000, guid: a2372338b30ea4ae68a81b971b50a559, type: 2}
+  _attackData: {fileID: 11400000, guid: dff8862931af24281b30df9452b20884, type: 2}
 --- !u!4 &57666095
 Transform:
   m_ObjectHideFlags: 0
@@ -893,7 +894,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyFactory: {fileID: 57666094}
   _placementFactory: {fileID: 1376340091}
-  _placementPrefab: {fileID: 1165252638641002743, guid: ccb6ea4932389467d902a86c577ea0ab, type: 3}
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}

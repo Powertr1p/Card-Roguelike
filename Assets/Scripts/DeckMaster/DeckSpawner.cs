@@ -7,9 +7,12 @@ namespace DeckMaster
 {
     public class DeckSpawner : MonoBehaviour
     {
+        [Header("Spawners")]
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private PlacementFactory _placementFactory;
-        [SerializeField] private Card _placementPrefab;
+        
+        [Space(10)]
+        [Header("Spawn Params")]
         [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
         [SerializeField] private Vector2 _offset;

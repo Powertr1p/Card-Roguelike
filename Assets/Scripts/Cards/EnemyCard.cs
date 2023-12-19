@@ -32,6 +32,11 @@ namespace Cards
             _effects = effects;
         }
 
+        public void SetAttackDirections(List<DirectionAttackPosition> attacks)
+        {
+            _directionAttacker.SetAttackDirection(attacks);
+        }
+
         public override void Interact(HeroCard heroCardConsumer)
         {
             _coinsPrefab.Interact(heroCardConsumer);
@@ -40,7 +45,7 @@ namespace Cards
 
         public override void OpenCard()
         {
-            _directionAttacker.SetAttackDirection();
+            _directionAttacker.EnableSprites();
             base.OpenCard();
         }
 
