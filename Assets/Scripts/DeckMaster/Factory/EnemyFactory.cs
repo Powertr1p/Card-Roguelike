@@ -10,9 +10,9 @@ namespace DeckMaster.Factory
         [SerializeField] private List<Effect> _possibleEffects;
         [SerializeField] private int _maxEffects = 1;
 
-        public override DeckCard CreateNewInstance(int col, int row, int position, Vector2 offset)
+        public override EnemyCard CreateNewInstance(int col, int row, int position, Vector2 offset)
         {
-            var instance = base.CreateNewInstance(col, row, position, offset) as EnemyCard;
+            var instance = base.CreateNewInstance(col, row, position, offset);
             instance.SetEffects(SetRandomizeEffects());
 
             return instance;

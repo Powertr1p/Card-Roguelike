@@ -8,6 +8,7 @@ namespace DeckMaster
     public class DeckSpawner : MonoBehaviour
     {
         [SerializeField] private EnemyFactory _enemyFactory;
+        [SerializeField] private PlacementFactory _placementFactory;
         [SerializeField] private Card _placementPrefab;
         [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
@@ -25,7 +26,7 @@ namespace DeckMaster
             
                 for (int j = 0; j < _rows; j++)
                 {
-                    var card = CreateCard(i, j, nextPosition);
+                    var card = _enemyFactory.CreateNewInstance(i, j, nextPosition, _offset);
                     instancedCards.Add(card);
                 
                     nextPosition += (int)_offset.x;
@@ -45,8 +46,7 @@ namespace DeckMaster
 
                 for (int j = 0; j < _rows; j++)
                 {
-                    var placement = CreatePlayerPlacement();
-                    PlaceObjectOnDeck(placement,i - 1, j, nextPosition);
+                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _offset);
                     instancedPlacements.Add(placement);
 
                     nextPosition += (int) _offset.x;
@@ -59,23 +59,6 @@ namespace DeckMaster
         private int GetStartPosition()
         {
             return -(_rows / 2) * (int)_offset.x;
-        }
-
-        private DeckCard CreateCard(int col, int row, int position)
-        {
-            return _enemyFactory.CreateNewInstance(col, row, position, _offset);
-        }
-
-        private Card CreatePlayerPlacement()
-        {
-            var instance = Instantiate(_placementPrefab);
-            return instance;
-        }
-
-        private void PlaceObjectOnDeck(Card instance, int col, int row, int position)
-        {
-            instance.Initialize(new Vector2Int(row, col));
-            instance.transform.position = new Vector3(position, col * _offset.y);
         }
     }
 }
