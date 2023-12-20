@@ -33,10 +33,29 @@ namespace DeckMaster
         private void Start()
         {
             _deckCards = _spawner.SpawnCards();
+            SubscribeCardsDeath();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
         }
-        
+
+        private void SubscribeCardsDeath()
+        {
+            for (int i = 0; i < _deckCards.Count; i++)
+            {
+                _deckCards[i].DeathPerformed += OnEnemyDeath;
+            }
+        }
+
+        private void OnEnemyDeath(object obj, DeathArgs deathArgs)
+        {
+            if (deathArgs.CanSpawnCoins)
+            {
+                _spawner.SpawnCoins(deathArgs.DeckPosition.Position, deathArgs.WorldPosition);
+            }
+
+            deathArgs.Sender.DeathPerformed -= OnEnemyDeath;
+        }
+
         private void ChangeGameState()
         {
             _cameraScrolling.SetTarget(_player.transform);

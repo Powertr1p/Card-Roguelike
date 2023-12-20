@@ -16,4 +16,9 @@ public class GenericFactory<T> : MonoBehaviour where T : Card
 
         return instance;
     }
+
+    protected virtual T CreateNewInstance()
+    {
+        return Instantiate(_prefab);
+    }
 }

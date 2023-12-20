@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
-using DefaultNamespace.Effects;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ namespace Cards
     public class EnemyCard : DeckCard
     {
         [SerializeField] private DirectionAttacker _directionAttacker;
-        [SerializeField] private EffectCard _coinsPrefab;
 
         protected override void Awake()
         {
             base.Awake();
+            CanSpawnCoinsOnDeath = true;
         }
 
         protected override void Start()
@@ -30,7 +29,6 @@ namespace Cards
 
         public override void Interact(HeroCard heroCardConsumer)
         {
-            _coinsPrefab.Interact(heroCardConsumer);
             PerformDeath();
         }
 
@@ -74,16 +72,7 @@ namespace Cards
 
             yield return new WaitUntil(() => animationEnded);
             
-            SpawnCoins();
             PerformDeath();
-            
-            gameObject.SetActive(false);
-        }
-        
-        private void SpawnCoins()
-        {
-            var instance = Instantiate(_coinsPrefab, transform.position, Quaternion.identity);
-            instance.InitializePosition(positionData.Position);
         }
 
         private void DealDamage(HeroCard target)

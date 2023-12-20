@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 5418021560702126794, guid: 4965e7b0c00ec41a09feeb86503e160a, type: 3}
-  MaxEffects: 1
   PossibleEffects:
   - {fileID: 11400000, guid: 7e5a44c5f020b474e8974eb277314806, type: 2}
   - {fileID: 11400000, guid: d75efa8301bd84e70b06122930a5f7b7, type: 2}
@@ -721,10 +720,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8528698518851208355, guid: bc82da9f71094e546bbfa62ce1a40f9b, type: 3}
-  MaxEffects: 1
   PossibleEffects:
   - {fileID: 11400000, guid: c65be5019a8c045e4b7ed1df904f9f37, type: 2}
   - {fileID: 11400000, guid: 3e5f99d3af9ba4ddaa0695d0c8b6ac82, type: 2}
+  _coinsEffect: {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
 --- !u!1001 &1447618394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,7 +1104,6 @@ MonoBehaviour:
   _healthPoints: 0
   _shieldPoints: 0
   _maxHealthValue: 12
-  _maxShieldValue: 12
 --- !u!114 &1919648629
 MonoBehaviour:
   m_ObjectHideFlags: 0

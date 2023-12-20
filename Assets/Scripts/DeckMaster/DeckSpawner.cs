@@ -64,6 +64,11 @@ namespace DeckMaster
             return instancedPlacements;
         }
 
+        public void SpawnCoins(Vector2Int deckPosition, Vector3 worldPosition)
+        {
+            _itemFactory.SpawnCoins(deckPosition, worldPosition);
+        }
+
         private int GetStartPosition()
         {
             return -(_rows / 2) * (int)_offset.x;

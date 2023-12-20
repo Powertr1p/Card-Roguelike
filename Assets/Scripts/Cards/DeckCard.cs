@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Data;
 using DefaultNamespace.Effects;
 using DG.Tweening;
 using NaughtyAttributes;
@@ -16,7 +18,11 @@ namespace Cards
         
         [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
         [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
-
+        
+        public event EventHandler<DeathArgs> DeathPerformed;
+        
+        public bool CanSpawnCoinsOnDeath { get; protected set; } = false;
+        
         public int EffectPower => Effect.Amount;
         
         protected Effect Effect;
@@ -62,8 +68,31 @@ namespace Cards
         {
             DeathSpritesContainer.SetActive(true);
             MainSpritesContainer.SetActive(false);
+
+            DeathHandler(new DeathArgs(CanSpawnCoinsOnDeath, _transform.position, PositionData, this));
             
             _condition = CardCondition.Dead;
+        }
+        
+        protected virtual void DeathHandler(DeathArgs args)
+        {
+            DeathPerformed?.Invoke(this, args);
+        }
+    }
+    
+    public class DeathArgs : EventArgs
+    {
+        public bool CanSpawnCoins;
+        public Vector3 WorldPosition;
+        public CardPositionData DeckPosition;
+        public DeckCard Sender;
+
+        public DeathArgs(bool canSpawnCoins, Vector3 worldPosition, CardPositionData deckPosition, DeckCard sender)
+        {
+            CanSpawnCoins = canSpawnCoins;
+            WorldPosition = worldPosition;
+            DeckPosition = deckPosition;
+            Sender = sender;
         }
     }
 }
