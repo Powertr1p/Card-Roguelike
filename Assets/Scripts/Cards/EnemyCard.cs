@@ -91,16 +91,12 @@ namespace Cards
 
         private void DealDamage(HeroCard target)
         {
-            for (int i = 0; i < Effects.Count; i++)
-                target.ApplyEffect(Effects[i]);
+            target.ApplyEffect(Effect);
         }
 
         private void CalculateAllDamage()
         {
-            for (int i = 0; i < Effects.Count; i++)
-            {
-                SummDamage += Effects[i].Amount;
-            }
+            SummDamage = Effect.Amount;
         }
     }
 }

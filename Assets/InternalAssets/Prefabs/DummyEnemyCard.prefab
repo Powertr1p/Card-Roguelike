@@ -226,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 28bb21a3b0043ad4f8e3e77f569ad117, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13f07d1e65cc99144bb35551efb5a136, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -364,9 +364,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _iconRenderer: {fileID: 8101477187065821077}
+  _frameRenderer: {fileID: 7168259870684404130}
   MainSpritesContainer: {fileID: 482395458714422085}
   DeathSpritesContainer: {fileID: 856518488478221778}
-  Effects: []
   _directionAttacker: {fileID: 6431167648432870239}
   _coinsPrefab: {fileID: 8528698518851208355, guid: d0944207309fd4141a79e071885501df, type: 3}
 --- !u!114 &6431167648432870239
@@ -892,7 +892,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 510289901, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  m_Sprite: {fileID: 1771446180, guid: 91ece539279118a438c900dfb08582ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

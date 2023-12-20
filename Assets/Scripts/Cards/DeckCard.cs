@@ -11,10 +11,13 @@ namespace Cards
     {
         [BoxGroup("Visual Dependencies")] 
         [SerializeField] private SpriteRenderer _iconRenderer;
+        [BoxGroup("Visual Dependencies")] 
+        [SerializeField] private SpriteRenderer _frameRenderer;
         
         [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
         [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
-        [SerializeField] protected List<Effect> Effects;
+        
+        protected Effect Effect;
 
         private Transform _transform;
 
@@ -35,14 +38,15 @@ namespace Cards
             DeathSpritesContainer.SetActive(false);
         }
 
-        public void InitializeVisuals(Sprite sprite)
+        public void InitializeVisuals(CardVisualData data)
         {
-            _iconRenderer.sprite = sprite;
+            _iconRenderer.sprite = data.Icon;
+            _frameRenderer.sprite = data.Frame;
         }
         
-        public void SetEffects(List<Effect> effects)
+        public void SetEffect(Effect effect)
         {
-            Effects = effects;
+            Effect = effect;
         }
 
         public virtual void OpenCard()

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Enemy Low
   m_EditorClassIdentifier: 
   _iconSprite: {fileID: 450093703, guid: 91ece539279118a438c900dfb08582ed, type: 3}
+  _frameSprite: {fileID: 21300000, guid: 28bb21a3b0043ad4f8e3e77f569ad117, type: 3}

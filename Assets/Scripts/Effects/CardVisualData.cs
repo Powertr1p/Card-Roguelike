@@ -6,7 +6,9 @@ namespace DefaultNamespace.Effects
     public class CardVisualData : ScriptableObject
     {
         [SerializeField] private Sprite _iconSprite;
+        [SerializeField] private Sprite _frameSprite;
 
         public Sprite Icon => _iconSprite;
+        public Sprite Frame => _frameSprite;
     }
 }

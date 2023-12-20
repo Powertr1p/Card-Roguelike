@@ -9,11 +9,7 @@ namespace Cards
 
         protected void ApplyItemEffectOnInteractor(HeroCard interactor)
         {
-            foreach (var effect in Effects)
-            {
-                interactor.ApplyEffect(effect);
-            }
-
+            interactor.ApplyEffect(Effect);
             PerformDeath();
         }
     }
