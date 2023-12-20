@@ -59,6 +59,8 @@ namespace DeckMaster
 
         private void ChangeGameState()
         {
+            if (GameStateGetter.State == TurnState.PlayerPositioningTurn) return;
+            
             _cameraScrolling.SetTarget(_player.transform);
         }
     }

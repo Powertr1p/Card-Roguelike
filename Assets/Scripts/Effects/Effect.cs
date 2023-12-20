@@ -10,6 +10,7 @@ namespace DefaultNamespace.Effects
         [SerializeField] private EffectType _effectType;
         [SerializeField] private AffectParameter _affectParameter;
         [SerializeField] private AffectType _affectType;
+        [SerializeField] private ParticleSystem _effectParticle;
 
         [ShowIf("_affectType", AffectType.Turns)]
         [SerializeField] private int _duration;
@@ -20,6 +21,7 @@ namespace DefaultNamespace.Effects
         [SerializeField] private CardVisualData _visual;
 
         public CardVisualData VisualData => _visual;
+        public ParticleSystem EffectParticle => _effectParticle;
         public EffectType EffectType => _effectType;
         public AffectParameter AffectParameter => _affectParameter;
         public AffectType AffectType => _affectType;

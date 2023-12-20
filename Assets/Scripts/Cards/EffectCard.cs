@@ -7,9 +7,13 @@ namespace Cards
             ApplyItemEffectOnInteractor(interactor);
         }
 
-        protected void ApplyItemEffectOnInteractor(HeroCard interactor)
+        private void ApplyItemEffectOnInteractor(HeroCard interactor)
         {
             interactor.ApplyEffect(Effect);
+            
+            if (!ReferenceEquals(Effect.EffectParticle, null))
+                interactor.PlayParticleEffectCard(Effect.EffectParticle);
+            
             PerformDeath();
             SendDeathEvent();
         }

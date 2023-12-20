@@ -15,6 +15,7 @@ MonoBehaviour:
   _effectType: 1
   _affectParameter: 0
   _affectType: 0
+  _effectParticle: {fileID: 1627244374365964243, guid: fb416252cfd83456ea695ffb9abc0893, type: 3}
   _duration: 0
   _amount: 4
   _visual: {fileID: 11400000, guid: 2d7d603bdf8714e19bed8fb4a67ea057, type: 2}

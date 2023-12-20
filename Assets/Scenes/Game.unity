@@ -1074,6 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coins: 0
+  _attackParticle: {fileID: 1627244374365964243, guid: cfbcd2c3ea2444c25b0630f5ed0bc0c9, type: 3}
   _dragBehaviour: {fileID: 1919648624}
   _raycaster: {fileID: 1919648627}
 --- !u!114 &1919648627

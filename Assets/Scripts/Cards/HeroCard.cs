@@ -8,6 +8,8 @@ namespace Cards
     public class HeroCard : Card
     {
         [SerializeField] private int _coins;
+        [SerializeField] private ParticleSystem _attackParticle;
+
         private Health _health;
         private EffectMapper _effectMapper;
 
@@ -24,6 +26,18 @@ namespace Cards
         public void ApplyEffect(Effect effect)
         {
             _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect.AffectType);
+        }
+
+        public void PlayParticleEffectCard(ParticleSystem particle)
+        {
+            var particalInstance = Instantiate(particle, transform.position, Quaternion.identity);
+            particalInstance.Play();
+        }
+
+        public void PlayParticleAttack()
+        {
+            var particalInstance = Instantiate(_attackParticle, transform.position, Quaternion.identity);
+            particalInstance.Play();
         }
 
         public void Heal(int amount, AffectType affectType)

@@ -29,6 +29,7 @@ namespace Cards
 
         public override void Interact(HeroCard heroCardConsumer)
         {
+            heroCardConsumer.PlayParticleAttack();
             PerformDeath();
         }
 
@@ -68,6 +69,7 @@ namespace Cards
                 {
                     animationEnded = true;
                 });
+                
             });
 
             yield return new WaitUntil(() => animationEnded);
@@ -79,6 +81,13 @@ namespace Cards
         private void DealDamage(HeroCard target)
         {
             target.ApplyEffect(Effect);
+            SpawnEffectParticle(target);
+        }
+
+        private void SpawnEffectParticle(Card target)
+        {
+            var particleInstance = Instantiate(Effect.EffectParticle, target.transform.position, Quaternion.identity);
+            particleInstance.Play();
         }
     }
 }
