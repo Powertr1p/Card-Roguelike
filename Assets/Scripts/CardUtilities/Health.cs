@@ -9,7 +9,6 @@ public class Health : MonoBehaviour
     [SerializeField] private int _shieldPoints;
 
     [SerializeField] private int _maxHealthValue = 12;
-    [SerializeField] private int _maxShieldValue = 12;
 
     public event Action<int> HealthValueChanged;
     public event Action<int> ShieldValueChanged;
@@ -25,7 +24,10 @@ public class Health : MonoBehaviour
 
     public void DecreaseHealth(int amount, AffectType type)
     {
-        _healthPoints = Math.Max(_healthPoints - amount, 0);
+        int shieldDamage = Mathf.Min(amount, _shieldPoints);
+        DecreaseShield(shieldDamage, type);
+    
+        _healthPoints = Mathf.Max(_healthPoints - (amount - shieldDamage), 0);
         HealthValueChanged?.Invoke(_healthPoints);
     }
 
@@ -37,7 +39,7 @@ public class Health : MonoBehaviour
 
     public void IncreaseShield(int amount, AffectType type)
     {
-        _shieldPoints = Math.Min(_shieldPoints + amount, _maxShieldValue);
+        _shieldPoints += amount;
         ShieldValueChanged?.Invoke(_shieldPoints);
     }
     

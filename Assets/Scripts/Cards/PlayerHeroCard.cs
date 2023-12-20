@@ -113,7 +113,9 @@ namespace Cards
             if (card.TryGetComponent(out DeckCard deckCard))
             {
                 if (deckCard.Condition == CardCondition.Alive)
+                {
                     card.Interact(this);
+                }
             }
             
             SetPosition(card.PositionData.Position);
