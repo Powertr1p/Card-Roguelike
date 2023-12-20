@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _card: {fileID: 5418021560702126794}
-  _powerDisplay: {fileID: 1921909787653970053}
+  _powerLabel: {fileID: 1921909787653970053}
 --- !u!1 &6612614560652963021
 GameObject:
   m_ObjectHideFlags: 0

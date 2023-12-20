@@ -16,6 +16,8 @@ namespace Cards
         
         [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
         [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
+
+        public int EffectPower => Effect.Amount;
         
         protected Effect Effect;
 

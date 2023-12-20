@@ -13,8 +13,6 @@ namespace Cards
         [SerializeField] private DirectionAttacker _directionAttacker;
         [SerializeField] private EffectCard _coinsPrefab;
 
-        public int SummDamage { get; private set; }
-
         protected override void Awake()
         {
             base.Awake();
@@ -23,7 +21,6 @@ namespace Cards
         protected override void Start()
         {
             base.Start();
-            CalculateAllDamage();
         }
 
         public void SetAttackDirections(List<DirectionAttackPosition> attacks)
@@ -92,11 +89,6 @@ namespace Cards
         private void DealDamage(HeroCard target)
         {
             target.ApplyEffect(Effect);
-        }
-
-        private void CalculateAllDamage()
-        {
-            SummDamage = Effect.Amount;
         }
     }
 }
