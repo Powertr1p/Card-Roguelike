@@ -91,7 +91,7 @@ namespace Cards
                     InteractWithOverlappedCard(overlappedCard);
                     return true;
                 }
-
+                
                 return false;
             }
 
@@ -110,7 +110,12 @@ namespace Cards
 
         private void InteractWithOverlappedCard(Card card)
         {
-            card.Interact(this);
+            if (card.TryGetComponent(out DeckCard deckCard))
+            {
+                if (deckCard.Condition == CardCondition.Alive)
+                    card.Interact(this);
+            }
+            
             SetPosition(card.PositionData.Position);
             EventTurnEnded?.Invoke();
         }
