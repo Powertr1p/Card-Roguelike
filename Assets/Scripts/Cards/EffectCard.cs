@@ -11,6 +11,7 @@ namespace Cards
         {
             interactor.ApplyEffect(Effect);
             PerformDeath();
+            SendDeathEvent();
         }
     }
 }

@@ -73,6 +73,7 @@ namespace Cards
             yield return new WaitUntil(() => animationEnded);
             
             PerformDeath();
+            SendDeathEvent();
         }
 
         private void DealDamage(HeroCard target)

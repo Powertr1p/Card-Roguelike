@@ -50,11 +50,11 @@ namespace DeckMaster
         {
             if (deathArgs.CanSpawnCoins)
             {
+                deathArgs.Sender.gameObject.SetActive(false);
                 _spawner.SpawnCoins(deathArgs.DeckPosition.Position, deathArgs.WorldPosition);
             }
 
             deathArgs.Sender.DeathPerformed -= OnEnemyDeath;
-            deathArgs.Sender.gameObject.SetActive(false);
         }
 
         private void ChangeGameState()

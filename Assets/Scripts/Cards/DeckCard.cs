@@ -68,10 +68,12 @@ namespace Cards
         {
             DeathSpritesContainer.SetActive(true);
             MainSpritesContainer.SetActive(false);
-
-            DeathHandler(new DeathArgs(CanSpawnCoinsOnDeath, _transform.position, PositionData, this));
-            
             _condition = CardCondition.Dead;
+        }
+
+        protected void SendDeathEvent()
+        {
+            DeathHandler(new DeathArgs(CanSpawnCoinsOnDeath, _transform.position, PositionData, this));
         }
         
         protected virtual void DeathHandler(DeathArgs args)
