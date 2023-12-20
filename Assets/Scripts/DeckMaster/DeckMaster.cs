@@ -54,6 +54,7 @@ namespace DeckMaster
             }
 
             deathArgs.Sender.DeathPerformed -= OnEnemyDeath;
+            deathArgs.Sender.gameObject.SetActive(false);
         }
 
         private void ChangeGameState()
