@@ -27,19 +27,7 @@ namespace Cards
         {
             _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect.AffectType);
         }
-
-        public void PlayParticleEffectCard(ParticleSystem particle)
-        {
-            var particalInstance = Instantiate(particle, transform.position, Quaternion.identity);
-            particalInstance.Play();
-        }
-
-        public void PlayParticleAttack()
-        {
-            var particalInstance = Instantiate(_attackParticle, transform.position, Quaternion.identity);
-            particalInstance.Play();
-        }
-
+        
         public void Heal(int amount, AffectType affectType)
         {
             _health.IncreaseHealth(amount, affectType);
@@ -63,6 +51,12 @@ namespace Cards
         public void AddCoins(int amount, AffectType affectType)
         {
             _coins += amount;
+        }
+        
+        protected void PlayParticleAttack()
+        {
+            var particalInstance = Instantiate(_attackParticle, transform.position, Quaternion.identity);
+            particalInstance.Play();
         }
     }
 }

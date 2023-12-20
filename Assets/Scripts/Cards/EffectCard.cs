@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Cards
 {
     public class EffectCard : DeckCard
@@ -10,12 +12,17 @@ namespace Cards
         private void ApplyItemEffectOnInteractor(HeroCard interactor)
         {
             interactor.ApplyEffect(Effect);
-            
+
             if (!ReferenceEquals(Effect.EffectParticle, null))
-                interactor.PlayParticleEffectCard(Effect.EffectParticle);
-            
+                CreateEffectParticles(Effect.EffectParticle).Play();
+
             PerformDeath();
             SendDeathEvent();
+        }
+
+        private ParticleSystem CreateEffectParticles(ParticleSystem effectParticle)
+        {
+            return Instantiate(effectParticle, transform.position, Quaternion.identity);
         }
     }
 }

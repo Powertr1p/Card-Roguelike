@@ -29,7 +29,7 @@ namespace Cards
 
         public override void Interact(HeroCard heroCardConsumer)
         {
-            heroCardConsumer.PlayParticleAttack();
+            
             PerformDeath();
         }
 

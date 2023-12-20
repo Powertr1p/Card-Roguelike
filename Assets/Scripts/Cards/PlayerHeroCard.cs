@@ -110,7 +110,15 @@ namespace Cards
 
         private void InteractWithOverlappedCard(Card card)
         {
-            if (card.TryGetComponent(out DeckCard deckCard))
+            if (card.TryGetComponent(out EnemyCard enemy))
+            {
+                if (CanInteract(enemy.Condition))
+                {
+                    enemy.Interact(this);
+                    PlayParticleAttack();
+                }
+            }
+            else if (card.TryGetComponent(out DeckCard deckCard))
             {
                 if (deckCard.Condition == CardCondition.Alive)
                 {
@@ -120,6 +128,11 @@ namespace Cards
             
             SetPosition(card.PositionData.Position);
             EventTurnEnded?.Invoke();
+        }
+
+        private bool CanInteract(CardCondition condition)
+        {
+            return condition == CardCondition.Alive;
         }
     }
 }
