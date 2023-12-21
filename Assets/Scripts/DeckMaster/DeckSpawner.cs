@@ -14,6 +14,11 @@ namespace DeckMaster
         [SerializeField] private PlacementFactory _placementFactory;
         [BoxGroup("Spawners")]
         [SerializeField] private ItemFactory _itemFactory;
+
+        [BoxGroup("Room Containers")] 
+        [SerializeField] private Transform _firstRoom;
+
+        [SerializeField] private Card _door;
         
         [BoxGroup("Spawn Params")]
         [SerializeField] private int _columns = 5;
@@ -34,13 +39,13 @@ namespace DeckMaster
             
                 for (int j = 0; j < _rows; j++)
                 {
-                    DeckCard card = CreateNewRandomCard(i, j, nextPosition);
+                    DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
                     instancedCards.Add(card);
                 
                     nextPosition += (int)_offset.x;
                 }
             }
-
+            
             return instancedCards;
         }
 
@@ -54,7 +59,7 @@ namespace DeckMaster
 
                 for (int j = 0; j < _rows; j++)
                 {
-                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _offset);
+                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _offset, _firstRoom);
                     instancedPlacements.Add(placement);
 
                     nextPosition += (int) _offset.x;
@@ -74,22 +79,22 @@ namespace DeckMaster
             return -(_rows / 2) * (int)_offset.x;
         }
         
-        private DeckCard CreateNewRandomCard(int col, int row, int position)
+        private DeckCard CreateNewRandomCard(int col, int row, int position, Transform parent)
         {
             var rnd = Random.Range(0, 10);
-            var instance = rnd > 5 ? CreateNewEnemyCard(col, row, position) : CreateNewItemCard(col, row, position);
+            var instance = rnd > 5 ? CreateNewEnemyCard(col, row, position, parent) : CreateNewItemCard(col, row, position, parent);
 
             return instance;
         }
 
-        private DeckCard CreateNewEnemyCard(int col, int row, int position)
+        private DeckCard CreateNewEnemyCard(int col, int row, int position, Transform parent)
         {
-            return _enemyFactory.CreateNewInstance(col, row, position, _offset);
+            return _enemyFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
 
-        private DeckCard CreateNewItemCard(int col, int row, int position)
+        private DeckCard CreateNewItemCard(int col, int row, int position, Transform parent)
         { 
-            return _itemFactory.CreateNewInstance(col, row, position, _offset);
+            return _itemFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
     }
 }

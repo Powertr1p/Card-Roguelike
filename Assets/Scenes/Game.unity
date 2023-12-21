@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _collider: {fileID: 0}
+  _collider: {fileID: 1919648625}
 --- !u!114 &725052638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +868,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3785427540999382378, guid: 0ffda69df7da52f44b9f68e5ea59be59, type: 3}
   m_PrefabInstance: {fileID: 1904098802712740459}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1621303671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621303672}
+  m_Layer: 0
+  m_Name: Room_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621303672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621303671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8148581, y: -1.9772946, z: 0.08831611}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1731515871
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +985,8 @@ MonoBehaviour:
   _enemyFactory: {fileID: 57666094}
   _placementFactory: {fileID: 1376340091}
   _itemFactory: {fileID: 1381529589}
+  _firstRoom: {fileID: 1621303672}
+  _door: {fileID: 1165252638641002743, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}
@@ -1283,3 +1316,4 @@ SceneRoots:
   - {fileID: 588084465}
   - {fileID: 1447618394}
   - {fileID: 1892885413}
+  - {fileID: 1621303672}
