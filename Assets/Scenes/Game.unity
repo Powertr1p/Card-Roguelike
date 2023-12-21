@@ -723,6 +723,7 @@ MonoBehaviour:
   PossibleEffects:
   - {fileID: 11400000, guid: c65be5019a8c045e4b7ed1df904f9f37, type: 2}
   - {fileID: 11400000, guid: 3e5f99d3af9ba4ddaa0695d0c8b6ac82, type: 2}
+  - {fileID: 11400000, guid: 927686ea8f7bc4bb3831e2c633cd7c9f, type: 2}
   _coinsEffect: {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
 --- !u!1001 &1447618394
 PrefabInstance:
