@@ -1,29 +1,36 @@
 using System;
-using DefaultNamespace.Effects.Enums;
+using DeckMaster;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [Header("Player Parameters")]
-    [SerializeField] private int _healthPoints;
-    [SerializeField] private int _shieldPoints;
-
-    [SerializeField] private int _maxHealthValue = 12;
+    private int _healthPoints;
+    private int _shieldPoints;
+    private int _maxHealth;
 
     public event Action<int> HealthValueChanged;
     public event Action<int> ShieldValueChanged;
     
     private void Start()
     {
-        _healthPoints = _maxHealthValue;
+        _maxHealth = GameRules.PlayerMaxHealth;
+
+        _healthPoints = _maxHealth;
         _shieldPoints = 0;
         
         HealthValueChanged?.Invoke(_healthPoints);
         ShieldValueChanged?.Invoke(_shieldPoints);
     }
 
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(int amount, bool ignoreShield)
     {
+        if (ignoreShield)
+        {
+            _healthPoints = Math.Max(_healthPoints - amount, 0);
+            HealthValueChanged?.Invoke(_healthPoints);
+            return;
+        }
+        
         int shieldDamage = Mathf.Min(amount, _shieldPoints);
         DecreaseShield(shieldDamage);
     
@@ -33,7 +40,11 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(int amount)
     {
-        _healthPoints = Math.Min(_healthPoints + amount, _maxHealthValue);
+        if (GameRules.OverhealWithDamage)
+            _healthPoints += amount;
+        else
+            _healthPoints = Math.Min(_healthPoints + amount, _maxHealth);
+
         HealthValueChanged?.Invoke(_healthPoints);
     }
 
@@ -47,5 +58,15 @@ public class Health : MonoBehaviour
     {
         _shieldPoints = Math.Max(_shieldPoints - amount, 0);
         ShieldValueChanged?.Invoke(_shieldPoints);
+    }
+
+    public void TryDamageOverheal()
+    {
+        if (!GameRules.OverhealWithDamage) return;
+        
+        if (_healthPoints > _maxHealth)
+        {
+            DecreaseHealth(1, true);
+        }
     }
 }

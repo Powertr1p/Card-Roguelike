@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cards;
 using DeckMaster.StateMachine;
@@ -28,6 +27,10 @@ namespace DeckMaster
         [SerializeField] private int _positioningStatePlacementsY = -1;
         [BoxGroup("Game Rules")] 
         [SerializeField] private int _playerMovingLimit = 1;
+        [BoxGroup("Game Rules")] 
+        [SerializeField] private int _playerMaxHealth = 12;
+        [BoxGroup("Game Rules")] 
+        [SerializeField] private bool _overhealWithDamage = true;
 
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
@@ -46,7 +49,7 @@ namespace DeckMaster
 
         private void Awake()
         {
-            GameRules.Initialize(_visibleZone,_positioningStatePlacementsY, _enemyAttackZone, _playerMovingLimit);
+            GameRules.Initialize(_visibleZone,_positioningStatePlacementsY, _enemyAttackZone, _playerMovingLimit, _overhealWithDamage, _playerMaxHealth);
         }
 
         private void Start()

@@ -53,7 +53,7 @@ namespace Cards
 
         public void GetHpDamage(int amount, Effect effect)
         {
-            _health.DecreaseHealth(amount);
+            _health.DecreaseHealth(amount, false);
         }
 
         public void AddShield(int amount, Effect effect)
@@ -74,6 +74,7 @@ namespace Cards
         public void TryExecuteTurnEffects()
         {
             _turnEffectsHandler.TryExecuteEffects();
+            _health.TryDamageOverheal();
         }
         
         protected void PlayParticleAttack()

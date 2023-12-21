@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DeckMaster;
 using DefaultNamespace.Effects;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ namespace CardUtilities
 {
     public class TurnEffectsHandler : MonoBehaviour
     {
+        [SerializeField] private Health _health;
+        
         private Dictionary<Effect, int> _turnEffects = new Dictionary<Effect, int>();
 
         public event Action<Effect> ExecuteTurnEffect;
-        
+
         public void AddTurnEffect(Effect effect)
         {
             if (IsSameEffectAlreadyExists(effect))

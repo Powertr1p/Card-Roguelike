@@ -1,3 +1,4 @@
+using DeckMaster;
 using TMPro;
 using UnityEngine;
 
@@ -23,12 +24,18 @@ namespace CardUtilities.UI
 
         private void UpdateHealthVisual(int newValue)
         {
+            _healthLabel.color = IsOverheal(newValue) ? Color.yellow : Color.white;
             _healthLabel.text = newValue.ToString();
         }
 
         private void UpdateShieldVisual(int newValue)
         {
             _shieldLabel.text = newValue.ToString();
+        }
+
+        private bool IsOverheal(int newValue)
+        {
+            return newValue > GameRules.PlayerMaxHealth && GameRules.OverhealWithDamage;
         }
     }
 }
