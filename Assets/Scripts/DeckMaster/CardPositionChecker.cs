@@ -14,6 +14,8 @@ namespace DeckMaster
         
         public bool CanPositionCard(Vector2Int desirePosition, Vector2Int currentPosition)
         {
+            if (desirePosition == currentPosition) return false;
+            
             return (desirePosition.x >= currentPosition.x - _movingLimit && desirePosition.x <= currentPosition.x + _movingLimit) &&
                    (desirePosition.y >= currentPosition.y - _movingLimit && desirePosition.y <= currentPosition.y + _movingLimit);
         }

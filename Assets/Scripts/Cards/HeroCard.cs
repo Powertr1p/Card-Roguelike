@@ -91,6 +91,13 @@ namespace Cards
         private void ApplyTurnBasedEffect(Effect effect)
         {
             _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect);
+            PlayTurnEffectParticles(effect);
+        }
+
+        private void PlayTurnEffectParticles(Effect effect)
+        {
+            var particle = Instantiate(effect.EffectParticle, transform.position, Quaternion.identity);
+            particle.Play();
         }
     }
 }
