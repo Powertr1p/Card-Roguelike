@@ -17,6 +17,8 @@ namespace DeckMaster.StateMachine
         {
             Player.EventTurnEnded += ProcessState;
             
+            Player.TryExecuteTurnEffects();
+            
             Input.EnableInput();
             base.Enter();
         }

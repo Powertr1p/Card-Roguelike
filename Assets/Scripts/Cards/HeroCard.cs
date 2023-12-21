@@ -1,3 +1,4 @@
+using CardUtilities;
 using DefaultNamespace.Effects;
 using DefaultNamespace.Effects.Enums;
 using UnityEngine;
@@ -5,18 +6,32 @@ using UnityEngine;
 namespace Cards
 {
     [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(TurnEffectsHandler))]
     public class HeroCard : Card
     {
         [SerializeField] private int _coins;
         [SerializeField] private ParticleSystem _attackParticle;
 
         private Health _health;
+        private TurnEffectsHandler _turnEffectsHandler;
         private EffectMapper _effectMapper;
 
         protected virtual void Awake()
         {
             _health = GetComponent<Health>();
+            _turnEffectsHandler = GetComponent<TurnEffectsHandler>();
+            
             _effectMapper = new EffectMapper(this);
+        }
+
+        private void OnEnable()
+        {
+            _turnEffectsHandler.ExecuteTurnEffect += ApplyTurnBasedEffect;
+        }
+
+        private void OnDisable()
+        {
+            _turnEffectsHandler.ExecuteTurnEffect -= ApplyTurnBasedEffect;
         }
 
         public override void Interact(HeroCard interactorCard)
@@ -25,38 +40,56 @@ namespace Cards
 
         public void ApplyEffect(Effect effect)
         {
-            _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect.AffectType);
+            if (IsEffectTurnAffect(effect))
+                _turnEffectsHandler.AddTurnEffect(effect);
+            else
+                _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect);
         }
         
-        public void Heal(int amount, AffectType affectType)
+        public void Heal(int amount, Effect effect)
         {
-            _health.IncreaseHealth(amount, affectType);
+            _health.IncreaseHealth(amount);
         }
 
-        public void GetHpDamage(int amount, AffectType affectType)
+        public void GetHpDamage(int amount, Effect effect)
         {
-            _health.DecreaseHealth(amount, affectType);
+            _health.DecreaseHealth(amount);
         }
 
-        public void AddShield(int amount, AffectType affectType)
+        public void AddShield(int amount, Effect effect)
         {
-            _health.IncreaseShield(amount, affectType);
+            _health.IncreaseShield(amount);
         }
 
-        public void GetShieldDamage(int amount, AffectType affectType)
+        public void GetShieldDamage(int amount, Effect effect)
         {
-            _health.DecreaseShield(amount, affectType);
+            _health.DecreaseShield(amount);
         }
 
-        public void AddCoins(int amount, AffectType affectType)
+        public void AddCoins(int amount, Effect effect)
         {
             _coins += amount;
+        }
+
+        public void TryExecuteTurnEffects()
+        {
+            _turnEffectsHandler.TryExecuteEffects();
         }
         
         protected void PlayParticleAttack()
         {
             var particalInstance = Instantiate(_attackParticle, transform.position, Quaternion.identity);
             particalInstance.Play();
+        }
+
+        private bool IsEffectTurnAffect(Effect effect)
+        {
+            return effect.AffectType == AffectType.Turns;
+        }
+
+        private void ApplyTurnBasedEffect(Effect effect)
+        {
+            _effectMapper.GetEffect(effect).Invoke(effect.Amount, effect);
         }
     }
 }

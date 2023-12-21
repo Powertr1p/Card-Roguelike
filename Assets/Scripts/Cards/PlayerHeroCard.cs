@@ -58,6 +58,7 @@ namespace Cards
                 if (TryInteractWithOverlappedCard(hit))
                 {
                     SetNewInitialPosition(hit.collider.transform.position);
+                    EventTurnEnded?.Invoke();
                 }
                 else
                 {
@@ -127,7 +128,6 @@ namespace Cards
             }
             
             SetPosition(card.PositionData.Position);
-            EventTurnEnded?.Invoke();
         }
 
         private bool CanInteract(CardCondition condition)

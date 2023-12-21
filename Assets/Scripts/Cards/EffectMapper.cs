@@ -7,11 +7,11 @@ namespace Cards
 {
     public class EffectMapper
     {
-        private Dictionary<(AffectParameter, EffectType), Action<int, AffectType>> _effectMethods;
+        private Dictionary<(AffectParameter, EffectType), Action<int, Effect>> _effectMethods;
 
         public EffectMapper(HeroCard player)
         {
-            _effectMethods = new Dictionary<(AffectParameter, EffectType), Action<int, AffectType>>
+            _effectMethods = new Dictionary<(AffectParameter, EffectType), Action<int, Effect>>
             {
                 {(AffectParameter.Health, EffectType.Positive), player.Heal },
                 {(AffectParameter.Shield, EffectType.Positive), player.AddShield },
@@ -21,9 +21,9 @@ namespace Cards
             };
         }
 
-        public Action<int, AffectType> GetEffect(Effect effect)
+        public Action<int, Effect> GetEffect(Effect effect)
         {
-            return _effectMethods.TryGetValue((effect.AffectParameter, effect.EffectType), out Action<int, AffectType> method) ? method : null;
+            return _effectMethods.TryGetValue((effect.AffectParameter, effect.EffectType), out Action<int, Effect> method) ? method : null;
         }
     }
 }
