@@ -49,8 +49,6 @@ namespace Cards
         public void Drag()
         {
             _dragBehaviour.Drag();
-            
-            _dragBehaviour.Drag();
 
             var hit = _raycaster.GetBoxcastNearestHit(transform);
             
