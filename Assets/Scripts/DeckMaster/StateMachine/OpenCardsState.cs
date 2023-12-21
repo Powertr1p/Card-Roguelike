@@ -9,8 +9,6 @@ namespace DeckMaster.StateMachine
 {
     public class OpenCardsState : State
     {
-        private readonly Vector2Int _visibleZone = new Vector2Int(2,2);
-        
         public OpenCardsState(PlayerInput input, List<DeckCard> deckCards, PlayerHeroCard playerCard, MonoBehaviour mono) : base(input, deckCards, playerCard, mono)
         {
             Name = TurnState.OpenCardsState;
@@ -24,7 +22,9 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            var cards =  GetCardsAroundPlayer(Player.PositionData.Position - _visibleZone, Player.PositionData.Position + _visibleZone, FaceSate.FaceUp);
+            var openLimit = GameRules.PlayerVisibleZone;
+            
+            var cards =  GetCardsAroundPlayer(Player.PositionData.Position - openLimit, Player.PositionData.Position + openLimit, FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
         }
 

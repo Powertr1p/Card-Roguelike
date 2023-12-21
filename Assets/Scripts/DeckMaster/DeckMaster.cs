@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Cards;
 using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
+using NaughtyAttributes;
 using Player;
 using UnityEngine;
 
@@ -12,8 +14,16 @@ namespace DeckMaster
         [SerializeField] private PlayerHeroCard _player;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private DeckSpawner _spawner;
-        [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
         [SerializeField] private CameraScrolling _cameraScrolling;
+        
+        [BoxGroup("Game Rules")]
+        [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
+        [BoxGroup("Game Rules")]
+        [SerializeField] private int _positioningStatePlacementsY = -1;
+        [BoxGroup("Game Rules")] 
+        [SerializeField] private Vector2Int _enemyAttackZone = Vector2Int.one;
+        [BoxGroup("Game Rules")] 
+        [SerializeField] private int _playerMovingLimit = 1;
 
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
@@ -28,6 +38,11 @@ namespace DeckMaster
         private void OnDisable()
         {
             _player.EventTurnEnded -= ChangeGameState;
+        }
+
+        private void Awake()
+        {
+            GameRules.Initialize(_visibleZone,_positioningStatePlacementsY, _enemyAttackZone, _playerMovingLimit);
         }
 
         private void Start()
