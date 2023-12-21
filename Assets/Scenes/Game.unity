@@ -724,6 +724,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c65be5019a8c045e4b7ed1df904f9f37, type: 2}
   - {fileID: 11400000, guid: 3e5f99d3af9ba4ddaa0695d0c8b6ac82, type: 2}
   - {fileID: 11400000, guid: 927686ea8f7bc4bb3831e2c633cd7c9f, type: 2}
+  - {fileID: 11400000, guid: d9f6fc44b66ba4f9196c150f00a02784, type: 2}
   _coinsEffect: {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
 --- !u!1001 &1447618394
 PrefabInstance:
@@ -912,8 +913,11 @@ MonoBehaviour:
   _player: {fileID: 1919648626}
   _input: {fileID: 725052638}
   _spawner: {fileID: 1892885412}
-  _visibleZone: {x: 2, y: 2}
   _cameraScrolling: {fileID: 519420034}
+  _visibleZone: {x: 2, y: 2}
+  _enemyAttackZone: {x: 1, y: 1}
+  _positioningStatePlacementsY: -1
+  _playerMovingLimit: 1
 --- !u!1 &1892885410
 GameObject:
   m_ObjectHideFlags: 0
