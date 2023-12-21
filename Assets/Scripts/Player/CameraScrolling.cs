@@ -1,4 +1,4 @@
-using DefaultNamespace.Player;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Player
@@ -8,10 +8,15 @@ namespace Player
         [SerializeField] private Camera _camera;
         [SerializeField] private Material _backgroundMaterial;
 
-        [Header("Automatic Camera Scrolling")]
+        [BoxGroup("Mouse Wheel Scrolling")]
         [SerializeField] private float _scrollSpeed = 2.0f;
-        [SerializeField] private float _lerpSpeed = 3.0f; 
+        
+        [BoxGroup("Automatic Camera Scrolling")]
+        [SerializeField] private float _lerpSpeed = 3.0f;
+        [BoxGroup("Automatic Camera Scrolling")]
         [SerializeField] private float _positionThreshold = 0.1f;
+        [BoxGroup("Automatic Camera Scrolling")]
+        [SerializeField] private float _offsetY;
 
         public bool IsCameraMoving => _isMoving;
         
@@ -36,7 +41,7 @@ namespace Player
             if (_isMoving)
             {
                 var cameraPosition = _cameraTransform.position;
-                var targetPosition = _targetTransform.position;
+                var targetPosition = _targetTransform.position + new Vector3(0f, _offsetY, 0f);
 
                 var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
 

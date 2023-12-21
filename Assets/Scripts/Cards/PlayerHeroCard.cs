@@ -49,9 +49,13 @@ namespace Cards
         public void Drag()
         {
             _dragBehaviour.Drag();
+            TrySelectHoverCard();
+        }
 
+        private void TrySelectHoverCard()
+        {
             var hit = _raycaster.GetBoxcastNearestHit(transform);
-            
+
             DeselectLastDraggedCard();
 
             if (hit && hit.collider.TryGetComponent(out DeckCard overlappedCard))
@@ -63,31 +67,23 @@ namespace Cards
                 }
             }
         }
-        
+
         private void DeselectLastDraggedCard()
         {
             if (!ReferenceEquals(_lastDragHit, null))
             {
                 _lastDragHit.DeselectCard();
-                _lastDragHit = null;
             }
         }
 
         private void TryPlaceSelf()
         {
             var hit = _raycaster.GetBoxcastNearestHit(transform);
-            
-            if (hit)
+
+            if (hit && TryInteractWithOverlappedCard(hit))
             {
-                if (TryInteractWithOverlappedCard(hit))
-                {
-                    SetNewInitialPosition(hit.collider.transform.position);
-                    EventTurnEnded?.Invoke();
-                }
-                else
-                {
-                    PlaceInitialPosition();
-                }
+                SetNewInitialPosition(hit.collider.transform.position);
+                EventTurnEnded?.Invoke();
             }
             else
             {

@@ -312,8 +312,9 @@ MonoBehaviour:
   _camera: {fileID: 519420031}
   _backgroundMaterial: {fileID: 2100000, guid: ad0a94cfc497ff745a2e308c6d42d824, type: 2}
   _scrollSpeed: 2
-  _lerpSpeed: 3
+  _lerpSpeed: 6
   _positionThreshold: 0.1
+  _offsetY: 2
 --- !u!1 &588084464
 GameObject:
   m_ObjectHideFlags: 0
