@@ -14,8 +14,14 @@ namespace Cards
             interactor.ApplyEffect(Effect);
 
             if (!ReferenceEquals(Effect.EffectParticle, null))
+            {
                 CreateEffectParticles(Effect.EffectParticle).Play();
-
+            }
+            else
+            {
+                Debug.LogError($"There is no particle prefab on effect: {Effect.name}", gameObject);
+            }
+            
             PerformDeath();
             SendDeathEvent();
         }
