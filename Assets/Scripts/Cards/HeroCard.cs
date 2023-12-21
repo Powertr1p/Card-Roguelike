@@ -53,7 +53,7 @@ namespace Cards
 
         public void GetHpDamage(int amount, Effect effect)
         {
-            _health.DecreaseHealth(amount, false);
+            _health.DecreaseHealth(amount, effect.IgnoreShield);
         }
 
         public void AddShield(int amount, Effect effect)

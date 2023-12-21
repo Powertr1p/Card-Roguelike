@@ -20,14 +20,15 @@ namespace Cards
         [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
         
         public event EventHandler<DeathArgs> DeathPerformed;
-        
-        public bool CanSpawnCoinsOnDeath { get; protected set; } = false;
+
+        protected bool CanSpawnCoinsOnDeath { get; set; } = false;
         
         public int EffectPower => Effect.Amount;
         
         protected Effect Effect;
 
         private Transform _transform;
+        private bool _isSelected;
 
         public FaceSate Facing => _facing;
         public CardCondition Condition => _condition;
@@ -62,6 +63,24 @@ namespace Cards
             _facing = FaceSate.FaceUp;
 
             _transform.DORotate(Vector3.zero, 0.25f);
+        }
+
+        public void SelectCard()
+        {
+            if (Condition == CardCondition.Dead) return;
+            if (_isSelected) return;
+            _isSelected = true;
+
+            MainSpritesContainer.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        }
+
+        public void DeselectCard()
+        {
+            if (Condition == CardCondition.Dead) return;
+            if (!_isSelected) return;
+            _isSelected = false;
+            
+            MainSpritesContainer.transform.localScale = Vector3.one;
         }
 
         protected virtual void PerformDeath()

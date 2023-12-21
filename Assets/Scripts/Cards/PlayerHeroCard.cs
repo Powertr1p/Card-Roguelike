@@ -17,6 +17,8 @@ namespace Cards
         private CardPositionChecker _positionChecker;
         private readonly Vector2Int _initialPosition = new Vector2Int(-2, -2);
 
+        private DeckCard _lastDragHit;
+
         protected override void Awake()
         {
             base.Awake();
@@ -47,6 +49,30 @@ namespace Cards
         public void Drag()
         {
             _dragBehaviour.Drag();
+            
+            _dragBehaviour.Drag();
+
+            var hit = _raycaster.GetBoxcastNearestHit(transform);
+            
+            DeselectLastDraggedCard();
+
+            if (hit && hit.collider.TryGetComponent(out DeckCard overlappedCard))
+            {
+                if (CanPlaceCard(overlappedCard.PositionData.Position))
+                {
+                    overlappedCard.SelectCard();
+                    _lastDragHit = overlappedCard;
+                }
+            }
+        }
+        
+        private void DeselectLastDraggedCard()
+        {
+            if (!ReferenceEquals(_lastDragHit, null))
+            {
+                _lastDragHit.DeselectCard();
+                _lastDragHit = null;
+            }
         }
 
         private void TryPlaceSelf()
@@ -111,19 +137,18 @@ namespace Cards
 
         private void InteractWithOverlappedCard(Card card)
         {
-            if (card.TryGetComponent(out EnemyCard enemy))
+            DeckCard cardComponent = card.GetComponent<DeckCard>();
+
+            if (!ReferenceEquals(cardComponent, null))
             {
-                if (CanInteract(enemy.Condition))
+                if (cardComponent is EnemyCard enemy && CanInteract(enemy.Condition))
                 {
                     enemy.Interact(this);
                     PlayParticleAttack();
                 }
-            }
-            else if (card.TryGetComponent(out DeckCard deckCard))
-            {
-                if (deckCard.Condition == CardCondition.Alive)
+                else if (cardComponent.Condition == CardCondition.Alive)
                 {
-                    card.Interact(this);
+                    cardComponent.Interact(this);
                 }
             }
             

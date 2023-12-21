@@ -17,6 +17,9 @@ namespace DefaultNamespace.Effects
 
         [SerializeField] private int _amount;
 
+        [ShowIf("_affectParameter", AffectParameter.Health)]
+        [SerializeField] private bool _ignoreShield = false;
+
         [Header("Visual Data")]
         [SerializeField] private CardVisualData _visual;
 
@@ -27,5 +30,6 @@ namespace DefaultNamespace.Effects
         public AffectType AffectType => _affectType;
         public int Duration => _duration;
         public int Amount => _amount;
+        public bool IgnoreShield => _ignoreShield;
     }
 }

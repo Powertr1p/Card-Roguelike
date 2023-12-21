@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
+  _collider: {fileID: 0}
 --- !u!114 &725052638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +919,8 @@ MonoBehaviour:
   _enemyAttackZone: {x: 1, y: 1}
   _positioningStatePlacementsY: -1
   _playerMovingLimit: 1
+  _playerMaxHealth: 12
+  _overhealWithDamage: 1
 --- !u!1 &1892885410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
+  _collider: {fileID: 1919648625}
 --- !u!114 &1919648628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,9 +1112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c85e2c65e8744b18ae01b870f195820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthPoints: 0
-  _shieldPoints: 0
-  _maxHealthValue: 12
 --- !u!114 &1919648629
 MonoBehaviour:
   m_ObjectHideFlags: 0
