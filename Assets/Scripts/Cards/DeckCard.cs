@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Data;
 using DefaultNamespace.Effects;
 using DG.Tweening;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,9 +9,7 @@ namespace Cards
 {
     public abstract class DeckCard : Card
     {
-        [BoxGroup("Visual Dependencies")] 
         [SerializeField] private SpriteRenderer _iconRenderer;
-        [BoxGroup("Visual Dependencies")] 
         [SerializeField] private SpriteRenderer _frameRenderer;
         
         [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;

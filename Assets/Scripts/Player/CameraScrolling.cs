@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Player
@@ -7,15 +6,11 @@ namespace Player
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private Material _backgroundMaterial;
-
-        [BoxGroup("Mouse Wheel Scrolling")]
+        
         [SerializeField] private float _scrollSpeed = 2.0f;
         
-        [BoxGroup("Automatic Camera Scrolling")]
         [SerializeField] private float _lerpSpeed = 3.0f;
-        [BoxGroup("Automatic Camera Scrolling")]
         [SerializeField] private float _positionThreshold = 0.1f;
-        [BoxGroup("Automatic Camera Scrolling")]
         [SerializeField] private float _offsetY;
 
         public bool IsCameraMoving => _isMoving;

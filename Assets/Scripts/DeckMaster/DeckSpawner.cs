@@ -1,30 +1,22 @@
 using System.Collections.Generic;
 using Cards;
 using DeckMaster.Factory;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace DeckMaster
 {
     public class DeckSpawner : MonoBehaviour
     {
-        [BoxGroup("Spawners")]
         [SerializeField] private EnemyFactory _enemyFactory;
-        [BoxGroup("Spawners")]
         [SerializeField] private PlacementFactory _placementFactory;
-        [BoxGroup("Spawners")]
         [SerializeField] private ItemFactory _itemFactory;
-
-        [BoxGroup("Room Containers")] 
+        
         [SerializeField] private Transform _firstRoom;
 
         [SerializeField] private Card _door;
         
-        [BoxGroup("Spawn Params")]
         [SerializeField] private int _columns = 5;
-        [BoxGroup("Spawn Params")]
         [SerializeField] private int _rows = 4;
-        [BoxGroup("Spawn Params")]
         [SerializeField] private Vector2 _offset;
 
         public int Rows => _rows;

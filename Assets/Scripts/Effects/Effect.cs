@@ -1,5 +1,4 @@
 using DefaultNamespace.Effects.Enums;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace DefaultNamespace.Effects
@@ -11,13 +10,11 @@ namespace DefaultNamespace.Effects
         [SerializeField] private AffectParameter _affectParameter;
         [SerializeField] private AffectType _affectType;
         [SerializeField] private ParticleSystem _effectParticle;
-
-        [ShowIf("_affectType", AffectType.Turns)]
+        
         [SerializeField] private int _duration;
 
         [SerializeField] private int _amount;
-
-        [ShowIf("_affectParameter", AffectParameter.Health)]
+        
         [SerializeField] private bool _ignoreShield = false;
 
         [Header("Visual Data")]
