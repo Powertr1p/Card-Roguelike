@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using Cards;
 using DefaultNamespace.Effects;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace DeckMaster.Factory
 {
     public class EffectCardsFactory<T> : GenericFactory<T> where T : DeckCard
     {
-        [BoxGroup("Effects Params")]
         [SerializeField] protected List<Effect> PossibleEffects;
         
         public override T CreateNewInstance(int col, int row, int position, Vector2 offset, Transform parent)

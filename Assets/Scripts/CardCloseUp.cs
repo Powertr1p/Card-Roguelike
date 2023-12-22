@@ -39,7 +39,7 @@ public class CardCloseUp : MonoBehaviour
         _camera.transform.DOMove(targetPosition, 0.5f);
         _camera.DOFieldOfView(10f, 0.5f).OnComplete(() =>
         {
-            _isPlaying = false;
+            _isPlaying = false; 
         });
     }
         

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Cards;
 using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
-using NaughtyAttributes;
 using Player;
 using UnityEngine;
 
@@ -10,26 +9,16 @@ namespace DeckMaster
 {
     public class DeckMaster : MonoBehaviour
     {
-        [BoxGroup("Dependecies")]
         [SerializeField] private PlayerHeroCard _player;
-        [BoxGroup("Dependecies")]
         [SerializeField] private PlayerInput _input;
-        [BoxGroup("Dependecies")]
         [SerializeField] private DeckSpawner _spawner;
-        [BoxGroup("Dependecies")]
         [SerializeField] private CameraScrolling _cameraScrolling;
         
-        [BoxGroup("Game Rules")]
         [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
-        [BoxGroup("Game Rules")]
         [SerializeField] private Vector2Int _enemyAttackZone = Vector2Int.one;
-        [BoxGroup("Game Rules")] 
         [SerializeField] private int _positioningStatePlacementsY = -1;
-        [BoxGroup("Game Rules")] 
         [SerializeField] private int _playerMovingLimit = 1;
-        [BoxGroup("Game Rules")] 
         [SerializeField] private int _playerMaxHealth = 12;
-        [BoxGroup("Game Rules")] 
         [SerializeField] private bool _overhealWithDamage = true;
 
         private List<DeckCard> _deckCards;

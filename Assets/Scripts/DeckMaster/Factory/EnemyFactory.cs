@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Cards;
 using CardUtilities;
-using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,11 +8,8 @@ namespace DeckMaster.Factory
 {
     public class EnemyFactory : EffectCardsFactory<EnemyCard>
     {
-        [BoxGroup("Attack Params")]
         [SerializeField] private DirectionAttackPositionaData _attackData;
-        [BoxGroup("Attack Params")]
         [SerializeField] private int _maxDirections = 3;
-        [BoxGroup("Attack Params")]
         [SerializeField] private int _minDirections = 1;
         
         private List<DirectionAttackPosition> _attackDirections;
