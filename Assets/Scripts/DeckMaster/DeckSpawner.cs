@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Cards;
 using DeckMaster.Factory;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace DeckMaster
@@ -10,6 +12,13 @@ namespace DeckMaster
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private PlacementFactory _placementFactory;
         [SerializeField] private ItemFactory _itemFactory;
+
+        [BoxGroup("ToggleLevel"), PropertyOrder(-1), HideLabel]
+        [EnumToggleButtons]
+        public LevelCardType brushCardType;
+        [BoxGroup("ToggleLevel"), PropertyOrder(-1)]
+        [ShowInInspector, TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard")]
+        public LevelCardType[,] _levelCards;
         
         [SerializeField] private Transform _firstRoom;
 
@@ -88,5 +97,45 @@ namespace DeckMaster
         { 
             return _itemFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
+
+        [BoxGroup("ToggleLevel")]
+        [Button]
+        private void CreateData()
+        {
+            _levelCards = new LevelCardType[16, 16];
+        }
+
+#if UNITY_EDITOR
+        private LevelCardType DrawLevelCard(Rect rect, LevelCardType value)
+        {
+            if (UnityEngine.Event.current.type == EventType.MouseDown && rect.Contains(UnityEngine.Event.current.mousePosition))
+            {
+                value = brushCardType;
+                GUI.changed = true;
+                UnityEngine.Event.current.Use();
+            }
+
+            UnityEditor.EditorGUI.DrawRect(rect.Padding(2), AssignColorToLevelCardType(value));
+
+            return value;
+        }
+
+        private Color AssignColorToLevelCardType(LevelCardType value)
+        {
+            if (value == LevelCardType.Block)
+                return new Color(0, 0, 0, 0.5f);
+            if (value == LevelCardType.Door)
+                return new Color(0.36f, 0.2f, 0.7f, 0.5f);
+            if (value == LevelCardType.Empty)
+                return Color.gray;
+            if (value == LevelCardType.Enemy)
+                return Color.red;
+            if (value == LevelCardType.Random)
+                return Color.green;
+            else
+                return Color.yellow;
+        }
+
+#endif
     }
 }
