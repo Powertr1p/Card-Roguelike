@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Cards;
+using Data;
 using DeckMaster.Factory;
-using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DeckMaster
 {
@@ -12,37 +12,51 @@ namespace DeckMaster
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private PlacementFactory _placementFactory;
         [SerializeField] private ItemFactory _itemFactory;
-
-        [BoxGroup("ToggleLevel"), PropertyOrder(-1), HideLabel]
-        [EnumToggleButtons]
-        public LevelCardType brushCardType;
-        [BoxGroup("ToggleLevel"), PropertyOrder(-1)]
-        [ShowInInspector, TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard")]
-        public LevelCardType[,] _levelCards;
-        
         [SerializeField] private Transform _firstRoom;
-
-        [SerializeField] private Card _door;
+        [SerializeField] private DoorCard _door;
         
         [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
+        
         [SerializeField] private Vector2 _offset;
+        [SerializeField] private RoomsPresents _presets;
 
-        public int Rows => _rows;
+        private RoomData _currentData;
+        private LevelCardType[,] _currentPreset;
+        
+        public int Rows => _currentData.GridSize.x;
 
         public List<DeckCard> SpawnCards()
         {
+            var rnd = Random.Range(0, _presets.GetRoomVariants.Count);
+
+            _currentData = _presets.GetRoomVariants[rnd];
+
+            var columns = _currentData.GridSize.y;
+            var rows = _currentData.GridSize.x;
+
+            _currentPreset = _currentData.GetCards();
+            
             List<DeckCard> instancedCards = new List<DeckCard>();
         
-            for (int i = 0; i < _columns; i++)
+            for (int i = 0; i < columns; i++)
             {
                 int nextPosition = GetStartPosition();
             
-                for (int j = 0; j < _rows; j++)
+                for (int j = 0; j < rows; j++)
                 {
-                    DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
-                    instancedCards.Add(card);
-                
+                    if (_currentPreset[i, j] == LevelCardType.Door)
+                    {
+                        var door = Instantiate(_door, _firstRoom);
+                        door.InitializePosition(new Vector2Int(j, i));
+                        door.transform.position = new Vector3(nextPosition, i * _offset.y);
+                    }
+                    else
+                    {
+                        DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
+                        instancedCards.Add(card);
+                    }
+                    
                     nextPosition += (int)_offset.x;
                 }
             }
@@ -82,8 +96,16 @@ namespace DeckMaster
         
         private DeckCard CreateNewRandomCard(int col, int row, int position, Transform parent)
         {
-            var rnd = Random.Range(0, 10);
-            var instance = rnd > 5 ? CreateNewEnemyCard(col, row, position, parent) : CreateNewItemCard(col, row, position, parent);
+            DeckCard instance = null;
+            
+            if (_currentPreset[col, row] == LevelCardType.Item)
+            {
+                instance = CreateNewItemCard(col, row, position, parent);
+            }
+            else if (_currentPreset[col, row] == LevelCardType.Enemy)
+            {
+                instance = CreateNewEnemyCard(col, row, position, parent);
+            }
 
             return instance;
         }
@@ -97,45 +119,5 @@ namespace DeckMaster
         { 
             return _itemFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
-
-        [BoxGroup("ToggleLevel")]
-        [Button]
-        private void CreateData()
-        {
-            _levelCards = new LevelCardType[16, 16];
-        }
-
-#if UNITY_EDITOR
-        private LevelCardType DrawLevelCard(Rect rect, LevelCardType value)
-        {
-            if (UnityEngine.Event.current.type == EventType.MouseDown && rect.Contains(UnityEngine.Event.current.mousePosition))
-            {
-                value = brushCardType;
-                GUI.changed = true;
-                UnityEngine.Event.current.Use();
-            }
-
-            UnityEditor.EditorGUI.DrawRect(rect.Padding(2), AssignColorToLevelCardType(value));
-
-            return value;
-        }
-
-        private Color AssignColorToLevelCardType(LevelCardType value)
-        {
-            if (value == LevelCardType.Block)
-                return new Color(0, 0, 0, 0.5f);
-            if (value == LevelCardType.Door)
-                return new Color(0.36f, 0.2f, 0.7f, 0.5f);
-            if (value == LevelCardType.Empty)
-                return Color.gray;
-            if (value == LevelCardType.Enemy)
-                return Color.red;
-            if (value == LevelCardType.Random)
-                return Color.green;
-            else
-                return Color.yellow;
-        }
-
-#endif
     }
 }
