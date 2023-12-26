@@ -9,9 +9,9 @@ namespace DeckMaster.Factory
     {
         [SerializeField] protected List<Effect> PossibleEffects;
         
-        public override T CreateNewInstance(int col, int row, Vector2 position, Vector2 offset, Transform parent)
+        public override T CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent)
         {
-            var instance = base.CreateNewInstance(col, row, position, offset, parent);
+            var instance = base.CreateNewInstance(col, row, worldPosition, parent);
             var effect = SetRandomizeEffect();
             
             instance.SetEffect(effect);

@@ -76,7 +76,7 @@ namespace DeckMaster
 
                 for (int j = 0; j < _rows; j++)
                 {
-                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _offset, _firstRoom);
+                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _firstRoom);
                     instancedPlacements.Add(placement);
 
                     nextPosition = new Vector2(nextPosition.x + _offset.x, (i - 1) * _offset.y);
@@ -114,12 +114,12 @@ namespace DeckMaster
 
         private DeckCard CreateNewEnemyCard(int col, int row, Vector2 position, Transform parent)
         {
-            return _enemyFactory.CreateNewInstance(col, row, position, _offset, parent);
+            return _enemyFactory.CreateNewInstance(col, row, position, parent);
         }
 
         private DeckCard CreateNewItemCard(int col, int row, Vector2 position, Transform parent)
         { 
-            return _itemFactory.CreateNewInstance(col, row, position, _offset, parent);
+            return _itemFactory.CreateNewInstance(col, row, position, parent);
         }
     }
 }

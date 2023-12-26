@@ -19,9 +19,9 @@ namespace DeckMaster.Factory
             ValidateAttackParams();
         }
 
-        public override EnemyCard CreateNewInstance(int col, int row, Vector2 position, Vector2 offset, Transform parent)
+        public override EnemyCard CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent)
         {
-            var instance = base.CreateNewInstance(col, row, position, offset, parent);
+            var instance = base.CreateNewInstance(col, row, worldPosition, parent);
             
             instance.SetAttackDirections(GetRandomAttackDirections());
 
