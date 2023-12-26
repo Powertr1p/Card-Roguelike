@@ -28,8 +28,6 @@ namespace DeckMaster
         {
             var rows = cards.GetLength(1);
 
-            Debug.Log(cards.GetLength(1));
-            
             _currentPreset = cards;
             
             Rows = rows;
@@ -38,8 +36,9 @@ namespace DeckMaster
         
             for (int i = 0; i < cards.GetLength(0); i++)
             {
-                int nextPosition = GetStartPosition();
-            
+                Vector2 nextPosition = GetStartPosition();
+                nextPosition = new Vector2(nextPosition.x, i * _offset.y);
+
                 for (int j = 0; j < cards.GetLength(1); j++)
                 {
                     if (_currentPreset[i, j] == LevelCardType.Door)
@@ -52,18 +51,18 @@ namespace DeckMaster
                         instancedCards.Add(card);
                     }
                     
-                    nextPosition += (int)_offset.x;
+                    nextPosition = new Vector2(nextPosition.x + _offset.x, i * _offset.y);
                 }
             }
             
             return instancedCards;
         }
 
-        private void CreateDoor(int j, int i, int nextPosition)
+        private void CreateDoor(int j, int i, Vector2 nextPosition)
         {
             var door = Instantiate(_door, _firstRoom);
             door.InitializePosition(new Vector2Int(j, i));
-            door.transform.position = new Vector3(nextPosition, i * _offset.y);
+            door.transform.position = new Vector3(nextPosition.x, i * _offset.y);
         }
 
         public List<Card> SpawnPlacementsForPlayer()
@@ -72,14 +71,15 @@ namespace DeckMaster
         
             for (int i = 0; i < 1; i++)
             {
-                int nextPosition = GetStartPosition();
+                Vector2 nextPosition = GetStartPosition();
+                nextPosition = new Vector2(nextPosition.x, (i - 1) * _offset.y);
 
                 for (int j = 0; j < _rows; j++)
                 {
                     var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _offset, _firstRoom);
                     instancedPlacements.Add(placement);
 
-                    nextPosition += (int) _offset.x;
+                    nextPosition = new Vector2(nextPosition.x + _offset.x, (i - 1) * _offset.y);
                 }
             }
 
@@ -91,12 +91,12 @@ namespace DeckMaster
             _itemFactory.SpawnCoins(deckPosition, worldPosition);
         }
 
-        private int GetStartPosition()
+        private Vector2 GetStartPosition()
         {
-            return -(_rows / 2) * (int)_offset.x;
+            return new(-(_rows / 2) * (int)_offset.x, _offset.y);
         }
         
-        private DeckCard CreateNewRandomCard(int col, int row, int position, Transform parent)
+        private DeckCard CreateNewRandomCard(int col, int row, Vector2 position, Transform parent)
         {
             DeckCard instance = null;
             
@@ -112,12 +112,12 @@ namespace DeckMaster
             return instance;
         }
 
-        private DeckCard CreateNewEnemyCard(int col, int row, int position, Transform parent)
+        private DeckCard CreateNewEnemyCard(int col, int row, Vector2 position, Transform parent)
         {
             return _enemyFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
 
-        private DeckCard CreateNewItemCard(int col, int row, int position, Transform parent)
+        private DeckCard CreateNewItemCard(int col, int row, Vector2 position, Transform parent)
         { 
             return _itemFactory.CreateNewInstance(col, row, position, _offset, parent);
         }
