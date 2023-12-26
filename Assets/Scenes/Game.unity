@@ -953,6 +953,11 @@ MonoBehaviour:
   _playerMovingLimit: 1
   _playerMaxHealth: 12
   _overhealWithDamage: 1
+  _possibleRooms:
+  - {fileID: 11400000, guid: e68ad852ca19d4255977cde85629e385, type: 2}
+  - {fileID: 11400000, guid: 1413e0763c05548b7910308cd81d07c1, type: 2}
+  - {fileID: 11400000, guid: e68ad852ca19d4255977cde85629e385, type: 2}
+  - {fileID: 11400000, guid: 1413e0763c05548b7910308cd81d07c1, type: 2}
 --- !u!1 &1892885410
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +995,6 @@ MonoBehaviour:
   _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}
-  _presets: {fileID: 11400000, guid: 0cc0e0ca106fb4084bb6a7743f3e13b6, type: 2}
 --- !u!4 &1892885413
 Transform:
   m_ObjectHideFlags: 0

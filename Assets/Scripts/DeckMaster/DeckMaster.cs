@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cards;
+using CardUtilities;
+using Data;
 using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
 using Player;
@@ -20,6 +23,8 @@ namespace DeckMaster
         [SerializeField] private int _playerMovingLimit = 1;
         [SerializeField] private int _playerMaxHealth = 12;
         [SerializeField] private bool _overhealWithDamage = true;
+        [SerializeField] private List<RoomData> _possibleRooms;
+        [SerializeField] private int _maxRooms = 2;
 
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
@@ -43,7 +48,9 @@ namespace DeckMaster
 
         private void Start()
         {
-            _deckCards = _spawner.SpawnCards();
+            var converter = new DeckRoomsConverter(RandomizeRooms());
+            
+            _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
             SubscribeCardsDeath();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
@@ -56,6 +63,22 @@ namespace DeckMaster
                 _deckCards[i].DeathPerformed += OnEnemyDeath;
             }
         }
+
+        private List<RoomData> RandomizeRooms()
+        {
+            List<RoomData> pickedRooms = new List<RoomData>();
+            List<RoomData> remainRooms = new List<RoomData>(_possibleRooms);
+
+            for (int i = 0; i < _maxRooms; i++)
+            {
+                var rnd = Random.Range(0, remainRooms.Count);
+                pickedRooms.Add(remainRooms[rnd]);
+                remainRooms.Remove(remainRooms[rnd]);
+            }
+
+            return pickedRooms;
+        }
+        
 
         private void OnEnemyDeath(object obj, DeathArgs deathArgs)
         {

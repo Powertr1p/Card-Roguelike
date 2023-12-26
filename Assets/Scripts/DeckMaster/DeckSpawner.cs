@@ -3,7 +3,6 @@ using Cards;
 using Data;
 using DeckMaster.Factory;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace DeckMaster
 {
@@ -20,30 +19,28 @@ namespace DeckMaster
         
         [SerializeField] private Vector2 _offset;
         [SerializeField] private RoomsPresents _presets;
-
-        private RoomData _currentData;
-        private LevelCardType[,] _currentPreset;
         
-        public int Rows => _currentData.GridSize.x;
+        private LevelCardType[,] _currentPreset;
 
-        public List<DeckCard> SpawnCards()
+        public int Rows;
+
+        public List<DeckCard> SpawnCards(LevelCardType[,] cards)
         {
-            var rnd = Random.Range(0, _presets.GetRoomVariants.Count);
+            var rows = cards.GetLength(1);
 
-            _currentData = _presets.GetRoomVariants[rnd];
-
-            var columns = _currentData.GridSize.y;
-            var rows = _currentData.GridSize.x;
-
-            _currentPreset = _currentData.GetCards();
+            Debug.Log(cards.GetLength(1));
+            
+            _currentPreset = cards;
+            
+            Rows = rows;
             
             List<DeckCard> instancedCards = new List<DeckCard>();
         
-            for (int i = 0; i < columns; i++)
+            for (int i = 0; i < cards.GetLength(0); i++)
             {
                 int nextPosition = GetStartPosition();
             
-                for (int j = 0; j < rows; j++)
+                for (int j = 0; j < cards.GetLength(1); j++)
                 {
                     if (_currentPreset[i, j] == LevelCardType.Door)
                     {
