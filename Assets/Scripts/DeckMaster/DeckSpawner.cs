@@ -44,9 +44,7 @@ namespace DeckMaster
                 {
                     if (_currentPreset[i, j] == LevelCardType.Door)
                     {
-                        var door = Instantiate(_door, _firstRoom);
-                        door.InitializePosition(new Vector2Int(j, i));
-                        door.transform.position = new Vector3(nextPosition, i * _offset.y);
+                        CreateDoor(j, i, nextPosition);
                     }
                     else
                     {
@@ -59,6 +57,13 @@ namespace DeckMaster
             }
             
             return instancedCards;
+        }
+
+        private void CreateDoor(int j, int i, int nextPosition)
+        {
+            var door = Instantiate(_door, _firstRoom);
+            door.InitializePosition(new Vector2Int(j, i));
+            door.transform.position = new Vector3(nextPosition, i * _offset.y);
         }
 
         public List<Card> SpawnPlacementsForPlayer()
@@ -103,7 +108,7 @@ namespace DeckMaster
             {
                 instance = CreateNewEnemyCard(col, row, position, parent);
             }
-
+            
             return instance;
         }
 
