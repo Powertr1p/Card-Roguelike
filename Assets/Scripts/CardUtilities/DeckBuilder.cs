@@ -11,6 +11,7 @@ namespace CardUtilities
 
         private Vector2Int _gridSize;
         private Vector2Int _nextStartPos = Vector2Int.zero;
+        private Vector2Int _doorPosition = Vector2Int.zero;
         
         public DeckBuilder(List<RoomData> roomDatas)
         {
@@ -22,20 +23,18 @@ namespace CardUtilities
         {
             _levelGrid = new LevelCardType[_gridSize.y + 1, _gridSize.x + 1];
 
-            int currentColumn = 0;
-            int currentRow = 0;
-
             foreach (var roomData in _roomDatas)
-            {
-                var roomCards = roomData.GetCards();
-                CreateRoom(ref roomCards);
+            { 
+                CreateRoom(roomData);
             }
 
             return _levelGrid;
         }
 
-        private void CreateRoom(ref LevelCardType[,] roomCards)
+        private void CreateRoom(RoomData roomData)
         {
+            var roomCards = roomData.GetCards();
+            
             for (int i = 0; i < roomCards.GetLength(0); i++)
             {
                 for (int j = 0; j < roomCards.GetLength(1); j++)
@@ -58,7 +57,7 @@ namespace CardUtilities
                 summCols += _roomDatas[i].GridSize.y;
                 summRows += _roomDatas[i].GridSize.x;
             }
-            
+
             Debug.Log($"Max is {summCols} {summRows}");
 
             return new Vector2Int(summRows, summCols);

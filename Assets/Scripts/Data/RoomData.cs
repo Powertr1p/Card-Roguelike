@@ -11,6 +11,7 @@ namespace Data
     {
         [SerializeField, PropertyOrder(0)] 
         private Vector2Int _grid = new Vector2Int(7, 7);
+        [SerializeField] private DoorAlignment _doorAlignment;
         
         [PropertyOrder(1), Button]
         private void RegenerateData() => _levelCards = new LevelCardType[_grid.y, _grid.x];
@@ -22,7 +23,8 @@ namespace Data
         [SerializeField] private LevelCardType[,] _levelCards;
         
         public Vector2Int GridSize => _grid;
-
+        public DoorAlignment DoorAlignment => _doorAlignment;
+        
         private readonly Dictionary<LevelCardType, Func<Color>> _colorMappings = new Dictionary<LevelCardType, Func<Color>>
             {
                 {LevelCardType.Block, () => new Color(0, 0, 0, 0.5f)},
@@ -48,7 +50,7 @@ namespace Data
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    reversedArray[i, j] = array[rows - 1 - i, columns - 1 - j];
+                    reversedArray[i, j] = array[rows - 1 - i, j];
                 }
             }
 
