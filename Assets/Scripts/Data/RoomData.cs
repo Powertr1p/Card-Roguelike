@@ -13,7 +13,7 @@ namespace Data
         private Vector2Int _grid = new Vector2Int(7, 7);
         
         [PropertyOrder(1), Button]
-        private void RegenerateData() => _levelCards = new LevelCardType[_grid.x, _grid.y];
+        private void RegenerateData() => _levelCards = new LevelCardType[_grid.y, _grid.x];
 
         [ShowInInspector, Space(10),PropertyOrder(2), EnumToggleButtons, HideLabel]
         private LevelCardType _brushCardType;
