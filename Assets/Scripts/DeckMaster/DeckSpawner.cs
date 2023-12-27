@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cards;
-using Data;
 using DeckMaster.Factory;
 using UnityEngine;
 
@@ -14,7 +13,6 @@ namespace DeckMaster
         [SerializeField] private Transform _firstRoom;
         [SerializeField] private DoorCard _door;
         
-        [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
         
         [SerializeField] private Vector2 _offset;

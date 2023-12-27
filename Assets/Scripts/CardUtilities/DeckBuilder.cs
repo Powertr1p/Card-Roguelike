@@ -33,6 +33,8 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData)
         {
+            Debug.LogError($"Create Room: {roomData.name}");
+            
             var roomCards = roomData.GetCards();
             
             for (int i = 0; i < roomCards.GetLength(0); i++)
@@ -42,12 +44,14 @@ namespace CardUtilities
                     var currentColumn = _nextStartPos.y + i;
                     var currentRow = _nextStartPos.x + j;
                     
+                    Debug.Log($"{currentColumn} {currentRow}");
+                    
                     _levelGrid[currentColumn, currentRow] = roomCards[i, j];
 
                     if (roomCards[i, j] == LevelCardType.Door)
                     {
-                        _doorPosition.x = j;
-                        _doorPosition.y = i;
+                        _doorPosition.x = currentRow;
+                        _doorPosition.y = currentColumn;
                     }
                 }
             }
@@ -62,6 +66,10 @@ namespace CardUtilities
                 _nextStartPos.x = _doorPosition.x;
                 _nextStartPos.y = _doorPosition.y + 1;
             }
+            else if (roomData.DoorAlignment == DoorAlignment.Left)
+            {
+                //_nextStartPos.x = _doorPosition
+            }
         }
 
         private Vector2Int GetGridSize()
@@ -74,9 +82,7 @@ namespace CardUtilities
                 summCols += _roomDatas[i].GridSize.y;
                 summRows += _roomDatas[i].GridSize.x;
             }
-
-            Debug.Log($"Max is {summCols} {summRows}");
-
+            
             return new Vector2Int(summRows, summCols);
         }
     }

@@ -72,6 +72,7 @@ namespace DeckMaster
             for (int i = 0; i < _maxRooms; i++)
             {
                 var rnd = Random.Range(0, remainRooms.Count);
+
                 pickedRooms.Add(remainRooms[rnd]);
                 remainRooms.Remove(remainRooms[rnd]);
             }
