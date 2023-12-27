@@ -41,14 +41,17 @@ namespace DeckMaster
 
                 for (int j = 0; j < cards.GetLength(1); j++)
                 {
-                    if (_currentPreset[i, j] == LevelCardType.Door)
+                    if (cards[i, j] != LevelCardType.Empty)
                     {
-                        CreateDoor(j, i, nextPosition);
-                    }
-                    else
-                    {
-                        DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
-                        instancedCards.Add(card);
+                        if (_currentPreset[i, j] == LevelCardType.Door)
+                        {
+                            CreateDoor(j, i, nextPosition);
+                        }
+                        else
+                        {
+                            DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
+                            instancedCards.Add(card);
+                        }
                     }
                     
                     nextPosition = new Vector2(nextPosition.x + _offset.x, i * _offset.y);

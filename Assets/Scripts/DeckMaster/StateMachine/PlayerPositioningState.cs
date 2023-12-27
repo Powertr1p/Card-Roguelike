@@ -25,7 +25,7 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             PositionPlacements = Spawner.SpawnPlacementsForPlayer();
-            var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(Spawner.Rows - 1,0), FaceSate.FaceUp);
+            var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(7,0), FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
         }
 
