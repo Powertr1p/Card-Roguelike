@@ -18,8 +18,7 @@ namespace DeckMaster
         [SerializeField] private int _rows = 4;
         
         [SerializeField] private Vector2 _offset;
-        [SerializeField] private RoomsPresents _presets;
-        
+
         private LevelCardType[,] _currentPreset;
 
         public int Rows;

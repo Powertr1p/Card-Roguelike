@@ -9,19 +9,19 @@ namespace Data
     [CreateAssetMenu(fileName = "RoomData", menuName = "RoomData", order = 0)]
     public class RoomData : SerializedScriptableObject
     {
-        [SerializeField, PropertyOrder(0)] 
-        private Vector2Int _grid = new Vector2Int(7, 7);
+        [PropertyOrder(0)] 
+        [SerializeField] private Vector2Int _grid = new Vector2Int(7, 7);
         [SerializeField] private DoorAlignment _doorAlignment;
+        
+        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true), OnValueChanged("SetDoorAligment")]
+        [SerializeField] private LevelCardType[,] _levelCards;
         
         [PropertyOrder(1), Button]
         private void RegenerateData() => _levelCards = new LevelCardType[_grid.y, _grid.x];
 
         [ShowInInspector, Space(10),PropertyOrder(2), EnumToggleButtons, HideLabel, OnValueChanged("DeletePreviousDoor")]
         private LevelCardType _brushCardType;
-        
-        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true), OnValueChanged("SetDoorAligment")]
-        [SerializeField] private LevelCardType[,] _levelCards;
-        
+
         public Vector2Int GridSize => _grid;
         public DoorAlignment DoorAlignment => _doorAlignment;
         
