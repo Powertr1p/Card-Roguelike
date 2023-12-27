@@ -13,7 +13,7 @@ namespace Data
         [SerializeField] private Vector2Int _grid = new Vector2Int(7, 7);
         [SerializeField] private DoorAlignment _doorAlignment;
         
-        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true), OnValueChanged("SetDoorAligment")]
+        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true), OnValueChanged("SetDoorAlignment")]
         [SerializeField] private LevelCardType[,] _levelCards;
         
         [PropertyOrder(1), Button]
@@ -73,7 +73,7 @@ namespace Data
             return value;
         }
 
-        private void SetDoorAligment()
+        private void SetDoorAlignment()
         {
             if (_brushCardType == LevelCardType.Door)
             {
