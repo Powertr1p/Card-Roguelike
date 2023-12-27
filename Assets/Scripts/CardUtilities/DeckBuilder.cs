@@ -43,7 +43,24 @@ namespace CardUtilities
                     var currentRow = _nextStartPos.x + j;
                     
                     _levelGrid[currentColumn, currentRow] = roomCards[i, j];
+
+                    if (roomCards[i, j] == LevelCardType.Door)
+                    {
+                        _doorPosition.x = j;
+                        _doorPosition.y = i;
+                    }
                 }
+            }
+
+            if (roomData.DoorAlignment == DoorAlignment.Right)
+            {
+                _nextStartPos.x = _doorPosition.x + 1;
+                _nextStartPos.y = _doorPosition.y;
+            }
+            else if (roomData.DoorAlignment == DoorAlignment.Up)
+            {
+                _nextStartPos.x = _doorPosition.x;
+                _nextStartPos.y = _doorPosition.y + 1;
             }
         }
 

@@ -16,10 +16,10 @@ namespace Data
         [PropertyOrder(1), Button]
         private void RegenerateData() => _levelCards = new LevelCardType[_grid.y, _grid.x];
 
-        [ShowInInspector, Space(10),PropertyOrder(2), EnumToggleButtons, HideLabel]
+        [ShowInInspector, Space(10),PropertyOrder(2), EnumToggleButtons, HideLabel, OnValueChanged("DeletePreviousDoor")]
         private LevelCardType _brushCardType;
         
-        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true)]
+        [PropertyOrder(3), TableMatrix(SquareCells = true, DrawElementMethod = "DrawLevelCard", Transpose = true), OnValueChanged("SetDoorAligment")]
         [SerializeField] private LevelCardType[,] _levelCards;
         
         public Vector2Int GridSize => _grid;
@@ -72,7 +72,73 @@ namespace Data
 
             return value;
         }
-        
+
+        private void SetDoorAligment()
+        {
+            if (_brushCardType == LevelCardType.Door)
+            {
+               _doorAlignment = FindDoorAlignment();
+               _brushCardType = LevelCardType.Empty;
+            }
+        }
+
+        private DoorAlignment FindDoorAlignment()
+        {
+            for (int i = 0; i < _levelCards.GetLength(0); i++)
+            {
+                for (int j = 0; j < _levelCards.GetLength(1); j++)
+                {
+                    if (_levelCards[i, j] == LevelCardType.Door)
+                    {
+                        return ClaculateAlignment(i, j);
+                    }
+                }
+            }
+
+            return DoorAlignment.Undefined;
+        }
+
+        private DoorAlignment ClaculateAlignment(int col, int row)
+        {
+            if (col == _levelCards.GetLength(0) - 1)
+            {
+                return DoorAlignment.Down;
+            }
+            
+            if (col == 0)
+            {
+                return DoorAlignment.Up;
+            }
+
+            if (row > _levelCards.GetLength(1) / 2)
+            {
+                return DoorAlignment.Right;
+            }
+
+            if (row < _levelCards.GetLength(1) / 2)
+            {
+                return DoorAlignment.Left;
+            }
+
+            return DoorAlignment.Undefined;
+        }
+
+        private void DeletePreviousDoor()
+        {
+            if (_brushCardType != LevelCardType.Door) return;
+            
+            for (int i = 0; i < _levelCards.GetLength(0); i++)
+            {
+                for (int j = 0; j < _levelCards.GetLength(1); j++)
+                {
+                    if (_levelCards[i, j] == LevelCardType.Door)
+                    {
+                        _levelCards[i, j] = LevelCardType.Empty;
+                    }
+                }
+            }
+        }
+
         public Color GetCardColor(LevelCardType value)
         {
             return _colorMappings.TryGetValue(value, out var getColor) ? getColor() : Color.yellow;
