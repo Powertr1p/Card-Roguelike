@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace CardUtilities
 {
-    public class DeckRoomsConverter
+    public class DeckBuilder
     {
         private List<RoomData> _roomDatas;
 
         private Vector2Int _gridSize;
         
-        public DeckRoomsConverter(List<RoomData> roomDatas)
+        public DeckBuilder(List<RoomData> roomDatas)
         {
             _roomDatas = roomDatas;
             _gridSize = GetGridSize();
