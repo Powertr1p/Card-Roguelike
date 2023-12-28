@@ -41,22 +41,19 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
       Data: 2
-    - Name: 
-      Entry: 3
-      Data: 2
-    - Name: 
-      Entry: 3
-      Data: 3
     - Name: 
       Entry: 3
       Data: 4
     - Name: 
       Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
       Data: 3
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 3
       Data: 3
@@ -65,7 +62,10 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 2
     - Name: 
       Entry: 13
       Data: 
@@ -73,4 +73,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _grid: {x: 4, y: 3}
-  _doorAlignment: 2
+  _doorAlignment: 4
