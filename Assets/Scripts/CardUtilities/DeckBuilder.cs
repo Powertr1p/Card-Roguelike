@@ -15,7 +15,7 @@ namespace CardUtilities
         private DoorAlignment _excludeNextDoorAlignment = DoorAlignment.Undefined;
 
         private Vector2Int _gridSize;
-        private Vector2Int _nextStartPos = new Vector2Int(15, 15);
+        private Vector2Int _nextStartPos = new Vector2Int(20, 20);
         private Vector2Int _doorPosition = Vector2Int.zero;
 
         private bool _isLastLeft = false;
@@ -29,14 +29,14 @@ namespace CardUtilities
 
         public LevelCardType[,] GetConcatinatedRooms()
         {
-            _levelGrid = new LevelCardType[30, 30];
+            _levelGrid = new LevelCardType[40, 40];
 
             foreach (var roomData in _pickedRoomDatas)
             { 
                 CreateRoom(roomData);
             }
 
-            return _levelGrid;
+            return ConvertGridToProperSize();
         }
         
         private List<RoomData> RandomizeRooms()
@@ -70,7 +70,7 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData)
         {
-            Debug.LogError($"Create Room: {roomData.name}");
+           // Debug.LogError($"Create Room: {roomData.name}");
 
             if (_isLastLeft)
             {
@@ -87,7 +87,7 @@ namespace CardUtilities
                     var currentColumn = _nextStartPos.y + i;
                     var currentRow = _nextStartPos.x + j;
                     
-                    Debug.Log($"{currentColumn} {currentRow}");
+                    //Debug.Log($"{currentColumn} {currentRow}");
                     
                     _levelGrid[currentColumn, currentRow] = roomCards[i, j];
 
@@ -115,6 +115,65 @@ namespace CardUtilities
                 _nextStartPos.y = _doorPosition.y;
                 _isLastLeft = true;
             }
+        }
+
+        private LevelCardType[,] ConvertGridToProperSize()
+        {
+            int startedCol = 30;
+            int startedRow = 30;
+            int lastCol = 0;
+            int lastRow = 0;
+            
+            for (int i = 0; i < _levelGrid.GetLength(1); i++)
+            {
+                for (int j = 0; j < _levelGrid.GetLength(0); j++)
+                {
+                    if (_levelGrid[j, i] != LevelCardType.Empty)
+                    {
+                        var currentCol = j;
+                        var currentRow = i;
+            
+                        if (currentCol < startedCol)
+                        {
+                            startedCol = currentCol;
+                        }
+            
+                        if (currentRow < startedRow)
+                        {
+                            startedRow = currentRow;
+                        }
+            
+                        if (currentCol > lastCol)
+                        {
+                            lastCol = currentCol;
+                        }
+            
+                        if (currentRow > lastRow)
+                        {
+                            lastRow = currentRow;
+                        }
+                    }
+                }
+            }
+            
+            Vector2Int size = new Vector2Int(_gridSize.y, _gridSize.x);
+            
+           // Debug.Log($"LastCol: {lastCol}, StartedCol: {startedCol}; LastRow: {lastRow}, StartedRow: {startedRow}");
+            
+            LevelCardType[,] newArray = new LevelCardType[size.x, size.y];
+            
+            for (int i = 0; i < newArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < newArray.GetLength(1); j++)
+                {
+                    newArray[i, j] = _levelGrid[startedCol + i, startedRow + j];
+                    
+                   // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
+                    
+                }
+            }
+            
+            return newArray;
         }
 
         private Vector2Int GetGridSize()
