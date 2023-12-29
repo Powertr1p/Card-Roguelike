@@ -55,7 +55,7 @@ namespace DeckMaster
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
             
-            _cameraScrolling.SetTarget(_player.transform);
+            _cameraScrolling.SetTarget(_player.transform, true);
         }
 
         private void SubscribeCardsDeath()

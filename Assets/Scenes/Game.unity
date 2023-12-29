@@ -315,6 +315,7 @@ MonoBehaviour:
   _lerpSpeed: 6
   _positionThreshold: 0.1
   _offsetY: 0
+  _offsetYOnGameStart: 4
 --- !u!1 &588084464
 GameObject:
   m_ObjectHideFlags: 0
