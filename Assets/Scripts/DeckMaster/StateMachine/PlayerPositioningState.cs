@@ -25,7 +25,8 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             PositionPlacements = Spawner.SpawnPlacementsForPlayer();
-            var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(Spawner.Rows - 1,0), FaceSate.FaceUp);
+            SetPlayerPosition();
+            var cards =  GetCardsAroundPlayer(new Vector2Int(0,0), new Vector2Int(7,0), FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
         }
 
@@ -59,6 +60,13 @@ namespace DeckMaster.StateMachine
             NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
             base.Execute();
             Input.EnableInput();
+        }
+
+        private void SetPlayerPosition()
+        {
+            var centerCard = PositionPlacements.Count / 2;
+            Player.transform.position = new Vector3(PositionPlacements[centerCard].transform.position.x,
+                PositionPlacements[centerCard].transform.position.y - Spawner.Offset.y, Player.transform.position.z);
         }
 
         private void ProcessState()

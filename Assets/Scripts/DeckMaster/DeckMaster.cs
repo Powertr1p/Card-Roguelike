@@ -48,12 +48,14 @@ namespace DeckMaster
 
         private void Start()
         {
-            var converter = new DeckBuilder(RandomizeRooms());
+            var converter = new DeckBuilder(_possibleRooms);
             
             _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
             SubscribeCardsDeath();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
+            
+            _cameraScrolling.SetTarget(_player.transform, true);
         }
 
         private void SubscribeCardsDeath()
@@ -63,22 +65,6 @@ namespace DeckMaster
                 _deckCards[i].DeathPerformed += OnEnemyDeath;
             }
         }
-
-        private List<RoomData> RandomizeRooms()
-        {
-            List<RoomData> pickedRooms = new List<RoomData>();
-            List<RoomData> remainRooms = new List<RoomData>(_possibleRooms);
-
-            for (int i = 0; i < _maxRooms; i++)
-            {
-                var rnd = Random.Range(0, remainRooms.Count);
-                pickedRooms.Add(remainRooms[rnd]);
-                remainRooms.Remove(remainRooms[rnd]);
-            }
-
-            return pickedRooms;
-        }
-        
 
         private void OnEnemyDeath(object obj, DeathArgs deathArgs)
         {

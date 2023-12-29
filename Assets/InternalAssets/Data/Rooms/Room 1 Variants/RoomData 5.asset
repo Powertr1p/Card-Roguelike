@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd8ea82b53fc47058643e21387d11252, type: 3}
-  m_Name: RoomData 2
+  m_Name: RoomData 5
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -44,7 +44,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 3
       Data: 2
@@ -53,7 +53,7 @@ MonoBehaviour:
       Data: 3
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 4
     - Name: 
       Entry: 3
       Data: 3
@@ -73,4 +73,4 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _grid: {x: 4, y: 3}
-  _doorAlignment: 4
+  _doorAlignment: 2

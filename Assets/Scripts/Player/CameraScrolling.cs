@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -12,6 +13,7 @@ namespace Player
         [SerializeField] private float _lerpSpeed = 3.0f;
         [SerializeField] private float _positionThreshold = 0.1f;
         [SerializeField] private float _offsetY;
+        [SerializeField] private float _offsetYOnGameStart = 3f;
 
         public bool IsCameraMoving => _isMoving;
         
@@ -22,37 +24,47 @@ namespace Player
 
         private Vector3 _diffCam;
         private Vector3 _originCam;
-        
+
         private bool _cameraDrag;
         private bool _isMoving = false;
+        private bool _isInstant;
 
         private void Awake()
         {
             _cameraTransform = _camera.transform;
         }
-        
+
         private void Update()
         {
             if (_isMoving)
             {
                 var cameraPosition = _cameraTransform.position;
                 var targetPosition = _targetTransform.position + new Vector3(0f, _offsetY, 0f);
-
-                var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
-
-                transform.position = lerpedPosition;
                 
-                ScrollBackgroundMaterial(lerpedPosition.y);
-                
-                if (Vector3.Distance(transform.position, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z)) < _positionThreshold)
+                if (_isInstant)
                 {
-                    _isMoving = false; 
+                    _cameraTransform.position = new Vector3(targetPosition.x, targetPosition.y + _offsetYOnGameStart, cameraPosition.z);
+                    _isInstant = false;
+                    _isMoving = false;
+                }
+                else 
+                {
+                    var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
+                    transform.position = lerpedPosition;
+                    ScrollBackgroundMaterial(lerpedPosition.y);
+                }
+                
+                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < _positionThreshold)
+                {
+                    _isMoving = false;
+                    _isInstant = false;
                 }
             }
         }
 
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform target, bool isInstant = false)
         {
+            _isInstant = isInstant;
             _targetTransform = target;
             _isMoving = true;
         }

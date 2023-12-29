@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cards;
-using Data;
 using DeckMaster.Factory;
 using UnityEngine;
 
@@ -14,13 +13,14 @@ namespace DeckMaster
         [SerializeField] private Transform _firstRoom;
         [SerializeField] private DoorCard _door;
         
-        [SerializeField] private int _columns = 5;
         [SerializeField] private int _rows = 4;
         
         [SerializeField] private Vector2 _offset;
-        [SerializeField] private RoomsPresents _presets;
+
+        public Vector2 Offset => _offset;
         
         private LevelCardType[,] _currentPreset;
+        private List<DeckCard> _firstRow = new List<DeckCard>();
 
         public int Rows;
 
@@ -41,14 +41,23 @@ namespace DeckMaster
 
                 for (int j = 0; j < cards.GetLength(1); j++)
                 {
-                    if (_currentPreset[i, j] == LevelCardType.Door)
+                    if (cards[i, j] != LevelCardType.Block && cards[i,j] != LevelCardType.Empty && cards[i,j] != LevelCardType.Random)
                     {
-                        CreateDoor(j, i, nextPosition);
-                    }
-                    else
-                    {
-                        DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
-                        instancedCards.Add(card);
+                        if (cards[i, j] == LevelCardType.Door)
+                        {
+                            CreateDoor(j, i, nextPosition);
+                        }
+                        else
+                        {
+                            DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom);
+
+                            instancedCards.Add(card);
+
+                            if (i == 0)
+                            {
+                                _firstRow.Add(card);
+                            }
+                        }
                     }
                     
                     nextPosition = new Vector2(nextPosition.x + _offset.x, i * _offset.y);
@@ -71,12 +80,12 @@ namespace DeckMaster
         
             for (int i = 0; i < 1; i++)
             {
-                Vector2 nextPosition = GetStartPosition();
+                Vector2 nextPosition = GetPlacementsStartPosition();
                 nextPosition = new Vector2(nextPosition.x, (i - 1) * _offset.y);
 
-                for (int j = 0; j < _rows; j++)
+                for (int j = 0; j < _firstRow.Count; j++)
                 {
-                    var placement = _placementFactory.CreateNewInstance(i - 1, j, nextPosition, _firstRoom);
+                    var placement = _placementFactory.CreateNewInstance(i - 1, _firstRow[j].PositionData.Position.x, nextPosition, _firstRoom);
                     instancedPlacements.Add(placement);
 
                     nextPosition = new Vector2(nextPosition.x + _offset.x, (i - 1) * _offset.y);
@@ -84,6 +93,11 @@ namespace DeckMaster
             }
 
             return instancedPlacements;
+        }
+
+        private Vector2 GetPlacementsStartPosition()
+        {
+            return new Vector2(_firstRow[0].transform.position.x, _firstRow[0].transform.position.y);
         }
 
         public void SpawnCoins(Vector2Int deckPosition, Vector3 worldPosition)
