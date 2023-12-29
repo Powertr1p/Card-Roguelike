@@ -54,6 +54,8 @@ namespace DeckMaster
             SubscribeCardsDeath();
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
+            
+            _cameraScrolling.SetTarget(_player.transform);
         }
 
         private void SubscribeCardsDeath()
@@ -63,7 +65,6 @@ namespace DeckMaster
                 _deckCards[i].DeathPerformed += OnEnemyDeath;
             }
         }
-
 
         private void OnEnemyDeath(object obj, DeathArgs deathArgs)
         {
