@@ -249,7 +249,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34
+  field of view: 46
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -314,7 +314,7 @@ MonoBehaviour:
   _scrollSpeed: 2
   _lerpSpeed: 6
   _positionThreshold: 0.1
-  _offsetY: 2
+  _offsetY: 0
 --- !u!1 &588084464
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,9 +954,13 @@ MonoBehaviour:
   _playerMaxHealth: 12
   _overhealWithDamage: 1
   _possibleRooms:
-  - {fileID: 11400000, guid: 175c8b48771fe49f9b18a219925e739c, type: 2}
   - {fileID: 11400000, guid: e581de599795d47c19e80f106aa9aa4b, type: 2}
+  - {fileID: 11400000, guid: 175c8b48771fe49f9b18a219925e739c, type: 2}
   - {fileID: 11400000, guid: f1a04beab696a49ac979fe96821d990c, type: 2}
+  - {fileID: 11400000, guid: 1eae957f310ba4cc8a114919fb1520f7, type: 2}
+  - {fileID: 11400000, guid: a1ce9fc5e4bc1471b923d2bd95b4a065, type: 2}
+  - {fileID: 11400000, guid: 602f930b913654e10b363bf3cce860bf, type: 2}
+  - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
   _maxRooms: 3
 --- !u!1 &1892885410
 GameObject:
@@ -992,7 +996,6 @@ MonoBehaviour:
   _itemFactory: {fileID: 1381529589}
   _firstRoom: {fileID: 1621303672}
   _door: {fileID: 7449930616306911950, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
-  _columns: 7
   _rows: 7
   _offset: {x: 2, y: 2.5}
   Rows: 0
@@ -1226,6 +1229,22 @@ PrefabInstance:
     - target: {fileID: 2555389698608169238, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2914331548739708707, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 25.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2914331548739708707, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060295585424240804, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
+      propertyPath: m_Size.x
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060295585424240804, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
+      propertyPath: m_Size.y
+      value: 25.8
       objectReference: {fileID: 0}
     - target: {fileID: 8851272519946496019, guid: 445fecb6b58c67942b19f0ef48500c54, type: 3}
       propertyPath: m_Name
