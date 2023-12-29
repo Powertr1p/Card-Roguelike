@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -30,7 +31,7 @@ namespace Player
         {
             _cameraTransform = _camera.transform;
         }
-        
+
         private void Update()
         {
             if (_isMoving)
@@ -38,13 +39,13 @@ namespace Player
                 var cameraPosition = _cameraTransform.position;
                 var targetPosition = _targetTransform.position + new Vector3(0f, _offsetY, 0f);
 
-                var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
+                var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
 
                 transform.position = lerpedPosition;
                 
                 ScrollBackgroundMaterial(lerpedPosition.y);
                 
-                if (Vector3.Distance(transform.position, new Vector3(cameraPosition.x, targetPosition.y, cameraPosition.z)) < _positionThreshold)
+                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < _positionThreshold)
                 {
                     _isMoving = false; 
                 }
