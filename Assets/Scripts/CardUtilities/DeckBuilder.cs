@@ -46,18 +46,10 @@ namespace CardUtilities
 
             for (int i = 0; i < 3; i++)
             {
-                _excludeNextDoorAlignment = _lastPickedDoor switch
-                {
-                    DoorAlignment.Undefined => DoorAlignment.Undefined,
-                    DoorAlignment.Left => DoorAlignment.Right,
-                    DoorAlignment.Up => DoorAlignment.Down,
-                    DoorAlignment.Down => DoorAlignment.Up,
-                    DoorAlignment.Right => DoorAlignment.Left,
-                    _ => _excludeNextDoorAlignment
-                };
+                SetExcludeDoorAlignment();
 
-                List<RoomData> suitableRooms = new List<RoomData>(remainRooms.Where(room => room.DoorAlignment != _excludeNextDoorAlignment).ToList());
-
+                List<RoomData> suitableRooms = GetSuitableRooms(i, remainRooms);
+                
                 var rnd = Random.Range(0, suitableRooms.Count);
 
                 pickedRooms.Add(suitableRooms[rnd]);
@@ -68,9 +60,29 @@ namespace CardUtilities
             return pickedRooms;
         }
 
+        private List<RoomData> GetSuitableRooms(int roomIndex, List<RoomData> remainRooms)
+        {
+            return roomIndex == 0 ? 
+                new List<RoomData>(remainRooms.Where(room => room.DoorAlignment == DoorAlignment.Up).ToList()) :
+                new List<RoomData>(remainRooms.Where(room => room.DoorAlignment != _excludeNextDoorAlignment).ToList());
+        }
+
+        private void SetExcludeDoorAlignment()
+        {
+            _excludeNextDoorAlignment = _lastPickedDoor switch
+            {
+                DoorAlignment.Undefined => DoorAlignment.Undefined,
+                DoorAlignment.Left => DoorAlignment.Right,
+                DoorAlignment.Up => DoorAlignment.Down,
+                DoorAlignment.Down => DoorAlignment.Up,
+                DoorAlignment.Right => DoorAlignment.Left,
+                _ => _excludeNextDoorAlignment
+            };
+        }
+
         private void CreateRoom(RoomData roomData)
         {
-           Debug.LogError($"Create Room: {roomData.name}");
+           //Debug.LogError($"Create Room: {roomData.name}");
 
             if (_isLastLeft)
             {
@@ -180,7 +192,6 @@ namespace CardUtilities
                     newArray[i, j] = _levelGrid[startedCol + i, startedRow + j];
                     
                    // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
-                    
                 }
             }
             
