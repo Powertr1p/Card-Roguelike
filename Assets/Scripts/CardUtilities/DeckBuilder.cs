@@ -19,10 +19,7 @@ namespace CardUtilities
         private Vector2Int _doorPosition = Vector2Int.zero;
         
         private int _maxRooms;
-        
-        private bool _isLastLeft = false;
-        private bool _isLastDown = false;
-        
+
         public DeckBuilder(List<RoomData> allRooms, int maxRooms)
         {
             _allRooms = allRooms;
@@ -143,8 +140,34 @@ namespace CardUtilities
 
         private LevelCardType[,] ConvertGridToProperSize()
         {
-            int startedCol = 30;
-            int startedRow = 30;
+            Vector2Int startPos = GetFirstNonEmptyGridCells();
+           
+            int startedCol = startPos.y;
+            int startedRow = startPos.x;
+
+            Vector2Int size = new Vector2Int(_gridSize.y, _gridSize.x);
+            
+           // Debug.Log($"LastCol: {lastCol}, StartedCol: {startedCol}; LastRow: {lastRow}, StartedRow: {startedRow}");
+            
+            LevelCardType[,] newArray = new LevelCardType[size.x, size.y];
+            
+            for (int i = 0; i < newArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < newArray.GetLength(1); j++)
+                {
+                    newArray[i, j] = _levelGrid[startedCol + i, startedRow + j];
+                    
+                   // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
+                }
+            }
+            
+            return newArray;
+        }
+
+        private Vector2Int GetFirstNonEmptyGridCells()
+        {
+            int startedCol = _initialGridSize.y / 2;
+            int startedRow = _initialGridSize.x / 2;
 
             for (int i = 0; i < _levelGrid.GetLength(1); i++)
             {
@@ -163,24 +186,8 @@ namespace CardUtilities
                     }
                 }
             }
-            
-            Vector2Int size = new Vector2Int(_gridSize.y, _gridSize.x);
-            
-           // Debug.Log($"LastCol: {lastCol}, StartedCol: {startedCol}; LastRow: {lastRow}, StartedRow: {startedRow}");
-            
-            LevelCardType[,] newArray = new LevelCardType[size.x, size.y];
-            
-            for (int i = 0; i < newArray.GetLength(0); i++)
-            {
-                for (int j = 0; j < newArray.GetLength(1); j++)
-                {
-                    newArray[i, j] = _levelGrid[startedCol + i, startedRow + j];
-                    
-                   // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
-                }
-            }
-            
-            return newArray;
+
+            return new Vector2Int(startedRow, startedCol);
         }
 
         private Vector2Int GetGridSize()
