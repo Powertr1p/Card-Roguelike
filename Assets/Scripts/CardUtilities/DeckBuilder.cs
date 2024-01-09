@@ -17,12 +17,15 @@ namespace CardUtilities
         private Vector2Int _nextStartPos = new Vector2Int(20, 20);
         private Vector2Int _doorPosition = Vector2Int.zero;
 
+        private int _maxRooms;
+        
         private bool _isLastLeft = false;
         private bool _isLastDown = false;
         
-        public DeckBuilder(List<RoomData> allRooms)
+        public DeckBuilder(List<RoomData> allRooms, int maxRooms)
         {
             _allRooms = allRooms;
+            _maxRooms = maxRooms;
             _pickedRoomDatas = RandomizeRooms();
             _gridSize = GetGridSize();
         }
@@ -44,7 +47,7 @@ namespace CardUtilities
             List<RoomData> pickedRooms = new List<RoomData>();
             List<RoomData> remainRooms = new List<RoomData>(_allRooms);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < _maxRooms; i++)
             {
                 SetExcludeDoorAlignment();
 

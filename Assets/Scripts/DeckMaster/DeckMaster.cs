@@ -48,7 +48,7 @@ namespace DeckMaster
 
         private void Start()
         {
-            var converter = new DeckBuilder(_possibleRooms);
+            var converter = new DeckBuilder(_possibleRooms, _maxRooms);
             
             _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
             SubscribeCardsDeath();
