@@ -14,9 +14,10 @@ namespace CardUtilities
         private DoorAlignment _excludeNextDoorAlignment = DoorAlignment.Undefined;
 
         private Vector2Int _gridSize;
-        private Vector2Int _nextStartPos = new Vector2Int(20, 20);
+        private Vector2Int _initialGridSize = new(40, 40);
+        private Vector2Int _nextStartPos;
         private Vector2Int _doorPosition = Vector2Int.zero;
-
+        
         private int _maxRooms;
         
         private bool _isLastLeft = false;
@@ -26,13 +27,16 @@ namespace CardUtilities
         {
             _allRooms = allRooms;
             _maxRooms = maxRooms;
+            
+            _nextStartPos = _initialGridSize / 2;
+            
             _pickedRoomDatas = RandomizeRooms();
             _gridSize = GetGridSize();
         }
 
         public LevelCardType[,] GetConcatinatedRooms()
         {
-            _levelGrid = new LevelCardType[40, 40];
+            _levelGrid = new LevelCardType[_initialGridSize.y, _initialGridSize.x];
 
             foreach (var roomData in _pickedRoomDatas)
             { 
@@ -86,8 +90,8 @@ namespace CardUtilities
         private void CreateRoom(RoomData roomData)
         {
            //Debug.LogError($"Create Room: {roomData.name}");
-           
-            var roomCards = roomData.GetCards();
+
+           var roomCards = roomData.GetCards();
             
             for (int i = 0; i < roomCards.GetLength(0); i++)
             {
@@ -141,9 +145,7 @@ namespace CardUtilities
         {
             int startedCol = 30;
             int startedRow = 30;
-            int lastCol = 0;
-            int lastRow = 0;
-            
+
             for (int i = 0; i < _levelGrid.GetLength(1); i++)
             {
                 for (int j = 0; j < _levelGrid.GetLength(0); j++)
@@ -154,24 +156,10 @@ namespace CardUtilities
                         var currentRow = i;
             
                         if (currentCol < startedCol)
-                        {
                             startedCol = currentCol;
-                        }
-            
+
                         if (currentRow < startedRow)
-                        {
                             startedRow = currentRow;
-                        }
-            
-                        if (currentCol > lastCol)
-                        {
-                            lastCol = currentCol;
-                        }
-            
-                        if (currentRow > lastRow)
-                        {
-                            lastRow = currentRow;
-                        }
                     }
                 }
             }
