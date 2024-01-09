@@ -962,6 +962,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1ce9fc5e4bc1471b923d2bd95b4a065, type: 2}
   - {fileID: 11400000, guid: 602f930b913654e10b363bf3cce860bf, type: 2}
   - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
+  - {fileID: 11400000, guid: ca62e39ec2cb84bd69d8f6ed8b2a70dd, type: 2}
   _maxRooms: 3
 --- !u!1 &1892885410
 GameObject:

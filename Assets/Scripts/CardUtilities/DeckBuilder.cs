@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CardUtilities
@@ -19,6 +18,7 @@ namespace CardUtilities
         private Vector2Int _doorPosition = Vector2Int.zero;
 
         private bool _isLastLeft = false;
+        private bool _isLastDown = false;
         
         public DeckBuilder(List<RoomData> allRooms)
         {
@@ -70,12 +70,17 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData)
         {
-           // Debug.LogError($"Create Room: {roomData.name}");
+           Debug.LogError($"Create Room: {roomData.name}");
 
             if (_isLastLeft)
             {
                 _nextStartPos.x -= roomData.GridSize.x;
                 _isLastLeft = false;
+            }
+            else if (_isLastDown)
+            {
+                _nextStartPos.y -= roomData.GridSize.y;
+                _isLastDown = false;
             }
             
             var roomCards = roomData.GetCards();
@@ -114,6 +119,12 @@ namespace CardUtilities
                 _nextStartPos.x = _doorPosition.x;
                 _nextStartPos.y = _doorPosition.y;
                 _isLastLeft = true;
+            }
+            else if (roomData.DoorAlignment == DoorAlignment.Down)
+            {
+                _nextStartPos.x = _doorPosition.x;
+                _nextStartPos.y = _doorPosition.y - 1;
+                _isLastDown = true;
             }
         }
 
