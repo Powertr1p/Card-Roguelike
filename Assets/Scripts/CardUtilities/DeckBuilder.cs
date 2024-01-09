@@ -83,18 +83,7 @@ namespace CardUtilities
         private void CreateRoom(RoomData roomData)
         {
            //Debug.LogError($"Create Room: {roomData.name}");
-
-            if (_isLastLeft)
-            {
-                _nextStartPos.x -= roomData.GridSize.x;
-                _isLastLeft = false;
-            }
-            else if (_isLastDown)
-            {
-                _nextStartPos.y -= roomData.GridSize.y;
-                _isLastDown = false;
-            }
-            
+           
             var roomCards = roomData.GetCards();
             
             for (int i = 0; i < roomCards.GetLength(0); i++)
@@ -116,6 +105,11 @@ namespace CardUtilities
                 }
             }
 
+            SetNextStartPosition(roomData);
+        }
+
+        private void SetNextStartPosition(RoomData roomData)
+        {
             if (roomData.DoorAlignment == DoorAlignment.Right)
             {
                 _nextStartPos.x = _doorPosition.x + 1;
@@ -129,14 +123,14 @@ namespace CardUtilities
             else if (roomData.DoorAlignment == DoorAlignment.Left)
             {
                 _nextStartPos.x = _doorPosition.x;
+                _nextStartPos.x -= roomData.GridSize.x - 1;
                 _nextStartPos.y = _doorPosition.y;
-                _isLastLeft = true;
             }
             else if (roomData.DoorAlignment == DoorAlignment.Down)
             {
                 _nextStartPos.x = _doorPosition.x;
                 _nextStartPos.y = _doorPosition.y - 1;
-                _isLastDown = true;
+                _nextStartPos.y -= roomData.GridSize.y;
             }
         }
 
