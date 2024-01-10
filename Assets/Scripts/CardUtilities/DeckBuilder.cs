@@ -19,6 +19,8 @@ namespace CardUtilities
         private Vector2Int _doorPosition = Vector2Int.zero;
         
         private int _maxRooms;
+        private bool _isLastLeft = false;
+        private bool _isLastDown = false;
 
         public DeckBuilder(List<RoomData> allRooms, int maxRooms)
         {
@@ -86,7 +88,18 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData)
         {
-           //Debug.LogError($"Create Room: {roomData.name}");
+           Debug.LogError($"Create Room: {roomData.name}");
+
+           if (_isLastLeft)
+           {
+               _nextStartPos.x -= roomData.GridSize.x;
+               _isLastLeft = false;
+           }
+           else if (_isLastDown)
+           {
+               _nextStartPos.y -= roomData.GridSize.y;
+               _isLastDown = false;
+           }
 
            var roomCards = roomData.GetCards();
             
@@ -127,14 +140,14 @@ namespace CardUtilities
             else if (roomData.DoorAlignment == DoorAlignment.Left)
             {
                 _nextStartPos.x = _doorPosition.x;
-                _nextStartPos.x -= roomData.GridSize.x - 1;
                 _nextStartPos.y = _doorPosition.y;
+                _isLastLeft = true;
             }
             else if (roomData.DoorAlignment == DoorAlignment.Down)
             {
                 _nextStartPos.x = _doorPosition.x;
                 _nextStartPos.y = _doorPosition.y - 1;
-                _nextStartPos.y -= roomData.GridSize.y;
+                _isLastDown = true;
             }
         }
 
@@ -202,6 +215,14 @@ namespace CardUtilities
             }
             
             return new Vector2Int(summRows, summCols);
+        }
+
+        private void CorrectStartPosition(Vector2Int correction)
+        {
+            Debug.Log(correction);
+            
+            _nextStartPos -= correction;
+            
         }
     }
 }
