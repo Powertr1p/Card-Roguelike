@@ -86,10 +86,10 @@ namespace Player
 
             if (_cameraDrag)
             {
-                var diff = _originCam.y - _diffCam.y;
-                _cameraTransform.position = new Vector3(cameraPosition.x, diff, cameraPosition.z);
+                var diff = _originCam - _diffCam;
+                _cameraTransform.position = new Vector3(diff.x, diff.y, cameraPosition.z);
 
-                ScrollBackgroundMaterial(diff);
+                ScrollBackgroundMaterial(diff.y);
             }
         }
 
