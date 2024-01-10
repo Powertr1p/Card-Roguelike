@@ -1000,7 +1000,7 @@ MonoBehaviour:
   _firstRoom: {fileID: 1621303672}
   _door: {fileID: 7449930616306911950, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
   _rows: 7
-  _offset: {x: 2, y: 2.5}
+  _offset: {x: 1.6, y: 2.2}
   Rows: 0
 --- !u!4 &1892885413
 Transform:
