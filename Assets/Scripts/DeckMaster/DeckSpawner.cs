@@ -10,6 +10,7 @@ namespace DeckMaster
         [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private PlacementFactory _placementFactory;
         [SerializeField] private ItemFactory _itemFactory;
+        [SerializeField] private BlockFactory _blockFactory;
         [SerializeField] private Transform _firstRoom;
         [SerializeField] private DoorCard _door;
         
@@ -41,7 +42,7 @@ namespace DeckMaster
 
                 for (int j = 0; j < cards.GetLength(1); j++)
                 {
-                    if (cards[i, j] != LevelCardType.Block && cards[i,j] != LevelCardType.Empty && cards[i,j] != LevelCardType.Random)
+                    if (cards[i,j] != LevelCardType.Empty && cards[i,j] != LevelCardType.Random)
                     {
                         if (cards[i, j] == LevelCardType.Door)
                         {
@@ -112,17 +113,14 @@ namespace DeckMaster
         
         private DeckCard CreateNewRandomCard(int col, int row, Vector2 position, Transform parent)
         {
-            DeckCard instance = null;
-            
-            if (_currentPreset[col, row] == LevelCardType.Item)
+            DeckCard instance = _currentPreset[col, row] switch
             {
-                instance = CreateNewItemCard(col, row, position, parent);
-            }
-            else if (_currentPreset[col, row] == LevelCardType.Enemy)
-            {
-                instance = CreateNewEnemyCard(col, row, position, parent);
-            }
-            
+                LevelCardType.Item => CreateNewItemCard(col, row, position, parent),
+                LevelCardType.Enemy => CreateNewEnemyCard(col, row, position, parent),
+                LevelCardType.Block => CreateNewBlock(col, row, position, parent),
+                _ => null
+            };
+
             return instance;
         }
 
@@ -134,6 +132,11 @@ namespace DeckMaster
         private DeckCard CreateNewItemCard(int col, int row, Vector2 position, Transform parent)
         { 
             return _itemFactory.CreateNewInstance(col, row, position, parent);
+        }
+
+        private DeckCard CreateNewBlock(int col, int row, Vector2 position, Transform parent)
+        {
+            return _blockFactory.CreateNewInstance(col, row, position, parent);
         }
     }
 }

@@ -996,6 +996,7 @@ MonoBehaviour:
   _enemyFactory: {fileID: 57666094}
   _placementFactory: {fileID: 1376340091}
   _itemFactory: {fileID: 1381529589}
+  _blockFactory: {fileID: 2087764294}
   _firstRoom: {fileID: 1621303672}
   _door: {fileID: 7449930616306911950, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
   _rows: 7
