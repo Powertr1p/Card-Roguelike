@@ -26,7 +26,7 @@ namespace Cards
       public void EnterGrabState()
       {
          _mousePosition = Input.mousePosition - GetMousePosition();
-         gameObject.layer = 2;
+         gameObject.layer = 0b10;
       }
 
       public void PlaceInitialPosition()
@@ -51,7 +51,7 @@ namespace Cards
 
       public void ExitGrabState()
       {
-         gameObject.layer = 0;
+         gameObject.layer = 0b0;
       }
    }
 }
