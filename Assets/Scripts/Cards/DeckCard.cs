@@ -1,5 +1,6 @@
 using System;
 using Data;
+using DeckMaster;
 using DefaultNamespace.Effects;
 using DG.Tweening;
 using UnityEngine;
@@ -58,7 +59,7 @@ namespace Cards
         {
             _facing = FaceSate.FaceUp;
 
-            _transform.DORotate(Vector3.zero, 0.25f);
+            _transform.DORotate(Vector3.zero, GameRulesGetter.Rules.CardsOpenSpeed);
         }
 
         public void SelectCard()
@@ -67,7 +68,7 @@ namespace Cards
             if (_isSelected) return;
             _isSelected = true;
 
-            MainSpritesContainer.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+            MainSpritesContainer.transform.localScale = GameRulesGetter.Rules.HoverScaleValue;
         }
 
         public void DeselectCard()

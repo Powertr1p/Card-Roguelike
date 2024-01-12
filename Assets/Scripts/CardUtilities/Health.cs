@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     
     private void Start()
     {
-        _maxHealth = GameRulesGetter.PlayerMaxHealth;
+        _maxHealth = GameRulesGetter.Rules.PlayerMaxHealth;
 
         _healthPoints = _maxHealth;
         _shieldPoints = 0;
@@ -40,7 +40,7 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(int amount)
     {
-        if (GameRulesGetter.OverhealWithDamage)
+        if (GameRulesGetter.Rules.OverhealWithDamage)
             _healthPoints += amount;
         else
             _healthPoints = Math.Min(_healthPoints + amount, _maxHealth);
@@ -62,7 +62,7 @@ public class Health : MonoBehaviour
 
     public void TryDamageOverheal()
     {
-        if (!GameRulesGetter.OverhealWithDamage) return;
+        if (!GameRulesGetter.Rules.OverhealWithDamage) return;
         
         if (_healthPoints > _maxHealth)
         {

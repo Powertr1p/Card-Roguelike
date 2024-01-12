@@ -40,7 +40,7 @@ namespace DeckMaster
 
         private void Start()
         {
-            var converter = new DeckBuilder(GameRulesGetter.PossibleRooms, GameRulesGetter.MaxRooms);
+            var converter = new DeckBuilder(GameRulesGetter.Rules.PossibleRooms, GameRulesGetter.Rules.MaxRooms);
             
             _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
             SubscribeCardsDeath();

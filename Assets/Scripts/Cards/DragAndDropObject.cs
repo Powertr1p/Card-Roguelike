@@ -31,7 +31,7 @@ namespace Cards
 
       public void PlaceInitialPosition()
       { 
-         _transform.DOMove(_initialCardPosition, GameRulesGetter.PlaceInitialDuration);
+         _transform.DOMove(_initialCardPosition, GameRulesGetter.Rules.PlaceInititialPositionDuration);
       
          ExitGrabState();
       }

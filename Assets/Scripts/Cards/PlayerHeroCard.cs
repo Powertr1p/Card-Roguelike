@@ -23,7 +23,7 @@ namespace Cards
         {
             base.Awake();
             
-            _positionChecker = new CardPositionChecker(GameRulesGetter.PlayerMovingLimit);
+            _positionChecker = new CardPositionChecker(GameRulesGetter.Rules.PlayerMovingLimit);
         }
 
         private void Start()
@@ -123,7 +123,7 @@ namespace Cards
         {
             if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
-                return desirePosition.y == GameRulesGetter.PlacementsY;
+                return desirePosition.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
             }
 
             return _positionChecker.CanPositionCard(desirePosition, PositionData.Position);

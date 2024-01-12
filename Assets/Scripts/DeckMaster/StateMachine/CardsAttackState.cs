@@ -23,7 +23,7 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            var attackZone = GameRulesGetter.EnemyAttackZone;
+            var attackZone = GameRulesGetter.Rules.EnemyAttackZone;
             
             var cardsWithPossibleAttack = GetCardsAroundPlayer(Player.PositionData.Position - attackZone, Player.PositionData.Position + attackZone, FaceSate.FaceDown);
             Mono.StartCoroutine(GetCardsThatCanAttackPlayer(cardsWithPossibleAttack, MoveToNextState));

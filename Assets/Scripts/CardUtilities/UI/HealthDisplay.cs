@@ -35,7 +35,7 @@ namespace CardUtilities.UI
 
         private bool IsOverheal(int newValue)
         {
-            return newValue > GameRulesGetter.PlayerMaxHealth && GameRulesGetter.OverhealWithDamage;
+            return newValue > GameRulesGetter.Rules.PlayerMaxHealth && GameRulesGetter.Rules.OverhealWithDamage;
         }
     }
 }

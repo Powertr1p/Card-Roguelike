@@ -22,7 +22,7 @@ namespace DeckMaster.StateMachine
 
         public override void Execute()
         {
-            var openLimit = GameRulesGetter.PlayerVisibleZone;
+            var openLimit = GameRulesGetter.Rules.VisibleZone;
             
             var cards =  GetCardsAroundPlayer(Player.PositionData.Position - openLimit, Player.PositionData.Position + openLimit, FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
@@ -39,7 +39,7 @@ namespace DeckMaster.StateMachine
             {
                 card.OpenCard();
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(GameRulesGetter.Rules.DelayBetweenCardsOpen);
             }
             
             completeCallback?.Invoke();

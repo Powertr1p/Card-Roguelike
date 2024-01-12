@@ -32,22 +32,22 @@ namespace Player
             if (_isMoving)
             {
                 var cameraPosition = _cameraTransform.position;
-                var targetPosition = _targetTransform.position + new Vector3(0f, GameRulesGetter.OffsetY, 0f);
+                var targetPosition = _targetTransform.position + new Vector3(0f, GameRulesGetter.Rules.OffsetY, 0f);
                 
                 if (_isInstant)
                 {
-                    _cameraTransform.position = new Vector3(targetPosition.x, targetPosition.y + GameRulesGetter.OffsetYOnGameStart, cameraPosition.z);
+                    _cameraTransform.position = new Vector3(targetPosition.x, targetPosition.y + GameRulesGetter.Rules.OffsetYOnGameStart, cameraPosition.z);
                     _isInstant = false;
                     _isMoving = false;
                 }
                 else 
                 {
-                    var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * GameRulesGetter.LerpSpeed);
+                    var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * GameRulesGetter.Rules.LerpSpeed);
                     transform.position = lerpedPosition;
                     ScrollBackgroundMaterial(lerpedPosition.y);
                 }
                 
-                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.PositionThreshold)
+                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.Rules.PositionThreshold)
                 {
                     _isMoving = false;
                     _isInstant = false;
@@ -99,7 +99,7 @@ namespace Player
 
             if (scroll == 0) return;
             
-            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * GameRulesGetter.ScrollSpeed);
+            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * GameRulesGetter.Rules.ScrollSpeed);
             _cameraTransform.position = newPosition;
         }
 
