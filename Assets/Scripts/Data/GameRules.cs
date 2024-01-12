@@ -20,6 +20,7 @@ namespace Data
 
         [BoxGroup("Player Feel")] 
         [SerializeField] private float _backOnCellAnimDuration = 0.25f;
+        [BoxGroup("Player Feel")] 
         [SerializeField] private Vector3 _cardScaleOnPlayerHover = new Vector3(0.9f, 0.9f, 0.9f);
         
         [BoxGroup("Enemy")]
@@ -32,6 +33,7 @@ namespace Data
 
         [BoxGroup("Deck Feel")] 
         [SerializeField] private float _delayBetweenCardsOpen = 0.1f;
+        [BoxGroup("Deck Feel")] 
         [SerializeField] private float _cardOpenSpeed = 0.25f;
         
         [BoxGroup("Camera")]
