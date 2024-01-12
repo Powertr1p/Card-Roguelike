@@ -948,12 +948,7 @@ MonoBehaviour:
   _input: {fileID: 725052638}
   _spawner: {fileID: 1892885412}
   _cameraScrolling: {fileID: 519420034}
-  _visibleZone: {x: 2, y: 2}
-  _enemyAttackZone: {x: 1, y: 1}
-  _positioningStatePlacementsY: -1
-  _playerMovingLimit: 1
-  _playerMaxHealth: 12
-  _overhealWithDamage: 1
+  _gameRules: {fileID: 11400000, guid: 1e2bbe30d12804ea4911b94e2daf358b, type: 2}
   _possibleRooms:
   - {fileID: 11400000, guid: e581de599795d47c19e80f106aa9aa4b, type: 2}
   - {fileID: 11400000, guid: 175c8b48771fe49f9b18a219925e739c, type: 2}
@@ -963,7 +958,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 602f930b913654e10b363bf3cce860bf, type: 2}
   - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
   - {fileID: 11400000, guid: ca62e39ec2cb84bd69d8f6ed8b2a70dd, type: 2}
-  _maxRooms: 3
 --- !u!1 &1892885410
 GameObject:
   m_ObjectHideFlags: 0

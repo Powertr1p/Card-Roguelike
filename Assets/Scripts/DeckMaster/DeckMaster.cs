@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cards;
 using CardUtilities;
 using Data;
 using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
+using JetBrains.Annotations;
 using Player;
 using UnityEngine;
 
@@ -12,19 +12,11 @@ namespace DeckMaster
 {
     public class DeckMaster : MonoBehaviour
     {
-        [SerializeField] private PlayerHeroCard _player;
-        [SerializeField] private PlayerInput _input;
-        [SerializeField] private DeckSpawner _spawner;
-        [SerializeField] private CameraScrolling _cameraScrolling;
-        
-        [SerializeField] private Vector2Int _visibleZone = new Vector2Int(2,2);
-        [SerializeField] private Vector2Int _enemyAttackZone = Vector2Int.one;
-        [SerializeField] private int _positioningStatePlacementsY = -1;
-        [SerializeField] private int _playerMovingLimit = 1;
-        [SerializeField] private int _playerMaxHealth = 12;
-        [SerializeField] private bool _overhealWithDamage = true;
-        [SerializeField] private List<RoomData> _possibleRooms;
-        [SerializeField] private int _maxRooms = 2;
+        [SerializeField, NotNull] private PlayerHeroCard _player;
+        [SerializeField, NotNull] private PlayerInput _input;
+        [SerializeField, NotNull] private DeckSpawner _spawner;
+        [SerializeField, NotNull] private CameraScrolling _cameraScrolling;
+        [SerializeField, NotNull] private GameRules _gameRules;
 
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
@@ -43,12 +35,12 @@ namespace DeckMaster
 
         private void Awake()
         {
-            GameRules.Initialize(_visibleZone,_positioningStatePlacementsY, _enemyAttackZone, _playerMovingLimit, _overhealWithDamage, _playerMaxHealth);
+            _gameRules.Initialize();
         }
 
         private void Start()
         {
-            var converter = new DeckBuilder(_possibleRooms, _maxRooms);
+            var converter = new DeckBuilder(GameRulesGetter.PossibleRooms, GameRulesGetter.MaxRooms);
             
             _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
             SubscribeCardsDeath();
