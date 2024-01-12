@@ -12,6 +12,7 @@ namespace DeckMaster
         public static int PlayerMovingLimit => _gameRules.PlayerMovingLimit;
         public static int PlayerMaxHealth => _gameRules.PlayerMaxHealth;
         public static bool OverhealWithDamage => _gameRules.OverhealWithDamage;
+        public static float PlaceInitialDuration => _gameRules.PlaceInititialPositionDuration;
 
         public static List<RoomData> PossibleRooms => _gameRules.PossibleRooms;
         public static int MaxRooms => _gameRules.MaxRooms;

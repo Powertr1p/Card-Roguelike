@@ -1,3 +1,4 @@
+using DeckMaster;
 using DG.Tweening;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Cards
 
       public void PlaceInitialPosition()
       { 
-         _transform.DOMove(_initialCardPosition, 0.25f);
+         _transform.DOMove(_initialCardPosition, GameRulesGetter.PlaceInitialDuration);
       
          ExitGrabState();
       }
