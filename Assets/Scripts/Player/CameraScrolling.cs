@@ -1,4 +1,4 @@
-using System;
+using DeckMaster;
 using UnityEngine;
 
 namespace Player
@@ -7,13 +7,6 @@ namespace Player
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private Material _backgroundMaterial;
-        
-        [SerializeField] private float _scrollSpeed = 2.0f;
-        
-        [SerializeField] private float _lerpSpeed = 3.0f;
-        [SerializeField] private float _positionThreshold = 0.1f;
-        [SerializeField] private float _offsetY;
-        [SerializeField] private float _offsetYOnGameStart = 3f;
 
         public bool IsCameraMoving => _isMoving;
         
@@ -39,22 +32,22 @@ namespace Player
             if (_isMoving)
             {
                 var cameraPosition = _cameraTransform.position;
-                var targetPosition = _targetTransform.position + new Vector3(0f, _offsetY, 0f);
+                var targetPosition = _targetTransform.position + new Vector3(0f, GameRulesGetter.OffsetY, 0f);
                 
                 if (_isInstant)
                 {
-                    _cameraTransform.position = new Vector3(targetPosition.x, targetPosition.y + _offsetYOnGameStart, cameraPosition.z);
+                    _cameraTransform.position = new Vector3(targetPosition.x, targetPosition.y + GameRulesGetter.OffsetYOnGameStart, cameraPosition.z);
                     _isInstant = false;
                     _isMoving = false;
                 }
                 else 
                 {
-                    var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * _lerpSpeed);
+                    var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * GameRulesGetter.LerpSpeed);
                     transform.position = lerpedPosition;
                     ScrollBackgroundMaterial(lerpedPosition.y);
                 }
                 
-                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < _positionThreshold)
+                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.PositionThreshold)
                 {
                     _isMoving = false;
                     _isInstant = false;
@@ -106,7 +99,7 @@ namespace Player
 
             if (scroll == 0) return;
             
-            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * _scrollSpeed);
+            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * GameRulesGetter.ScrollSpeed);
             _cameraTransform.position = newPosition;
         }
 

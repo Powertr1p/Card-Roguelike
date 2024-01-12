@@ -20,6 +20,14 @@ namespace Data
         [Header("Deck")] 
         [SerializeField, NotNull] private List<RoomData> _possibleRooms;
         [SerializeField] private int _maxRooms = 3;
+        
+        [Header("Camera")]
+        [SerializeField] private float _mouseWheelZoomSpeed = 2.0f;
+        
+        [SerializeField] private float _cameraFollowSpeed = 3.0f;
+        [SerializeField] private float _positionThreshold = 0.1f;
+        [SerializeField] private float _offsetYFromPlayerCard = 0f;
+        [SerializeField] private float _offsetYOnGameStart = 3f;
 
         public Vector2Int VisibleZone => _visibleZone;
         public int PlayerMovingLimit => _playerMovingLimit;
@@ -27,8 +35,15 @@ namespace Data
         public bool OverhealWithDamage => _overhealWithDamage;
         public int PositioningStatePlacementsY { get; } = -1;
         public Vector2Int EnemyAttackZone => _enemyAttackZone;
+        
         public List<RoomData> PossibleRooms => _possibleRooms;
         public int MaxRooms => _maxRooms;
+
+        public float ScrollSpeed => _mouseWheelZoomSpeed;
+        public float LerpSpeed => _cameraFollowSpeed;
+        public float PositionThreshold => _positionThreshold;
+        public float OffsetY => _offsetYFromPlayerCard;
+        public float OffsetYOnGameStart => _offsetYOnGameStart;
 
         public void Initialize()
         {
