@@ -16,6 +16,8 @@ MonoBehaviour:
   _playerMovingLimit: 1
   _playerMaxHealth: 12
   _overhealWithDamage: 1
+  _backOnCellAnimDuration: 0.25
+  _cardScaleOnPlayerHover: {x: 0.9, y: 0.9, z: 0.9}
   _enemyAttackZone: {x: 1, y: 1}
   _possibleRooms:
   - {fileID: 11400000, guid: e581de599795d47c19e80f106aa9aa4b, type: 2}
@@ -27,7 +29,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
   - {fileID: 11400000, guid: ca62e39ec2cb84bd69d8f6ed8b2a70dd, type: 2}
   _maxRooms: 3
+  _delayBetweenCardsOpen: 0.1
+  _cardOpenSpeed: 0.25
   _mouseWheelZoomSpeed: 2
+  _maxZoomValue: -9
+  _minZoomValue: -21
   _cameraFollowSpeed: 7
   _positionThreshold: 0.1
   _offsetYFromPlayerCard: 0

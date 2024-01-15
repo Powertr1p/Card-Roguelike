@@ -38,6 +38,10 @@ namespace Data
         
         [BoxGroup("Camera"), PropertyTooltip("$MouseWheelZoomSpeedTooltip")]
         [SerializeField] private float _mouseWheelZoomSpeed = 2.0f;
+        [BoxGroup("Camera")] 
+        [SerializeField] private float _maxZoomValue = -9f;
+        [BoxGroup("Camera")] 
+        [SerializeField] private float _minZoomValue = -21f;
         [BoxGroup("Camera"), PropertyTooltip("$CameraFollowSpeedTooltip")]
         [SerializeField] private float _cameraFollowSpeed = 3.0f;
         [BoxGroup("Camera"), PropertyTooltip("$PositionThresholdTooltip")]
@@ -64,6 +68,9 @@ namespace Data
         public int MaxRooms => _maxRooms;
 
         public float ScrollSpeed => _mouseWheelZoomSpeed;
+        public float MaxZoomValue => _maxZoomValue;
+        public float MinZoomValue => _minZoomValue;
+
         public float LerpSpeed => _cameraFollowSpeed;
         public float PositionThreshold => _positionThreshold;
         public float OffsetY => _offsetYFromPlayerCard;

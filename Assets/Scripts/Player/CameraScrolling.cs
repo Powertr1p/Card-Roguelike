@@ -1,3 +1,4 @@
+using Data;
 using DeckMaster;
 using UnityEngine;
 
@@ -17,9 +18,7 @@ namespace Player
 
         private Vector3 _diffCam;
         private Vector3 _originCam;
-
-        private float _minZScroll = -21f;
-        private float _maxZScroll = -9f;
+        
         private float _initialZScroll;
 
         private bool _cameraDrag;
@@ -106,7 +105,7 @@ namespace Player
             
             Vector3 newPosition = _cameraTransform.position + Vector3.forward * (scroll * GameRulesGetter.Rules.ScrollSpeed);
 
-            newPosition.z = Mathf.Clamp(newPosition.z, _minZScroll, _maxZScroll);
+            newPosition.z = Mathf.Clamp(newPosition.z, GameRulesGetter.Rules.MinZoomValue, GameRulesGetter.Rules.MaxZoomValue);
             
             _cameraTransform.position = newPosition;
         }
