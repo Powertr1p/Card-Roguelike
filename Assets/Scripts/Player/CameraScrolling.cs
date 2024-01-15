@@ -18,6 +18,10 @@ namespace Player
         private Vector3 _diffCam;
         private Vector3 _originCam;
 
+        private float _minZScroll = -21f;
+        private float _maxZScroll = -9f;
+        private float _initialZScroll;
+
         private bool _cameraDrag;
         private bool _isMoving = false;
         private bool _isInstant;
@@ -25,6 +29,7 @@ namespace Player
         private void Awake()
         {
             _cameraTransform = _camera.transform;
+            _initialZScroll = _cameraTransform.position.z;
         }
 
         private void Update()
@@ -99,7 +104,10 @@ namespace Player
 
             if (scroll == 0) return;
             
-            Vector3 newPosition = _cameraTransform.position + Vector3.up * (scroll * GameRulesGetter.Rules.ScrollSpeed);
+            Vector3 newPosition = _cameraTransform.position + Vector3.forward * (scroll * GameRulesGetter.Rules.ScrollSpeed);
+
+            newPosition.z = Mathf.Clamp(newPosition.z, _minZScroll, _maxZScroll);
+            
             _cameraTransform.position = newPosition;
         }
 
