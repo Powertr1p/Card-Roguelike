@@ -31,7 +31,8 @@ namespace Data
                 {LevelCardType.Door, () => new Color(0.36f, 0.2f, 0.7f, 0.5f)},
                 {LevelCardType.Empty, () => Color.gray},
                 {LevelCardType.Enemy, () => Color.red},
-                {LevelCardType.Random, () => Color.green}
+                {LevelCardType.Random, () => Color.green},
+                {LevelCardType.Unreachable, () => Color.clear},
             };
 
         public LevelCardType[,] GetCards()
