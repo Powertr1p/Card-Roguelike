@@ -11,6 +11,7 @@ namespace DeckMaster
         [SerializeField] private PlacementFactory _placementFactory;
         [SerializeField] private ItemFactory _itemFactory;
         [SerializeField] private BlockFactory _blockFactory;
+        [SerializeField] private DeckCardFactory _emptyCardFactory;
         [SerializeField] private Transform _firstRoom;
         [SerializeField] private DoorCard _door;
         

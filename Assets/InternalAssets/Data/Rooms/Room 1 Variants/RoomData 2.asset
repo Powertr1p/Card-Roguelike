@@ -32,7 +32,7 @@ MonoBehaviour:
       Data: 3|4
     - Name: 
       Entry: 3
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 3
       Data: 2
@@ -56,7 +56,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 3
-      Data: 3
+      Data: 5
     - Name: 
       Entry: 3
       Data: 3
