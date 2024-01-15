@@ -67,6 +67,8 @@ namespace DeckMaster.StateMachine
             var centerCard = PositionPlacements.Count / 2;
             Player.transform.position = new Vector3(PositionPlacements[centerCard].transform.position.x,
                 PositionPlacements[centerCard].transform.position.y - Spawner.Offset.y, Player.transform.position.z);
+            Player.InitializePosition(PositionPlacements[centerCard].PositionData.Position);
+            Player.GetComponent<DragAndDropObject>().SetNewInitialPosition(Player.transform.position);
         }
 
         private void ProcessState()

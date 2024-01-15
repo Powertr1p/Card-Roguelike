@@ -22,7 +22,7 @@ namespace Cards
       {
          return _camera.WorldToScreenPoint(transform.position);
       }
-   
+
       public void EnterGrabState()
       {
          _mousePosition = Input.mousePosition - GetMousePosition();
