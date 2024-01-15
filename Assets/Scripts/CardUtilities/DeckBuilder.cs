@@ -186,7 +186,7 @@ namespace CardUtilities
             {
                 for (int j = 0; j < _levelGrid.GetLength(0); j++)
                 {
-                    if (_levelGrid[j, i] != LevelCardType.Empty)
+                    if (_levelGrid[j, i] != LevelCardType.Unreachable)
                     {
                         var currentCol = j;
                         var currentRow = i;

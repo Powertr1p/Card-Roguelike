@@ -43,7 +43,7 @@ namespace DeckMaster
 
                 for (int j = 0; j < cards.GetLength(1); j++)
                 {
-                    if (cards[i,j] != LevelCardType.Empty && cards[i,j] != LevelCardType.Random)
+                    if (cards[i,j] != LevelCardType.Unreachable && cards[i,j] != LevelCardType.Random)
                     {
                         if (cards[i, j] == LevelCardType.Door)
                         {
@@ -69,13 +69,6 @@ namespace DeckMaster
             return instancedCards;
         }
 
-        private void CreateDoor(int j, int i, Vector2 nextPosition)
-        {
-            var door = Instantiate(_door, _firstRoom);
-            door.InitializePosition(new Vector2Int(j, i));
-            door.transform.position = new Vector3(nextPosition.x, i * _offset.y);
-        }
-
         public List<Card> SpawnPlacementsForPlayer()
         {
             List<Card> instancedPlacements = new List<Card>();
@@ -97,14 +90,23 @@ namespace DeckMaster
             return instancedPlacements;
         }
 
-        private Vector2 GetPlacementsStartPosition()
-        {
-            return new Vector2(_firstRow[0].transform.position.x, _firstRow[0].transform.position.y);
-        }
-
         public void SpawnCoins(Vector2Int deckPosition, Vector3 worldPosition)
         {
             _itemFactory.SpawnCoins(deckPosition, worldPosition);
+        }
+        
+        private Vector2 GetPlacementsStartPosition()
+        {
+            Debug.Log(_firstRow.Count);
+            
+            return new Vector2(_firstRow[0].transform.position.x, _firstRow[0].transform.position.y);
+        }
+        
+        private void CreateDoor(int j, int i, Vector2 nextPosition)
+        {
+            var door = Instantiate(_door, _firstRoom);
+            door.InitializePosition(new Vector2Int(j, i));
+            door.transform.position = new Vector3(nextPosition.x, i * _offset.y);
         }
 
         private Vector2 GetStartPosition()
@@ -119,6 +121,7 @@ namespace DeckMaster
                 LevelCardType.Item => CreateNewItemCard(col, row, position, parent),
                 LevelCardType.Enemy => CreateNewEnemyCard(col, row, position, parent),
                 LevelCardType.Block => CreateNewBlock(col, row, position, parent),
+                LevelCardType.Empty => CreateNewEmpty(col, row, position, parent),
                 _ => null
             };
 
@@ -138,6 +141,11 @@ namespace DeckMaster
         private DeckCard CreateNewBlock(int col, int row, Vector2 position, Transform parent)
         {
             return _blockFactory.CreateNewInstance(col, row, position, parent);
+        }
+
+        private DeckCard CreateNewEmpty(int col, int row, Vector2 position, Transform parent)
+        {
+            return _emptyCardFactory.CreateNewInstance(col, row, position, parent);
         }
     }
 }

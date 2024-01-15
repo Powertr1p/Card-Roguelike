@@ -1,7 +1,7 @@
 public enum LevelCardType
 {
-    Unreachable = 6,
-    Empty = 0,
+    Unreachable = 0,
+    Empty = 6,
     Random = 1,
     Enemy = 2,
     Item = 3,
