@@ -1,3 +1,4 @@
+using Cards;
 using UnityEngine;
 
 namespace DeckMaster
@@ -11,10 +12,13 @@ namespace DeckMaster
             _movingLimit = movingLimit;
         }
         
-        public bool CanPositionCard(Vector2Int desirePosition, Vector2Int currentPosition)
+        public bool CanPositionCard(Card card, Vector2Int currentPosition)
         {
-            if (desirePosition == currentPosition) return false;
+            var desirePosition = card.PositionData.Position;
             
+            if (desirePosition == currentPosition) return false;
+            if (card.TryGetComponent(out BlockCard block)) return false;
+
             return (desirePosition.x >= currentPosition.x - _movingLimit && desirePosition.x <= currentPosition.x + _movingLimit) &&
                    (desirePosition.y >= currentPosition.y - _movingLimit && desirePosition.y <= currentPosition.y + _movingLimit);
         }

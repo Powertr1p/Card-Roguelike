@@ -60,7 +60,7 @@ namespace Cards
 
             if (hit && hit.collider.TryGetComponent(out DeckCard overlappedCard))
             {
-                if (CanPlaceCard(overlappedCard.PositionData.Position))
+                if (CanPlaceCard(overlappedCard))
                 {
                     overlappedCard.SelectCard();
                     _lastDragHit = overlappedCard;
@@ -107,7 +107,7 @@ namespace Cards
             {
                 EventPlacing?.Invoke(overlappedCard.PositionData.Position);
                 
-                if (CanPlaceCard(overlappedCard.PositionData.Position))
+                if (CanPlaceCard(overlappedCard))
                 {
                     InteractWithOverlappedCard(overlappedCard);
                     return true;
@@ -119,14 +119,14 @@ namespace Cards
             return false;
         }
 
-        private bool CanPlaceCard(Vector2Int desirePosition)
+        private bool CanPlaceCard(Card cardOnPosition)
         {
             if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
-                return desirePosition.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
+                return cardOnPosition.PositionData.Position.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
             }
 
-            return _positionChecker.CanPositionCard(desirePosition, PositionData.Position);
+            return _positionChecker.CanPositionCard(cardOnPosition, PositionData.Position);
         }
 
         private void InteractWithOverlappedCard(Card card)
