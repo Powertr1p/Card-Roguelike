@@ -85,9 +85,9 @@ namespace DeckMaster
             return instancedPlacements;
         }
 
-        public void SpawnCoins(Vector2Int deckPosition, Vector3 worldPosition)
+        public void SpawnCoins(CardData data, Vector3 worldPosition)
         {
-            _itemFactory.SpawnCoins(deckPosition, worldPosition);
+            _itemFactory.SpawnCoins(worldPosition, data);
         }
         
         private Vector2 GetPlacementsStartPosition()

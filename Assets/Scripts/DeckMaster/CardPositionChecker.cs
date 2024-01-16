@@ -17,7 +17,7 @@ namespace DeckMaster
             var desirePosition = card.PositionData.Position;
             
             if (desirePosition == currentPosition) return false;
-            if (card.TryGetComponent(out BlockCard block)) return false;
+            if (card.Type == LevelCardType.Block) return false;
 
             return (desirePosition.x >= currentPosition.x - _movingLimit && desirePosition.x <= currentPosition.x + _movingLimit) &&
                    (desirePosition.y >= currentPosition.y - _movingLimit && desirePosition.y <= currentPosition.y + _movingLimit);

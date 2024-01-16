@@ -1,4 +1,5 @@
 using Cards;
+using Data;
 using DefaultNamespace.Effects;
 using UnityEngine;
 
@@ -8,10 +9,10 @@ namespace DeckMaster.Factory
     {
         [SerializeField] private Effect _coinsEffect;
 
-        public void SpawnCoins(Vector2Int deckPosition, Vector3 worldPosition)
+        public void SpawnCoins(Vector3 worldPosition, CardData data)
         {
             var instance = base.CreateNewInstance();
-            instance.SetPosition(deckPosition);
+            instance.Initialize(new CardData(data.Room, LevelCardType.Item), data.CardPositionData.Position);
             instance.SetEffect(_coinsEffect);
             instance.InitializeVisuals(_coinsEffect.VisualData);
             instance.transform.position = worldPosition;
