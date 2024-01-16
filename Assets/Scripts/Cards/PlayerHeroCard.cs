@@ -1,4 +1,5 @@
 using System;
+using Data;
 using DeckMaster;
 using DefaultNamespace.Interfaces;
 using Player;
@@ -28,7 +29,7 @@ namespace Cards
 
         private void Start()
         {
-            SetPosition(_initialPosition);
+            Initialize(new CardData(0, LevelCardType.Unreachable), _initialPosition);
         }
 
         public override void Interact(HeroCard interactorCard)

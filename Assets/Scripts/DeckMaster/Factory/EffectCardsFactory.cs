@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cards;
+using Data;
 using DefaultNamespace.Effects;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ namespace DeckMaster.Factory
     {
         [SerializeField] protected List<Effect> PossibleEffects;
         
-        public override T CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent)
+        public override T CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent, CardData data)
         {
-            var instance = base.CreateNewInstance(col, row, worldPosition, parent);
+            var instance = base.CreateNewInstance(col, row, worldPosition, parent, data);
             var effect = SetRandomizeEffect();
             
             instance.SetEffect(effect);

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cards;
 using CardUtilities;
+using Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,9 +20,9 @@ namespace DeckMaster.Factory
             ValidateAttackParams();
         }
 
-        public override EnemyCard CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent)
+        public override EnemyCard CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent, CardData data)
         {
-            var instance = base.CreateNewInstance(col, row, worldPosition, parent);
+            var instance = base.CreateNewInstance(col, row, worldPosition, parent, data);
             
             instance.SetAttackDirections(GetRandomAttackDirections());
 

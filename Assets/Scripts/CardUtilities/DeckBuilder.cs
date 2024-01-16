@@ -9,7 +9,7 @@ namespace CardUtilities
     {
         private List<RoomData> _pickedRoomDatas;
         private List<RoomData> _allRooms;
-        private LevelCardType[,] _levelGrid;
+        private CardData[,] _levelGrid;
         private DoorAlignment _lastPickedDoor = DoorAlignment.Undefined;
         private DoorAlignment _excludeNextDoorAlignment = DoorAlignment.Undefined;
 
@@ -33,13 +33,24 @@ namespace CardUtilities
             _gridSize = GetGridSize();
         }
 
-        public LevelCardType[,] GetConcatinatedRooms()
+        public CardData[,] GetConcatinatedRooms()
         {
-            _levelGrid = new LevelCardType[_initialGridSize.y, _initialGridSize.x];
+            _levelGrid = new CardData[_initialGridSize.y, _initialGridSize.x];
 
+            for (int i = 0; i < _levelGrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < _levelGrid.GetLength(1); j++)
+                {
+                    _levelGrid[i, j] = new CardData();
+                }
+            }
+
+            int roomNumber = 1;
+            
             foreach (var roomData in _pickedRoomDatas)
             { 
-                CreateRoom(roomData);
+                CreateRoom(roomData, roomNumber);
+                roomNumber++;
             }
 
             return ConvertGridToProperSize();
@@ -86,7 +97,7 @@ namespace CardUtilities
             };
         }
 
-        private void CreateRoom(RoomData roomData)
+        private void CreateRoom(RoomData roomData, int roomNumber)
         {
            //Debug.LogError($"Create Room: {roomData.name}");
 
@@ -111,8 +122,8 @@ namespace CardUtilities
                     var currentRow = _nextStartPos.x + j;
                     
                     //Debug.Log($"{currentColumn} {currentRow}");
-                    
-                    _levelGrid[currentColumn, currentRow] = roomCards[i, j];
+
+                    _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j]);
 
                     if (roomCards[i, j] == LevelCardType.Door)
                     {
@@ -151,7 +162,7 @@ namespace CardUtilities
             }
         }
 
-        private LevelCardType[,] ConvertGridToProperSize()
+        private CardData[,] ConvertGridToProperSize()
         {
             Vector2Int startPos = GetFirstNonEmptyGridCells();
            
@@ -162,15 +173,15 @@ namespace CardUtilities
             
            // Debug.Log($"LastCol: {lastCol}, StartedCol: {startedCol}; LastRow: {lastRow}, StartedRow: {startedRow}");
             
-            LevelCardType[,] newArray = new LevelCardType[size.x, size.y];
+           CardData[,] newArray = new CardData[size.x, size.y];
             
             for (int i = 0; i < newArray.GetLength(0); i++)
             {
                 for (int j = 0; j < newArray.GetLength(1); j++)
                 {
                     newArray[i, j] = _levelGrid[startedCol + i, startedRow + j];
-                    
-                   // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
+
+                    // Debug.Log($"col: {i}, row: {j}. Type: {newArray[i,j].ToString()}");
                 }
             }
             
@@ -186,7 +197,7 @@ namespace CardUtilities
             {
                 for (int j = 0; j < _levelGrid.GetLength(0); j++)
                 {
-                    if (_levelGrid[j, i] != LevelCardType.Unreachable)
+                    if (_levelGrid[j, i].Type != LevelCardType.Unreachable)
                     {
                         var currentCol = j;
                         var currentRow = i;
@@ -215,14 +226,6 @@ namespace CardUtilities
             }
             
             return new Vector2Int(summRows, summCols);
-        }
-
-        private void CorrectStartPosition(Vector2Int correction)
-        {
-            Debug.Log(correction);
-            
-            _nextStartPos -= correction;
-            
         }
     }
 }
