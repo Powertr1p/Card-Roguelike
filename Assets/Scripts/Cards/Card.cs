@@ -6,6 +6,9 @@ namespace Cards
     public abstract class Card : MonoBehaviour
     {
         public CardPositionData PositionData => CardData.CardPositionData;
+        public LevelCardType Type => CardData.Type;
+        public int Room => CardData.Room;
+       
         protected CardData CardData;
 
         private bool _isInitialized;
@@ -22,8 +25,6 @@ namespace Cards
         
         public virtual void SetPosition(Vector2Int position)
         {
-            CardData ??= new CardData();
-
             CardData.CardPositionData = new CardPositionData(position);
         }
         

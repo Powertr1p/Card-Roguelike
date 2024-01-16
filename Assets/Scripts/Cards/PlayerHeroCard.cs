@@ -25,10 +25,7 @@ namespace Cards
             base.Awake();
             
             _positionChecker = new CardPositionChecker(GameRulesGetter.Rules.PlayerMovingLimit);
-        }
-
-        private void Start()
-        {
+            
             Initialize(new CardData(0, LevelCardType.Unreachable), _initialPosition);
         }
 

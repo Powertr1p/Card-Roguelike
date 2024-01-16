@@ -54,7 +54,10 @@ namespace DeckMaster
                         {
                             DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom, cards[i,j]);
 
+                            Debug.Log(card.Type);
+                            
                             instancedCards.Add(card);
+                            
 
                             if (i == 0)
                             {
