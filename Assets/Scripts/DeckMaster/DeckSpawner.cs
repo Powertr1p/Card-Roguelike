@@ -25,16 +25,10 @@ namespace DeckMaster
         private CardData[,] _currentPreset;
         private List<DeckCard> _firstRow = new List<DeckCard>();
 
-        public int Rows;
-
         public List<DeckCard> SpawnCards(CardData[,] cards)
         {
-            var rows = cards.GetLength(1);
-
             _currentPreset = cards;
-            
-            Rows = rows;
-            
+
             List<DeckCard> instancedCards = new List<DeckCard>();
         
             for (int i = 0; i < cards.GetLength(0); i++)
@@ -54,11 +48,8 @@ namespace DeckMaster
                         {
                             DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom, cards[i,j]);
 
-                            Debug.Log(card.Type);
-                            
                             instancedCards.Add(card);
                             
-
                             if (i == 0)
                             {
                                 _firstRow.Add(card);
