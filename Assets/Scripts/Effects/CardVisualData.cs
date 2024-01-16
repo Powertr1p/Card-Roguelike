@@ -7,8 +7,10 @@ namespace DefaultNamespace.Effects
     {
         [SerializeField] private Sprite _iconSprite;
         [SerializeField] private Sprite _frameSprite;
+        [SerializeField] private Color _frameColor;
 
         public Sprite Icon => _iconSprite;
         public Sprite Frame => _frameSprite;
+        public Color FrameColor => _frameColor;
     }
 }

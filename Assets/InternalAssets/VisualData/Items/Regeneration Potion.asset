@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3535dbe44417b8c605f099858b832, type: 3}
   m_Name: Regeneration Potion
   m_EditorClassIdentifier: 
-  _iconSprite: {fileID: -1947057841, guid: 91ece539279118a438c900dfb08582ed, type: 3}
-  _frameSprite: {fileID: 21300000, guid: 8401a539bbbe0b04abcaf9c6b23e4788, type: 3}
+  _iconSprite: {fileID: 21300000, guid: 2d7d9ae02b7159843ac7d5ead0f8b89a, type: 3}
+  _frameSprite: {fileID: 21300000, guid: d047745a737e8654dbfa513599b52a0d, type: 3}
+  _frameColor: {r: 0.6981132, g: 0.1745283, b: 0.6652608, a: 1}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3535dbe44417b8c605f099858b832, type: 3}
   m_Name: Coins
   m_EditorClassIdentifier: 
-  _iconSprite: {fileID: 21300000, guid: 87cac1569c22e1744a40d28a103ff0e2, type: 3}
-  _frameSprite: {fileID: 21300000, guid: 5e952524ca6c43d42b84818565a54b98, type: 3}
+  _iconSprite: {fileID: 21300000, guid: 394899dbf2938874ca7d1025f7598406, type: 3}
+  _frameSprite: {fileID: 21300000, guid: d047745a737e8654dbfa513599b52a0d, type: 3}
+  _frameColor: {r: 0.9155669, g: 0.9245283, b: 0.3532396, a: 1}
