@@ -33,6 +33,11 @@ namespace Cards
         {
         }
 
+        public override void Initialize(CardData data)
+        {
+            CardData = new CardData(data.Room, LevelCardType.Unreachable, data.Position);
+        }
+
         public void StartDragState()
         {
             _dragBehaviour.EnterGrabState();
@@ -144,7 +149,7 @@ namespace Cards
                 }
             }
             
-            SetPosition(card.Data);
+            Initialize(card.Data);
         }
 
         private bool CanInteract(CardCondition condition)

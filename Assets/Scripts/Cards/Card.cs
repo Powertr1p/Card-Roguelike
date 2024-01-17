@@ -13,19 +13,14 @@ namespace Cards
 
         private bool _isInitialized;
 
-        public void Initialize(CardData data)
+        public virtual void Initialize(CardData data)
         {
             if (_isInitialized) return;
             _isInitialized = true;
             
             CardData = new CardData(data.Room, data.Type, data.Position);
         }
-        
-        public virtual void SetPosition(CardData data)
-        {
-            CardData = new CardData(data.Room, LevelCardType.Unreachable, data.Position);
-        }
-        
+
         public abstract void Interact(HeroCard heroCardConsumer);
     }
 }
