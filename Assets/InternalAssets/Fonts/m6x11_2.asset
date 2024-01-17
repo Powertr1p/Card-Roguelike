@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: m6x11_2
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 923338766
   material: {fileID: 8005839462461104913}
-  materialHashCode: 0
+  materialHashCode: 97378030
   m_Version: 1.1.0
   m_SourceFontFileGUID: 50bb10a851a3f46a6b95dcd117df172a
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 50bb10a851a3f46a6b95dcd117df172a, type: 3}

@@ -48,6 +48,7 @@ namespace Cards
         {
             _iconRenderer.sprite = data.Icon;
             _frameRenderer.sprite = data.Frame;
+            _frameRenderer.color = data.FrameColor;
         }
         
         public void SetEffect(Effect effect)
