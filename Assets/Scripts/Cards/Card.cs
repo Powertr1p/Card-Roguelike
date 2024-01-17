@@ -23,7 +23,6 @@ namespace Cards
         
         public virtual void SetPosition(CardData data)
         {
-            CardData.SetNewPosition(data.Position);
             CardData = new CardData(data.Room, LevelCardType.Unreachable, data.Position);
         }
         

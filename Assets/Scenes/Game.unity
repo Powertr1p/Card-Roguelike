@@ -919,7 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1621303672}
   m_Layer: 0
-  m_Name: Room_1
+  m_Name: CardsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,7 +1027,6 @@ MonoBehaviour:
   _door: {fileID: 7449930616306911950, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
   _rows: 7
   _offset: {x: 1.6, y: 2.2}
-  Rows: 0
 --- !u!4 &1892885413
 Transform:
   m_ObjectHideFlags: 0
