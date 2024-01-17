@@ -46,15 +46,16 @@ namespace Player
                 }
                 else 
                 {
+                    if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.Rules.PositionThreshold)
+                    {
+                        _isMoving = false;
+                        _isInstant = false;
+                        return;
+                    }
+                    
                     var lerpedPosition = Vector3.Lerp(cameraPosition, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z), Time.deltaTime * GameRulesGetter.Rules.LerpSpeed);
                     transform.position = lerpedPosition;
                     ScrollBackgroundMaterial(lerpedPosition.y);
-                }
-                
-                if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.Rules.PositionThreshold)
-                {
-                    _isMoving = false;
-                    _isInstant = false;
                 }
             }
         }
