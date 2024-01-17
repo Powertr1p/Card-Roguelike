@@ -23,8 +23,9 @@ namespace DeckMaster.StateMachine
         public override void Execute()
         {
             var openLimit = GameRulesGetter.Rules.VisibleZone;
+            var position = Player.PositionData.Position;
             
-            var cards =  GetCardsAroundPlayer(Player.PositionData.Position - openLimit, Player.PositionData.Position + openLimit, FaceSate.FaceUp);
+            var cards =  GetCardsAroundPlayer(position - openLimit, position + openLimit, FaceSate.FaceUp);
             Mono.StartCoroutine(OpenCards(cards, MoveToNextState));
         }
 

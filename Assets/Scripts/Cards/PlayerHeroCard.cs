@@ -26,7 +26,7 @@ namespace Cards
             
             _positionChecker = new CardPositionChecker(GameRulesGetter.Rules.PlayerMovingLimit);
             
-            Initialize(new CardData(0, LevelCardType.Unreachable), _initialPosition);
+            Initialize(new CardData(1, LevelCardType.Unreachable), _initialPosition);
         }
 
         public override void Interact(HeroCard interactorCard)

@@ -75,10 +75,12 @@ public class State
     protected List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
     {
         var pickedCards = new List<DeckCard>();
+        var position = Player.PositionData.Position;
 
         foreach (var card in DeckCards)
         {
             if (card.Facing == skipCondition || card.Condition == CardCondition.Dead) continue;
+            if (card.Room != Player.Room) continue;
 
             if (card.PositionData.Position.y >= startPosition.y && card.PositionData.Position.y <= endPosition.y)
             {
