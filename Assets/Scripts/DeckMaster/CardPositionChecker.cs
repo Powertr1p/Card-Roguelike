@@ -14,7 +14,7 @@ namespace DeckMaster
         
         public bool CanPositionCard(Card card, Vector2Int currentPosition)
         {
-            var desirePosition = card.PositionData.Position;
+            var desirePosition = card.Data.Position;
             
             if (desirePosition == currentPosition) return false;
             if (card.Type == LevelCardType.Block) return false;

@@ -12,7 +12,7 @@ namespace DeckMaster.Factory
         public void SpawnCoins(Vector3 worldPosition, CardData data)
         {
             var instance = base.CreateNewInstance();
-            instance.Initialize(new CardData(data.Room, LevelCardType.Item), data.CardPositionData.Position);
+            instance.Initialize(new CardData(data.Room, LevelCardType.Item, data.Position));
             instance.SetEffect(_coinsEffect);
             instance.InitializeVisuals(_coinsEffect.VisualData);
             instance.transform.position = worldPosition;

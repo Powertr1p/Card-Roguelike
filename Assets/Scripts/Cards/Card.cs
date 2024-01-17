@@ -5,7 +5,7 @@ namespace Cards
 {
     public abstract class Card : MonoBehaviour
     {
-        public CardPositionData PositionData => CardData.CardPositionData;
+        public CardData Data => CardData;
         public LevelCardType Type => CardData.Type;
         public int Room => CardData.Room;
        
@@ -13,19 +13,18 @@ namespace Cards
 
         private bool _isInitialized;
 
-        public void Initialize(CardData data, Vector2Int position)
+        public void Initialize(CardData data)
         {
             if (_isInitialized) return;
             _isInitialized = true;
             
-            CardData = data;
-            
-            SetPosition(position);
+            CardData = new CardData(data.Room, data.Type, data.Position);
         }
         
-        public virtual void SetPosition(Vector2Int position)
+        public virtual void SetPosition(CardData data)
         {
-            CardData.CardPositionData = new CardPositionData(position);
+            CardData.SetNewPosition(data.Position);
+            CardData = new CardData(data.Room, LevelCardType.Unreachable, data.Position);
         }
         
         public abstract void Interact(HeroCard heroCardConsumer);

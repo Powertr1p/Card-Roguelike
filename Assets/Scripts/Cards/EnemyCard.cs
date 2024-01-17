@@ -45,7 +45,7 @@ namespace Cards
             
             foreach (var attackDirecton in _directionAttacker.AttackDirections)
             {
-                var targetPosition = PositionData.Position + attackDirecton.GetAttackPosition;
+                var targetPosition = Data.Position + attackDirecton.GetAttackPosition;
                 positionToAttack.Add(targetPosition);
             }
 

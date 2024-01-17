@@ -26,7 +26,7 @@ namespace Cards
             
             _positionChecker = new CardPositionChecker(GameRulesGetter.Rules.PlayerMovingLimit);
             
-            Initialize(new CardData(1, LevelCardType.Unreachable), _initialPosition);
+            Initialize(new CardData(1, LevelCardType.Unreachable, _initialPosition));
         }
 
         public override void Interact(HeroCard interactorCard)
@@ -103,7 +103,7 @@ namespace Cards
         {
             if (hit.collider.TryGetComponent(out Card overlappedCard))
             {
-                EventPlacing?.Invoke(overlappedCard.PositionData.Position);
+                EventPlacing?.Invoke(overlappedCard.Data.Position);
                 
                 if (CanPlaceCard(overlappedCard))
                 {
@@ -121,10 +121,10 @@ namespace Cards
         {
             if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
-                return cardOnPosition.PositionData.Position.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
+                return cardOnPosition.Data.Position.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
             }
 
-            return _positionChecker.CanPositionCard(cardOnPosition, PositionData.Position);
+            return _positionChecker.CanPositionCard(cardOnPosition, Data.Position);
         }
 
         private void InteractWithOverlappedCard(Card card)
@@ -144,7 +144,7 @@ namespace Cards
                 }
             }
             
-            SetPosition(card.PositionData.Position);
+            SetPosition(card.Data);
         }
 
         private bool CanInteract(CardCondition condition)

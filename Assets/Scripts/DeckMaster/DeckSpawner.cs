@@ -75,7 +75,9 @@ namespace DeckMaster
 
                 for (int j = 0; j < _firstRow.Count; j++)
                 {
-                    var placement = _placementFactory.CreateNewInstance(i - 1, _firstRow[j].PositionData.Position.x, nextPosition, _firstRoom, new CardData(0, LevelCardType.Empty));
+                    var data = new CardData(1, LevelCardType.Empty, new Vector2Int(_firstRow[j].Data.Position.x, i - 1));
+                    
+                    var placement = _placementFactory.CreateNewInstance(i - 1, _firstRow[j].Data.Position.x, nextPosition, _firstRoom, data);
                     instancedPlacements.Add(placement);
 
                     nextPosition = new Vector2(nextPosition.x + _offset.x, (i - 1) * _offset.y);
@@ -98,7 +100,9 @@ namespace DeckMaster
         private void CreateDoor(int j, int i, Vector2 nextPosition, CardData data)
         {
             var door = Instantiate(_door, _firstRoom);
-            door.Initialize(data,new Vector2Int(j, i));
+            
+            data.SetNewPosition(new Vector2Int(j,i));
+            door.Initialize(data);
             door.transform.position = new Vector3(nextPosition.x, i * _offset.y);
         }
 

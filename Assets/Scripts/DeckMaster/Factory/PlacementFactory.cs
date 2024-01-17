@@ -8,6 +8,8 @@ namespace DeckMaster.Factory
     {
         public override Placement CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent, CardData data)
         {
+            data.SetNewPosition(new Vector2Int(row, col));
+            
             var instance = base.CreateNewInstance(col, row, worldPosition, parent, data);
             return instance;
         }

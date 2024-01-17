@@ -10,8 +10,10 @@ public class GenericFactory<T> : MonoBehaviour where T : Card
     
     public virtual T CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent, CardData data)
     {
+        data.SetNewPosition(new Vector2Int(row, col));
+        
         var instance = Instantiate(_prefab, parent);
-        instance.Initialize(data,new Vector2Int(row, col));
+        instance.Initialize(data);
         instance.transform.position = new Vector3(worldPosition.x, worldPosition.y);
         instance.transform.rotation = Quaternion.Euler(_initialRotation);
 

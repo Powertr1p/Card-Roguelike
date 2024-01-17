@@ -123,7 +123,7 @@ namespace CardUtilities
                     
                     //Debug.Log($"{currentColumn} {currentRow}");
 
-                    _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j]);
+                    _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j], new Vector2Int(currentColumn, currentRow));
 
                     if (roomCards[i, j] == LevelCardType.Door)
                     {
