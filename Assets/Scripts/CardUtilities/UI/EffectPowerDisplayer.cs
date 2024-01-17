@@ -1,4 +1,5 @@
 using Cards;
+using DefaultNamespace.Effects.Enums;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,10 @@ namespace CardUtilities.UI
 
         private void Start()
         {
-            _powerLabel.text = _card.EffectPower.ToString();
+            if (_card.EffectData.AffectType == AffectType.Instant)
+                _powerLabel.text = _card.EffectData.Amount.ToString();
+            else if (_card.EffectData.AffectType == AffectType.Turns)
+                _powerLabel.text = _card.EffectData.Duration.ToString();
         }
     }
 }

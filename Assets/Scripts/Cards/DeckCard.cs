@@ -13,25 +13,25 @@ namespace Cards
         [SerializeField] private SpriteRenderer _iconRenderer;
         [SerializeField] private SpriteRenderer _frameRenderer;
         
-        [FormerlySerializedAs("_mainSpritesContainer")] [SerializeField] protected GameObject MainSpritesContainer;
-        [FormerlySerializedAs("_deathSpritesContainer")] [SerializeField] protected GameObject DeathSpritesContainer;
+        [FormerlySerializedAs("_mainSpritesContainer")] 
+        [SerializeField] protected GameObject MainSpritesContainer;
+        [FormerlySerializedAs("_deathSpritesContainer")] 
+        [SerializeField] protected GameObject DeathSpritesContainer;
         
         public event EventHandler<DeathArgs> DeathPerformed;
 
+        public Effect EffectData => Effect;
+
+        protected Effect Effect;
         protected bool CanSpawnCoinsOnDeath { get; set; } = false;
         
-        public int EffectPower => Effect.Amount;
-        
-        protected Effect Effect;
-
-        private Transform _transform;
-        private bool _isSelected;
-
         public FaceSate Facing => _facing;
         public CardCondition Condition => _condition;
         
+        private Transform _transform;
         private FaceSate _facing = FaceSate.FaceDown;
         private CardCondition _condition = CardCondition.Alive;
+        private bool _isSelected;
 
         protected virtual void Awake()
         {
