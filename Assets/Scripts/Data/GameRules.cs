@@ -38,18 +38,18 @@ namespace Data
 
         [BoxGroup("Camera")] 
         [SerializeField] private bool _cameraFollow;
-        [BoxGroup("Camera"), PropertyTooltip("$MouseWheelZoomSpeedTooltip")]
+        [BoxGroup("Camera"), PropertyTooltip("$CameraFollowSpeedTooltip"), ShowIf("_cameraFollow")]
+        [SerializeField] private float _cameraFollowSpeed = 3.0f;
+        [BoxGroup("Camera"), PropertyTooltip("$PositionThresholdTooltip"), ShowIf("_cameraFollow")]
+        [SerializeField] private float _positionThreshold = 0.1f;
+        [BoxGroup("Camera"), PropertyTooltip("$OffsetYFromPlayerCardTooltip"), ShowIf("_cameraFollow")]
+        [SerializeField] private float _offsetYFromPlayerCard = 0f;
+        [BoxGroup("Camera"), PropertyTooltip("$MouseWheelZoomSpeedTooltip"), Space(10f)]
         [SerializeField] private float _mouseWheelZoomSpeed = 2.0f;
         [BoxGroup("Camera")] 
         [SerializeField] private float _maxZoomValue = -9f;
         [BoxGroup("Camera")] 
         [SerializeField] private float _minZoomValue = -21f;
-        [BoxGroup("Camera"), PropertyTooltip("$CameraFollowSpeedTooltip")]
-        [SerializeField] private float _cameraFollowSpeed = 3.0f;
-        [BoxGroup("Camera"), PropertyTooltip("$PositionThresholdTooltip")]
-        [SerializeField] private float _positionThreshold = 0.1f;
-        [BoxGroup("Camera"), PropertyTooltip("$OffsetYFromPlayerCardTooltip")]
-        [SerializeField] private float _offsetYFromPlayerCard = 0f;
         [BoxGroup("Camera"), PropertyTooltip("$OffsetYOnGameStartTooltip")]
         [SerializeField] private float _offsetYOnGameStart = 3f;
 

@@ -31,11 +31,11 @@ MonoBehaviour:
   _maxRooms: 3
   _delayBetweenCardsOpen: 0.05
   _cardOpenSpeed: 0.35
-  _cameraFollow: 1
-  _mouseWheelZoomSpeed: 10
-  _maxZoomValue: -9
-  _minZoomValue: -21
+  _cameraFollow: 0
   _cameraFollowSpeed: 7
   _positionThreshold: 0.1
   _offsetYFromPlayerCard: 0
+  _mouseWheelZoomSpeed: 10
+  _maxZoomValue: -9
+  _minZoomValue: -21
   _offsetYOnGameStart: 3
