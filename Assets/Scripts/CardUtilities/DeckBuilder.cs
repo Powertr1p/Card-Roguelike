@@ -103,7 +103,7 @@ namespace CardUtilities
            //Debug.LogError($"Create Room: {roomData.name}");
            var roomCards = roomData.GetCards();
 
-           CorrectStartPosition(roomData, roomCards);
+           CorrectStartPosition(roomData);
            
            for (int i = 0; i < roomCards.GetLength(0); i++) 
            {
@@ -127,13 +127,13 @@ namespace CardUtilities
            SetNextStartPosition(roomData);
         }
 
-        private void CorrectStartPosition(RoomData roomData, LevelCardType[,] roomCards)
+        private void CorrectStartPosition(RoomData roomData)
         {
             if (!_isLastDown)
             {
                 if (roomData.DoorAlignment == DoorAlignment.Down)
                 {
-                    _nextStartPos.y -= (roomCards.GetLength(0) - 1);
+                    _nextStartPos.y -= (roomData.GridSize.y - 1);
                 }
             }
             
@@ -149,7 +149,7 @@ namespace CardUtilities
             }
             else if (_isLastUp)
             {
-                var offset = roomCards.GetLength(1) / 2;
+                var offset = roomData.GridSize.x / 2;
                 _nextStartPos.x -= offset;
                 _isLastUp = false;
             }

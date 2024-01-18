@@ -41,7 +41,7 @@ namespace Data
             return reversedArray;
         }
         
-        LevelCardType[,] ReverseArray(LevelCardType[,] array)
+        private LevelCardType[,] ReverseArray(LevelCardType[,] array)
         {
             int rows = array.GetLength(0);
             int columns = array.GetLength(1);
