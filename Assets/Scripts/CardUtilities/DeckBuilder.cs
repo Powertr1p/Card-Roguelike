@@ -21,6 +21,7 @@ namespace CardUtilities
         private int _maxRooms;
         private bool _isLastLeft = false;
         private bool _isLastDown = false;
+        private bool _isLastUp;
 
         public DeckBuilder(List<RoomData> allRooms, int maxRooms)
         {
@@ -100,40 +101,58 @@ namespace CardUtilities
         private void CreateRoom(RoomData roomData, int roomNumber)
         {
            //Debug.LogError($"Create Room: {roomData.name}");
-
-           if (_isLastLeft)
-           {
-               _nextStartPos.x -= roomData.GridSize.x;
-               _isLastLeft = false;
-           }
-           else if (_isLastDown)
-           {
-               _nextStartPos.y -= roomData.GridSize.y;
-               _isLastDown = false;
-           }
-
            var roomCards = roomData.GetCards();
-            
-            for (int i = 0; i < roomCards.GetLength(0); i++)
+
+           CorrectStartPosition(roomData, roomCards);
+           
+           for (int i = 0; i < roomCards.GetLength(0); i++) 
+           {
+               for (var j = 0; j < roomCards.GetLength(1); j++)
+               {
+                   var currentColumn = _nextStartPos.y + i;
+                   var currentRow = _nextStartPos.x + j;
+
+                   //Debug.Log($"{currentColumn} {currentRow}");
+
+                   _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j], new Vector2Int(currentColumn, currentRow));
+
+                   if (roomCards[i, j] == LevelCardType.Door)
+                   {
+                       _doorPosition.x = currentRow;
+                       _doorPosition.y = currentColumn;
+                   }
+               }
+           }
+
+           SetNextStartPosition(roomData);
+        }
+
+        private void CorrectStartPosition(RoomData roomData, LevelCardType[,] roomCards)
+        {
+            if (!_isLastDown)
             {
-                for (int j = 0; j < roomCards.GetLength(1); j++)
+                if (roomData.DoorAlignment == DoorAlignment.Down)
                 {
-                    var currentColumn = _nextStartPos.y + i;
-                    var currentRow = _nextStartPos.x + j;
-                    
-                    //Debug.Log($"{currentColumn} {currentRow}");
-
-                    _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j], new Vector2Int(currentColumn, currentRow));
-
-                    if (roomCards[i, j] == LevelCardType.Door)
-                    {
-                        _doorPosition.x = currentRow;
-                        _doorPosition.y = currentColumn;
-                    }
+                    _nextStartPos.y -= (roomCards.GetLength(0) - 1);
                 }
             }
-
-            SetNextStartPosition(roomData);
+            
+            if (_isLastLeft)
+            {
+                _nextStartPos.x -= roomData.GridSize.x;
+                _isLastLeft = false;
+            }
+            else if (_isLastDown)
+            {
+                _nextStartPos.y -= roomData.GridSize.y;
+                _isLastDown = false;
+            }
+            else if (_isLastUp)
+            {
+                var offset = roomCards.GetLength(1) / 2;
+                _nextStartPos.x -= offset;
+                _isLastUp = false;
+            }
         }
 
         private void SetNextStartPosition(RoomData roomData)
@@ -147,6 +166,7 @@ namespace CardUtilities
             {
                 _nextStartPos.x = _doorPosition.x;
                 _nextStartPos.y = _doorPosition.y + 1;
+                _isLastUp = true;
             }
             else if (roomData.DoorAlignment == DoorAlignment.Left)
             {
