@@ -35,7 +35,9 @@ namespace Data
         [SerializeField] private float _delayBetweenCardsOpen = 0.1f;
         [BoxGroup("Deck Feel"), PropertyTooltip("$CardOpenSpeedTooltip")] 
         [SerializeField] private float _cardOpenSpeed = 0.25f;
-        
+
+        [BoxGroup("Camera")] 
+        [SerializeField] private bool _cameraFollow;
         [BoxGroup("Camera"), PropertyTooltip("$MouseWheelZoomSpeedTooltip")]
         [SerializeField] private float _mouseWheelZoomSpeed = 2.0f;
         [BoxGroup("Camera")] 
@@ -67,6 +69,7 @@ namespace Data
         public List<RoomData> PossibleRooms => _possibleRooms;
         public int MaxRooms => _maxRooms;
 
+        public bool CameraFollow => _cameraFollow;
         public float ScrollSpeed => _mouseWheelZoomSpeed;
         public float MaxZoomValue => _maxZoomValue;
         public float MinZoomValue => _minZoomValue;

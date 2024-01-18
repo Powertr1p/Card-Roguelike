@@ -44,7 +44,7 @@ namespace Player
                     _isInstant = false;
                     _isMoving = false;
                 }
-                else 
+                else
                 {
                     if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, targetPosition.y, cameraPosition.z)) < GameRulesGetter.Rules.PositionThreshold)
                     {
@@ -62,6 +62,8 @@ namespace Player
 
         public void SetTarget(Transform target, bool isInstant = false)
         {
+            if (!GameRulesGetter.Rules.CameraFollow) return;
+            
             _isInstant = isInstant;
             _targetTransform = target;
             _isMoving = true;
