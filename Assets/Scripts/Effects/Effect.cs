@@ -1,4 +1,5 @@
 using DefaultNamespace.Effects.Enums;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace DefaultNamespace.Effects
@@ -11,6 +12,7 @@ namespace DefaultNamespace.Effects
         [SerializeField] private AffectType _affectType;
         [SerializeField] private ParticleSystem _effectParticle;
         
+        [HideIf("_affectType", Enums.AffectType.Instant)]
         [SerializeField] private int _duration;
 
         [SerializeField] private int _amount;
