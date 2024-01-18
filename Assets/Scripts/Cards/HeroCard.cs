@@ -1,4 +1,5 @@
 using CardUtilities;
+using DeckMaster;
 using DefaultNamespace.Effects;
 using DefaultNamespace.Effects.Enums;
 using UnityEngine;
@@ -96,7 +97,7 @@ namespace Cards
 
         private void PlayTurnEffectParticles(Effect effect)
         {
-            var particle = Instantiate(effect.EffectParticle, transform.position, Quaternion.identity);
+            var particle = Instantiate(effect.EffectParticle, transform.position + GameRulesGetter.Rules.VFXOffset, Quaternion.identity);
             particle.Play();
         }
     }

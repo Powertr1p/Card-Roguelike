@@ -53,6 +53,8 @@ namespace Data
         [BoxGroup("Camera"), PropertyTooltip("$OffsetYOnGameStartTooltip")]
         [SerializeField] private float _offsetYOnGameStart = 3f;
 
+        public Vector3 VFXOffset { get; } = new(0, 0, -0.15f);
+        
         public Vector2Int VisibleZone => _visibleZone;
         public int PlayerMovingLimit => _playerMovingLimit;
         public int PlayerMaxHealth => _playerMaxHealth;

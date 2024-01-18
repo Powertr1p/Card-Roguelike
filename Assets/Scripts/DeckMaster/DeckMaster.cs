@@ -71,6 +71,8 @@ namespace DeckMaster
 
         private void ChangeGameState()
         {
+            if (!GameRulesGetter.Rules.CameraFollow) return;
+            
             _cameraScrolling.SetTarget(_player.transform);
         }
     }

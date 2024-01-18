@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
+using DeckMaster;
 using DG.Tweening;
 using UnityEngine;
 
@@ -29,7 +30,6 @@ namespace Cards
 
         public override void Interact(HeroCard heroCardConsumer)
         {
-            
             PerformDeath();
         }
 
@@ -86,7 +86,7 @@ namespace Cards
 
         private void SpawnEffectParticle(Card target)
         {
-            var particleInstance = Instantiate(Effect.EffectParticle, target.transform.position, Quaternion.identity);
+            var particleInstance = Instantiate(Effect.EffectParticle, target.transform.position + GameRulesGetter.Rules.VFXOffset, Quaternion.identity);
             particleInstance.Play();
         }
     }

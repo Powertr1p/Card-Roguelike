@@ -1,3 +1,4 @@
+using DeckMaster;
 using UnityEngine;
 
 namespace Cards
@@ -28,7 +29,7 @@ namespace Cards
 
         private ParticleSystem CreateEffectParticles(ParticleSystem effectParticle)
         {
-            return Instantiate(effectParticle, transform.position, Quaternion.identity);
+            return Instantiate(effectParticle, transform.position + GameRulesGetter.Rules.VFXOffset, Quaternion.identity);
         }
     }
 }

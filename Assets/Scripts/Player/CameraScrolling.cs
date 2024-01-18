@@ -62,8 +62,6 @@ namespace Player
 
         public void SetTarget(Transform target, bool isInstant = false)
         {
-            if (!GameRulesGetter.Rules.CameraFollow) return;
-            
             _isInstant = isInstant;
             _targetTransform = target;
             _isMoving = true;
