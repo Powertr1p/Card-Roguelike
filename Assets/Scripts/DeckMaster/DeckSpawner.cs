@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cards;
 using Data;
 using DeckMaster.Factory;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DeckMaster
@@ -30,7 +31,9 @@ namespace DeckMaster
             _currentPreset = cards;
 
             List<DeckCard> instancedCards = new List<DeckCard>();
-        
+
+            bool isFirst = true;
+            
             for (int i = 0; i < cards.GetLength(0); i++)
             {
                 Vector2 nextPosition = GetStartPosition();
@@ -47,10 +50,9 @@ namespace DeckMaster
                         else
                         {
                             DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom, cards[i,j]);
-
                             instancedCards.Add(card);
-                            
-                            if (i == 0)
+
+                            if (cards[i, j].Room == 1 && cards[i, j].Type != LevelCardType.Unreachable && isFirst)
                             {
                                 _firstRow.Add(card);
                             }
@@ -58,6 +60,11 @@ namespace DeckMaster
                     }
                     
                     nextPosition = new Vector2(nextPosition.x + _offset.x, i * _offset.y);
+                }
+
+                if (_firstRow.Count > 0)
+                {
+                    isFirst = false;
                 }
             }
             
@@ -67,20 +74,20 @@ namespace DeckMaster
         public List<Card> SpawnPlacementsForPlayer()
         {
             List<Card> instancedPlacements = new List<Card>();
-        
+
             for (int i = 0; i < 1; i++)
             {
                 Vector2 nextPosition = GetPlacementsStartPosition();
-                nextPosition = new Vector2(nextPosition.x, (i - 1) * _offset.y);
+                nextPosition = new Vector2(nextPosition.x, (_firstRow[i].Data.Position.y - 1) * _offset.y);
 
                 for (int j = 0; j < _firstRow.Count; j++)
                 {
-                    var data = new CardData(1, LevelCardType.Empty, new Vector2Int(_firstRow[j].Data.Position.x, i - 1));
+                    var data = new CardData(1, LevelCardType.Empty, new Vector2Int(_firstRow[j].Data.Position.x, _firstRow[i].Data.Position.y - 1));
                     
-                    var placement = _placementFactory.CreateNewInstance(i - 1, _firstRow[j].Data.Position.x, nextPosition, _firstRoom, data);
+                    var placement = _placementFactory.CreateNewInstance(_firstRow[i].Data.Position.y - 1, _firstRow[j].Data.Position.x, nextPosition, _firstRoom, data);
                     instancedPlacements.Add(placement);
 
-                    nextPosition = new Vector2(nextPosition.x + _offset.x, (i - 1) * _offset.y);
+                    nextPosition = new Vector2(nextPosition.x + _offset.x, (_firstRow[i].Data.Position.y - 1) * _offset.y);
                 }
             }
 

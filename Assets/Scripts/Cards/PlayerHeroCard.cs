@@ -35,7 +35,7 @@ namespace Cards
 
         public override void Initialize(CardData data)
         {
-            CardData = new CardData(data.Room, LevelCardType.Unreachable, data.Position);
+            CardData = new CardData(data.Room, data.Type, data.Position);
         }
 
         public void StartDragState()
@@ -126,10 +126,10 @@ namespace Cards
         {
             if (GameStateGetter.State == TurnState.PlayerPositioningTurn)
             {
-                return cardOnPosition.Data.Position.y == GameRulesGetter.Rules.PositioningStatePlacementsY;
+                return cardOnPosition.TryGetComponent(out Placement placement);
             }
 
-            return _positionChecker.CanPositionCard(cardOnPosition, Data.Position);
+            return _positionChecker.CanPositionCard(cardOnPosition, Data);
         }
 
         private void InteractWithOverlappedCard(Card card)

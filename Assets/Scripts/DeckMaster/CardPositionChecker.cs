@@ -1,23 +1,26 @@
 using Cards;
-using UnityEngine;
+using Data;
 
 namespace DeckMaster
 {
     public class CardPositionChecker
     {
         private int _movingLimit;
+        
 
         public CardPositionChecker(int movingLimit)
         {
             _movingLimit = movingLimit;
         }
         
-        public bool CanPositionCard(Card card, Vector2Int currentPosition)
+        public bool CanPositionCard(Card targetCard, CardData playerCard)
         {
-            var desirePosition = card.Data.Position;
+            var desirePosition = targetCard.Data.Position;
+            var currentPosition = playerCard.Position;
             
             if (desirePosition == currentPosition) return false;
-            if (card.Type == LevelCardType.Block) return false;
+            if (targetCard.Type == LevelCardType.Block) return false;
+            if (targetCard.Room > playerCard.Room && playerCard.Type != LevelCardType.Door) return false;
 
             return (desirePosition.x >= currentPosition.x - _movingLimit && desirePosition.x <= currentPosition.x + _movingLimit) &&
                    (desirePosition.y >= currentPosition.y - _movingLimit && desirePosition.y <= currentPosition.y + _movingLimit);

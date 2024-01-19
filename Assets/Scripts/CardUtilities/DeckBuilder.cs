@@ -14,7 +14,7 @@ namespace CardUtilities
         private DoorAlignment _excludeNextDoorAlignment = DoorAlignment.Undefined;
 
         private Vector2Int _gridSize;
-        private Vector2Int _initialGridSize = new(40, 40);
+        private Vector2Int _initialGridSize = new(200, 200);
         private Vector2Int _nextStartPos;
         private Vector2Int _doorPosition = Vector2Int.zero;
         
@@ -100,7 +100,7 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData, int roomNumber)
         {
-           //Debug.LogError($"Create Room: {roomData.name}");
+           Debug.LogError($"Create Room: {roomData.name}");
            var roomCards = roomData.GetCards();
 
            CorrectStartPosition(roomData);
@@ -144,7 +144,7 @@ namespace CardUtilities
             }
             else if (_isLastDown)
             {
-                _nextStartPos.y -= roomData.GridSize.y;
+                _nextStartPos.y -= (roomData.GridSize.y - 1);
                 _isLastDown = false;
             }
             else if (_isLastUp)

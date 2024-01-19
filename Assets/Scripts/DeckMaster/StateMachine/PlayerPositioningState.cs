@@ -69,7 +69,7 @@ namespace DeckMaster.StateMachine
                 PositionPlacements[centerCard].transform.position.y - Spawner.Offset.y, Player.transform.position.z);
             
             Player.Initialize(PositionPlacements[centerCard].Data);
-            
+
             Player.GetComponent<DragAndDropObject>().SetNewInitialPosition(Player.transform.position);
         }
 
