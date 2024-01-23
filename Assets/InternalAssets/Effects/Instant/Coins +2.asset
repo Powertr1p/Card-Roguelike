@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f66e26bc404a4d57807fcbea58bfa8e6, type: 3}
-  m_Name: +5 Shield
+  m_Name: Coins +2
   m_EditorClassIdentifier: 
   _effectType: 0
-  _affectParameter: 1
+  _affectParameter: 2
   _affectType: 0
   _effectParticle: {fileID: 1627244374365964243, guid: 73b325f164d9649c4916c78663e825cb, type: 3}
-  _duration: 3
-  _amount: 5
-  _visual: {fileID: 11400000, guid: 318f2fc4fce214e3fb5e0791d30dfabe, type: 2}
+  _duration: 0
+  _amount: 2
+  _visual: {fileID: 11400000, guid: 82f7800f825604fe09527aa3b37a7238, type: 2}
