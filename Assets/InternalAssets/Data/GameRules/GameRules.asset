@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d36f4a803374e4bf0a85967c813df69d, type: 2}
   - {fileID: 11400000, guid: 302e0a0f0588448ae8d380496404dd1f, type: 2}
   - {fileID: 11400000, guid: 06dbec43042d64596a1729c13b1e7dc3, type: 2}
-  _maxRooms: 4
+  _maxRooms: 5
   _delayBetweenCardsOpen: 0.05
   _cardOpenSpeed: 0.35
   _cameraFollow: 0
