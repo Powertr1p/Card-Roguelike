@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using Cards;
 using Data;
 using DefaultNamespace.Effects;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace DeckMaster.Factory
 {
     public class EffectCardsFactory<T> : GenericFactory<T> where T : DeckCard
     {
+        [ListDrawerSettings(NumberOfItemsPerPage = 40)]
         [SerializeField] protected List<Effect> PossibleEffects;
         
         public override T CreateNewInstance(int col, int row, Vector2 worldPosition, Transform parent, CardData data)

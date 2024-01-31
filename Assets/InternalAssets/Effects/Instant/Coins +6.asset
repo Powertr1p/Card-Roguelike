@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66e26bc404a4d57807fcbea58bfa8e6, type: 3}
+  m_Name: Coins +6
+  m_EditorClassIdentifier: 
+  _effectType: 0
+  _affectParameter: 2
+  _affectType: 0
+  _effectParticle: {fileID: 1627244374365964243, guid: 73b325f164d9649c4916c78663e825cb, type: 3}
+  _duration: 0
+  _amount: 2
+  _visual: {fileID: 11400000, guid: 82f7800f825604fe09527aa3b37a7238, type: 2}

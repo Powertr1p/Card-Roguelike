@@ -16,7 +16,7 @@ MonoBehaviour:
   _playerMovingLimit: 1
   _playerMaxHealth: 12
   _overhealWithDamage: 1
-  _backOnCellAnimDuration: 0.15
+  _backOnCellAnimDuration: 0.3
   _cardScaleOnPlayerHover: {x: 0.9, y: 0.9, z: 0.9}
   _enemyAttackZone: {x: 1, y: 1}
   _possibleRooms:
