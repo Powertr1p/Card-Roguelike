@@ -80,6 +80,8 @@ namespace Cards
         
         protected void PlayParticleAttack()
         {
+            if (ReferenceEquals(_attackParticle, null)) return;
+            
             var particalInstance = Instantiate(_attackParticle, transform.position, Quaternion.identity);
             particalInstance.Play();
         }

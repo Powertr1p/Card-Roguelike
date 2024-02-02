@@ -100,7 +100,7 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData, int roomNumber)
         {
-           Debug.LogError($"Create Room: {roomData.name}");
+           //Debug.LogError($"Create Room: {roomData.name}");
            var roomCards = roomData.GetCards();
 
            CorrectStartPosition(roomData);

@@ -16,6 +16,7 @@ namespace DeckMaster
         [SerializeField] private DeckCardFactory _emptyCardFactory;
         [SerializeField] private Transform _firstRoom;
         [SerializeField] private DoorCard _door;
+        [SerializeField] private HeroCard _boss;
         
         [SerializeField] private int _rows = 4;
         
@@ -30,6 +31,7 @@ namespace DeckMaster
         {
             _currentPreset = cards;
 
+            DoorCard lastDoor = null;
             List<DeckCard> instancedCards = new List<DeckCard>();
 
             bool isFirst = true;
@@ -45,7 +47,13 @@ namespace DeckMaster
                     {
                         if (cards[i, j].Type == LevelCardType.Door)
                         {
-                            CreateDoor(j, i, nextPosition, cards[i,j]);
+                            var currentDoor =  CreateDoor(j, i, nextPosition, cards[i,j]);
+                            
+                            if (lastDoor == null)
+                                lastDoor = currentDoor;
+
+                            if (currentDoor.Room > lastDoor.Room)
+                                lastDoor = currentDoor;
                         }
                         else
                         {
@@ -68,6 +76,8 @@ namespace DeckMaster
                 }
             }
             
+            CreateBoss(lastDoor);
+
             return instancedCards;
         }
 
@@ -104,13 +114,15 @@ namespace DeckMaster
             return new Vector2(_firstRow[0].transform.position.x, _firstRow[0].transform.position.y);
         }
         
-        private void CreateDoor(int j, int i, Vector2 nextPosition, CardData data)
+        private DoorCard CreateDoor(int j, int i, Vector2 nextPosition, CardData data)
         {
             var door = Instantiate(_door, _firstRoom);
             
             data.SetNewPosition(new Vector2Int(j,i));
             door.Initialize(data);
             door.transform.position = new Vector3(nextPosition.x, i * _offset.y);
+
+            return door;
         }
 
         private Vector2 GetStartPosition()
@@ -150,6 +162,14 @@ namespace DeckMaster
         private DeckCard CreateNewEmpty(int col, int row, Vector2 position, Transform parent,  CardData data)
         {
             return _emptyCardFactory.CreateNewInstance(col, row, position, parent, data);
+        }
+
+        private void CreateBoss(DoorCard door)
+        {
+           var boss = Instantiate(_boss);
+           boss.Initialize(door.Data);
+           boss.transform.position = door.transform.position;
+           Destroy(door.gameObject);
         }
     }
 }

@@ -1055,6 +1055,7 @@ MonoBehaviour:
   _emptyCardFactory: {fileID: 924738589}
   _firstRoom: {fileID: 1621303672}
   _door: {fileID: 7449930616306911950, guid: 9d8b57c5bc7484b9c8ac74e2fbf5369c, type: 3}
+  _boss: {fileID: 7411295443952520189, guid: d68b83cfae3cf4797b4cf3046650ac2c, type: 3}
   _rows: 7
   _offset: {x: 1.6, y: 2.2}
 --- !u!4 &1892885413
