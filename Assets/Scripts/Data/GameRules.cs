@@ -53,6 +53,15 @@ namespace Data
         [BoxGroup("Camera"), PropertyTooltip("$OffsetYOnGameStartTooltip")]
         [SerializeField] private float _offsetYOnGameStart = 3f;
 
+        [BoxGroup("Random")] 
+        [SerializeField] private float _enemySpawnChance = 0.1f;
+        [BoxGroup("Random")] 
+        [SerializeField] private float _itemSpawnChance = 0.1f;
+        [BoxGroup("Random")] 
+        [SerializeField] private float _emptySpawnChance = 0.1f;
+        [BoxGroup("Random")] 
+        [SerializeField] private float _blockSpawnChance = 0.1f;
+
         public Vector3 VFXOffset { get; } = new(0, 0, -0.15f);
         
         public Vector2Int VisibleZone => _visibleZone;
@@ -80,6 +89,11 @@ namespace Data
         public float PositionThreshold => _positionThreshold;
         public float OffsetY => _offsetYFromPlayerCard;
         public float OffsetYOnGameStart => _offsetYOnGameStart;
+
+        public float EnemySpawnChance => _emptySpawnChance;
+        public float ItemSpawnChance => _itemSpawnChance;
+        public float EmptySpawnChance => _emptySpawnChance;
+        public float BlockSpawnChance => _blockSpawnChance;
         
          #region Tooltips
 #if UNITY_EDITOR
@@ -99,7 +113,7 @@ namespace Data
         private const string PositionThresholdTooltip = "Минимальное расстояние для остановки камеры во время ее движения, после хода игрока. Не должно быть 0!";
         private const string OffsetYFromPlayerCardTooltip = "Свдиг по Y который применяется во время движения и остановки камеры. По сути определяет, как камеры будет расположена относительно игрока. Формула = playerPosition + offset";
         private const string OffsetYOnGameStartTooltip = "Сдвиг по Y относительно игрока на старте игры. Чтобы выставить нужное положение камеры до начала игры.";
-        // private const string Tooltip = "Радиус открытия карт вокруг позиции игрока";
+        //private const string RandomCard = "Вероятности спавна той или иной карты пр поставлении префаба комнаты, если выбрана карта Random";
         // private const string Tooltip = "Радиус открытия карт вокруг позиции игрока";
         // private const string Tooltip = "Радиус открытия карт вокруг позиции игрока";
 #endif    
