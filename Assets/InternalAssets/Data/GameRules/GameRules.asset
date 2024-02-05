@@ -15,43 +15,19 @@ MonoBehaviour:
   _visibleZone: {x: 2, y: 2}
   _playerMovingLimit: 1
   _playerMaxHealth: 12
-  _overhealWithDamage: 1
+  _overhealWithDamage: 0
   _backOnCellAnimDuration: 0.3
-  _cardScaleOnPlayerHover: {x: 0.9, y: 0.9, z: 0.9}
+  _cardScaleOnPlayerHover: {x: 0.8, y: 0.8, z: 0.8}
   _enemyAttackZone: {x: 1, y: 1}
   _possibleRooms:
-  - {fileID: 11400000, guid: e12f8aee30e5243d2a1c0763e1e7a008, type: 2}
-  - {fileID: 11400000, guid: 8c4bbcbdf74984467adba3f402899210, type: 2}
-  - {fileID: 11400000, guid: 8e85ea4ea1ebe4652b61a743602e1f71, type: 2}
-  - {fileID: 11400000, guid: ae758c922f4d14fab844fe3261e9b7f2, type: 2}
-  - {fileID: 11400000, guid: 6406c87b415dd4158b40f1673da1cd26, type: 2}
-  - {fileID: 11400000, guid: 79fc7fa52f40f431abe88253fa0cd13e, type: 2}
-  - {fileID: 11400000, guid: 59fd5736ad1ab45699b03e94d403f4a6, type: 2}
-  - {fileID: 11400000, guid: f10825364a0df48d28ec6e4377487bfc, type: 2}
-  - {fileID: 11400000, guid: c19993fc2bbb146a2bdfec52ce74163b, type: 2}
-  - {fileID: 11400000, guid: 3fc8d70254454447e84fb9d1670e9599, type: 2}
-  - {fileID: 11400000, guid: e25205118ff894e2bb958a6a76e4badb, type: 2}
-  - {fileID: 11400000, guid: 3920b3b4932a44b60a9b7b608ea4a604, type: 2}
-  - {fileID: 11400000, guid: 2f5cdb69b6548484b8bb58cf16be2f33, type: 2}
-  - {fileID: 11400000, guid: fea575702a8ee414d9f33623a2c617d0, type: 2}
-  - {fileID: 11400000, guid: 3f482914cc9df407ca17bf9437b1013f, type: 2}
-  - {fileID: 11400000, guid: 9d56f5efc8b574bd08c67329a6e77be9, type: 2}
-  - {fileID: 11400000, guid: 555d7699269314f1b9b730479530d823, type: 2}
-  - {fileID: 11400000, guid: d6dda7a0dce044868ace1e6d250f119d, type: 2}
-  - {fileID: 11400000, guid: 027f180b80a9643b7b2299e2dc27add1, type: 2}
-  - {fileID: 11400000, guid: 5dc775545fd644df484e130568f79dc3, type: 2}
-  - {fileID: 11400000, guid: 6be31845154eb43a8911eaa33076e674, type: 2}
-  - {fileID: 11400000, guid: 48e8e81b2f2e245569b33b13100b76fd, type: 2}
-  - {fileID: 11400000, guid: 51a029297042e455e811addd45f9c353, type: 2}
-  - {fileID: 11400000, guid: 93cfd82d106e24d3ca9ce4e40a861605, type: 2}
-  - {fileID: 11400000, guid: 5808644f329264329ab40c3a05e1e5f1, type: 2}
-  - {fileID: 11400000, guid: 91c96cf04bcdd47929660130c8343e17, type: 2}
-  - {fileID: 11400000, guid: e06868ae599024718ba1437a7bcc6973, type: 2}
-  - {fileID: 11400000, guid: b365129a128a9400f8578cb34fce51cd, type: 2}
-  - {fileID: 11400000, guid: 5ba6d5664079d46a6986c9bdcd8edaac, type: 2}
-  - {fileID: 11400000, guid: d36f4a803374e4bf0a85967c813df69d, type: 2}
-  - {fileID: 11400000, guid: 302e0a0f0588448ae8d380496404dd1f, type: 2}
-  - {fileID: 11400000, guid: 06dbec43042d64596a1729c13b1e7dc3, type: 2}
+  - {fileID: 11400000, guid: e581de599795d47c19e80f106aa9aa4b, type: 2}
+  - {fileID: 11400000, guid: 175c8b48771fe49f9b18a219925e739c, type: 2}
+  - {fileID: 11400000, guid: f1a04beab696a49ac979fe96821d990c, type: 2}
+  - {fileID: 11400000, guid: 1eae957f310ba4cc8a114919fb1520f7, type: 2}
+  - {fileID: 11400000, guid: a1ce9fc5e4bc1471b923d2bd95b4a065, type: 2}
+  - {fileID: 11400000, guid: 602f930b913654e10b363bf3cce860bf, type: 2}
+  - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
+  - {fileID: 11400000, guid: ca62e39ec2cb84bd69d8f6ed8b2a70dd, type: 2}
   _maxRooms: 4
   _delayBetweenCardsOpen: 0.05
   _cardOpenSpeed: 0.35
@@ -59,7 +35,7 @@ MonoBehaviour:
   _cameraFollowSpeed: 7
   _positionThreshold: 0.1
   _offsetYFromPlayerCard: 0
-  _mouseWheelZoomSpeed: 10
+  _mouseWheelZoomSpeed: 15
   _maxZoomValue: -9
   _minZoomValue: -21
   _offsetYOnGameStart: 3
