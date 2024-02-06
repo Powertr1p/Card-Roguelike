@@ -17,6 +17,8 @@ namespace Data
         [SerializeField] private int _playerMaxHealth = 12;
         [BoxGroup("Player Params"), PropertyTooltip("$OverhealWithDamageTooltip")]
         [SerializeField] private bool _overhealWithDamage = true;
+        [BoxGroup("Player Params")]
+        [SerializeField] private bool _isBackTracking = true;
 
         [BoxGroup("Player Feel"), PropertyTooltip("$BackOnCellAnimDurationTooltip")] 
         [SerializeField] private float _backOnCellAnimDuration = 0.25f;
@@ -68,7 +70,7 @@ namespace Data
         public int PlayerMovingLimit => _playerMovingLimit;
         public int PlayerMaxHealth => _playerMaxHealth;
         public bool OverhealWithDamage => _overhealWithDamage;
-        public int PositioningStatePlacementsY { get; } = -1;
+        public bool IsBackTracking => _isBackTracking;
 
         public float PlaceInititialPositionDuration => _backOnCellAnimDuration;
         public Vector3 HoverScaleValue => _cardScaleOnPlayerHover;

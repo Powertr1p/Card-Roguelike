@@ -86,6 +86,11 @@ namespace Cards
             DeathSpritesContainer.SetActive(true);
             MainSpritesContainer.SetActive(false);
             _condition = CardCondition.Dead;
+            
+            if (!GameRulesGetter.Rules.IsBackTracking)
+            {
+                Destroy(gameObject);
+            }
         }
 
         protected void SendDeathEvent()
