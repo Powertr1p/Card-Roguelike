@@ -39,3 +39,7 @@ MonoBehaviour:
   _maxZoomValue: -9
   _minZoomValue: -21
   _offsetYOnGameStart: 3
+  _enemySpawnChance: 0.4
+  _itemSpawnChance: 0.2
+  _emptySpawnChance: 0.3
+  _blockSpawnChance: 0.1

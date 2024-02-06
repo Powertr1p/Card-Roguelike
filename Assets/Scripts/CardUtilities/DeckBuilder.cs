@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using DeckMaster;
 using UnityEngine;
 
 namespace CardUtilities
@@ -100,7 +101,7 @@ namespace CardUtilities
 
         private void CreateRoom(RoomData roomData, int roomNumber)
         {
-           //Debug.LogError($"Create Room: {roomData.name}");
+           Debug.LogError($"Create Room: {roomData.name}");
            var roomCards = roomData.GetCards();
 
            CorrectStartPosition(roomData);
@@ -113,6 +114,11 @@ namespace CardUtilities
                    var currentRow = _nextStartPos.x + j;
 
                    //Debug.Log($"{currentColumn} {currentRow}");
+                   
+                   if (roomCards[i, j] == LevelCardType.Random)
+                   {
+                      roomCards[i, j] = GetRandomCard();
+                   }
 
                    _levelGrid[currentColumn, currentRow] = new CardData(roomNumber, roomCards[i, j], new Vector2Int(currentColumn, currentRow));
 
@@ -246,6 +252,34 @@ namespace CardUtilities
             }
             
             return new Vector2Int(summRows, summCols);
+        }
+
+        private LevelCardType GetRandomCard()
+        {
+            float randomValue = Random.value;
+            
+            Debug.Log($"Random Value is: {randomValue}");
+
+            var enemyChance = GameRulesGetter.Rules.EnemySpawnChance;
+            var itemChance = enemyChance + GameRulesGetter.Rules.ItemSpawnChance;
+            var emptyChance = itemChance + GameRulesGetter.Rules.EmptySpawnChance;
+
+            if (randomValue < enemyChance)
+            {
+                return LevelCardType.Enemy;
+            }
+            else if (randomValue < itemChance)
+            {
+                return LevelCardType.Item;
+            }
+            else if (randomValue < emptyChance)
+            {
+                return LevelCardType.Empty;
+            }
+            else
+            {
+                return LevelCardType.Block;
+            }
         }
     }
 }
