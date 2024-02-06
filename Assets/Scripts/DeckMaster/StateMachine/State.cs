@@ -75,7 +75,6 @@ public class State
     protected List<DeckCard> GetCardsAroundPlayer(Vector2Int startPosition, Vector2Int endPosition, FaceSate skipCondition)
     {
         var pickedCards = new List<DeckCard>();
-        var position = Player.Data.Position;
 
         foreach (var card in DeckCards)
         {

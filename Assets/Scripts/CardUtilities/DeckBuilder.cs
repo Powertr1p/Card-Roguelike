@@ -10,6 +10,8 @@ namespace CardUtilities
     {
         private List<RoomData> _pickedRoomDatas;
         private List<RoomData> _allRooms;
+        private List<RoomData> _remainRooms;
+        
         private CardData[,] _levelGrid;
         private DoorAlignment _lastPickedDoor = DoorAlignment.Undefined;
         private DoorAlignment _excludeNextDoorAlignment = DoorAlignment.Undefined;
@@ -48,35 +50,90 @@ namespace CardUtilities
             }
 
             int roomNumber = 1;
-            
-            foreach (var roomData in _pickedRoomDatas)
-            { 
-                CreateRoom(roomData, roomNumber);
-                roomNumber++;
+            int cycle = 0;
+
+            while (roomNumber <= GameRulesGetter.Rules.MaxRooms && cycle < 50)
+            {
+                if (CanPositionRoom(_pickedRoomDatas[roomNumber - 1]))
+                {
+                    CreateRoom(_pickedRoomDatas[roomNumber - 1], roomNumber);
+                    roomNumber++;
+                }
+                else
+                {
+                    ReplaceRoomWithNewOne(_pickedRoomDatas[roomNumber - 1]);
+                }
+                
+                cycle++;
+
+                if (cycle == 49)
+                {
+                    Debug.LogError("ERROR! TOO MANY CYCLES > 50");
+                }
             }
 
             return ConvertGridToProperSize();
         }
+
+
+        //     foreach (var roomData in _pickedRoomDatas)
+        //     {
+        //         if (CanPositionRoom(roomData))
+        //         {
+        //             CreateRoom(roomData, roomNumber);
+        //             roomNumber++;
+        //         }
+        //         else
+        //         {
+        //             ReplaceRoomWithNewOne(roomData);
+        //         }
+        //     }
+        //
+        //     return ConvertGridToProperSize();
+        // }
         
         private List<RoomData> RandomizeRooms()
         {
             List<RoomData> pickedRooms = new List<RoomData>();
-            List<RoomData> remainRooms = new List<RoomData>(_allRooms);
+            _remainRooms = new List<RoomData>(_allRooms);
 
             for (int i = 0; i < _maxRooms; i++)
             {
                 SetExcludeDoorAlignment();
 
-                List<RoomData> suitableRooms = GetSuitableRooms(i, remainRooms);
+                List<RoomData> suitableRooms = GetSuitableRooms(i, _remainRooms);
                 
                 var rnd = Random.Range(0, suitableRooms.Count);
 
                 pickedRooms.Add(suitableRooms[rnd]);
                 _lastPickedDoor = suitableRooms[rnd].DoorAlignment;
-                remainRooms.Remove(suitableRooms[rnd]);
+                _remainRooms.Remove(suitableRooms[rnd]);
             }
 
             return pickedRooms;
+        }
+
+        private void ReplaceRoomWithNewOne(RoomData data)
+        {
+            int index = _pickedRoomDatas.IndexOf(data);
+
+            Debug.Log($"Starting replacing! Current index of replacing room is {index}, its: {data.name}");
+            
+            _lastPickedDoor = _pickedRoomDatas[index - 1].DoorAlignment;
+
+            SetExcludeDoorAlignment();
+            List<RoomData> suitableRooms = new List<RoomData>(_remainRooms.Where(room => room.DoorAlignment != _excludeNextDoorAlignment).ToList());
+
+            var rnd = Random.Range(0, suitableRooms.Count);
+
+            if (suitableRooms.Count == 0)
+            {
+                _remainRooms = new List<RoomData>(_allRooms.Except(_pickedRoomDatas));
+                return;
+            }
+            
+            _pickedRoomDatas[index] = suitableRooms[rnd];
+            _remainRooms.Remove(suitableRooms[rnd]);
         }
 
         private List<RoomData> GetSuitableRooms(int roomIndex, List<RoomData> remainRooms)
@@ -99,9 +156,65 @@ namespace CardUtilities
             };
         }
 
+        private bool CanPositionRoom(RoomData roomData)
+        {
+            Debug.Log($"Trying to position room {roomData.name}");
+            
+            var roomCards = roomData.GetCards();
+            Vector2Int nextStartPos =  CorrectStartPosition(_nextStartPos, roomData);
+
+            for (int i = 0; i < roomCards.GetLength(0); i++) 
+            {
+                for (var j = 0; j < roomCards.GetLength(1); j++)
+                {
+                    var currentColumn = nextStartPos.y + i;
+                    var currentRow = nextStartPos.x + j;
+
+                    var type = _levelGrid[currentColumn, currentRow].Type;
+                    
+                    if (type != LevelCardType.Unreachable)
+                    {
+                        Debug.Log($"- Positioning room {roomData.name} is FAILED!!");
+                        return false;
+                    }
+                }
+            }
+
+            Debug.Log($"+ Positioning room {roomData.name} is succeed!");
+            
+            return true;
+        }
+        
+        private Vector2Int CorrectStartPosition(Vector2Int nextStartPos, RoomData data)
+        {
+            if (!_isLastDown)
+            {
+                if (data.DoorAlignment == DoorAlignment.Down)
+                {
+                    nextStartPos.y -= (data.GridSize.y - 1);
+                }
+            }
+            
+            if (_isLastLeft)
+            {
+                nextStartPos.x -= data.GridSize.x;
+            }
+            else if (_isLastDown)
+            {
+                nextStartPos.y -= (data.GridSize.y - 1);
+            }
+            else if (_isLastUp)
+            {
+                var offset = data.GridSize.x / 2;
+                nextStartPos.x -= offset;
+            }
+
+            return nextStartPos;
+        }
+
         private void CreateRoom(RoomData roomData, int roomNumber)
         {
-           Debug.LogError($"Create Room: {roomData.name}");
+           //Debug.LogError($"Create Room: {roomData.name}");
            var roomCards = roomData.GetCards();
 
            CorrectStartPosition(roomData);
