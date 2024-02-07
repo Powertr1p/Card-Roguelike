@@ -37,6 +37,7 @@ namespace Cards
 
             var effect = _coinDrop.EffectData;
             heroCardConsumer.AddCoins(effect.Amount, effect);
+            Destroy(_coinDrop.gameObject);
         }
 
         public override void OpenCard()

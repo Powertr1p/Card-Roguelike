@@ -60,7 +60,6 @@ namespace DeckMaster
 
         private void OnEnemyDeath(object obj, DeathArgs deathArgs)
         {
-            deathArgs.Sender.gameObject.SetActive(false);
             deathArgs.Sender.DeathPerformed -= OnEnemyDeath;
         }
 
