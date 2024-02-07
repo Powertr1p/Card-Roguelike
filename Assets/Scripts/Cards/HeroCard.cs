@@ -1,3 +1,4 @@
+using System;
 using CardUtilities;
 using DeckMaster;
 using DefaultNamespace.Effects;
@@ -13,6 +14,8 @@ namespace Cards
         [SerializeField] private int _coins;
         [SerializeField] private ParticleSystem _attackParticle;
 
+        public event Action<int> CoinsAdded;
+        
         private Health _health;
         private TurnEffectsHandler _turnEffectsHandler;
         private EffectMapper _effectMapper;
@@ -70,6 +73,8 @@ namespace Cards
         public void AddCoins(int amount, Effect effect)
         {
             _coins += amount;
+            
+            CoinsAdded?.Invoke(_coins);
         }
 
         public void TryExecuteTurnEffects()
