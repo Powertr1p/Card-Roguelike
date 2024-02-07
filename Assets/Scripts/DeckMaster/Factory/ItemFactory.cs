@@ -9,13 +9,15 @@ namespace DeckMaster.Factory
     {
         [SerializeField] private Effect _coinsEffect;
 
-        public void SpawnCoins(Vector3 worldPosition, CardData data)
+        public EffectCard SpawnCoins(Vector3 worldPosition, CardData data)
         {
             var instance = base.CreateNewInstance();
             instance.Initialize(new CardData(data.Room, LevelCardType.Item, data.Position));
             instance.SetEffect(_coinsEffect);
             instance.InitializeVisuals(_coinsEffect.VisualData);
             instance.transform.position = worldPosition;
+
+            return instance;
         }
     }
 }

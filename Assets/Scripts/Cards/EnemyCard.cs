@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CardUtilities;
 using DeckMaster;
+using DefaultNamespace.Effects;
 using DG.Tweening;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Cards
     public class EnemyCard : DeckCard
     {
         [SerializeField] private DirectionAttacker _directionAttacker;
+        [SerializeField] private EffectCard _coinDrop;
 
         protected override void Awake()
         {
@@ -18,19 +20,23 @@ namespace Cards
             CanSpawnCoinsOnDeath = true;
         }
 
-        protected override void Start()
-        {
-            base.Start();
-        }
-
         public void SetAttackDirections(List<DirectionAttackPosition> attacks)
         {
             _directionAttacker.SetAttackDirection(attacks);
         }
 
+        public void SetCoin(EffectCard coins)
+        {
+            _coinDrop = coins;
+            _coinDrop.gameObject.SetActive(false);
+        }
+
         public override void Interact(HeroCard heroCardConsumer)
         {
             PerformDeath();
+
+            var effect = _coinDrop.EffectData;
+            heroCardConsumer.AddCoins(effect.Amount, effect);
         }
 
         public override void OpenCard()
@@ -76,6 +82,8 @@ namespace Cards
             
             PerformDeath();
             SendDeathEvent();
+            
+            _coinDrop.gameObject.SetActive(true);
         }
 
         private void DealDamage(HeroCard target)

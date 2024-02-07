@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Cards;
 using Data;
 using DeckMaster.Factory;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DeckMaster
@@ -104,11 +103,6 @@ namespace DeckMaster
             return instancedPlacements;
         }
 
-        public void SpawnCoins(CardData data, Vector3 worldPosition)
-        {
-            _itemFactory.SpawnCoins(worldPosition, data);
-        }
-        
         private Vector2 GetPlacementsStartPosition()
         {
             return new Vector2(_firstRow[0].transform.position.x, _firstRow[0].transform.position.y);
@@ -146,7 +140,10 @@ namespace DeckMaster
 
         private DeckCard CreateNewEnemyCard(int col, int row, Vector2 position, Transform parent, CardData data)
         {
-            return _enemyFactory.CreateNewInstance(col, row, position, parent, data);
+            var enemy =  _enemyFactory.CreateNewInstance(col, row, position, parent, data);
+            enemy.SetCoin(_itemFactory.SpawnCoins(enemy.transform.position, enemy.Data));
+
+            return enemy;
         }
 
         private DeckCard CreateNewItemCard(int col, int row, Vector2 position, Transform parent,  CardData data)

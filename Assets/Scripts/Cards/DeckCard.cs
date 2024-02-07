@@ -95,7 +95,7 @@ namespace Cards
 
         protected void SendDeathEvent()
         {
-            DeathHandler(new DeathArgs(CanSpawnCoinsOnDeath, _transform.position, CardData, this));
+            DeathHandler(new DeathArgs(_transform.position, CardData, this));
         }
         
         protected virtual void DeathHandler(DeathArgs args)
@@ -106,14 +106,12 @@ namespace Cards
     
     public class DeathArgs : EventArgs
     {
-        public bool CanSpawnCoins;
         public Vector3 WorldPosition;
         public CardData Data;
         public DeckCard Sender;
 
-        public DeathArgs(bool canSpawnCoins, Vector3 worldPosition, CardData data, DeckCard sender)
+        public DeathArgs(Vector3 worldPosition, CardData data, DeckCard sender)
         {
-            CanSpawnCoins = canSpawnCoins;
             WorldPosition = worldPosition;
             Data = data;
             Sender = sender;
