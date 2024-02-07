@@ -34,6 +34,7 @@ namespace Cards
         public override void Interact(HeroCard heroCardConsumer)
         {
             PerformDeath();
+            SendDeathEvent();
 
             var effect = _coinDrop.EffectData;
             heroCardConsumer.AddCoins(effect.Amount, effect);
@@ -84,6 +85,7 @@ namespace Cards
             PerformDeath();
             SendDeathEvent();
             
+            gameObject.SetActive(false);
             _coinDrop.gameObject.SetActive(true);
         }
 

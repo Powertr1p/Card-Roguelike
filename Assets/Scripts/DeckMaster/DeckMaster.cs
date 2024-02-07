@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cards;
 using CardUtilities;
@@ -18,6 +19,8 @@ namespace DeckMaster
         [SerializeField, NotNull] private CameraScrolling _cameraScrolling;
         [SerializeField, NotNull] private GameRules _gameRules;
 
+        public event Action EnemyDeath;
+        
         private List<DeckCard> _deckCards;
         private List<Card> _placements;
 
@@ -54,13 +57,18 @@ namespace DeckMaster
         {
             for (int i = 0; i < _deckCards.Count; i++)
             {
-                _deckCards[i].DeathPerformed += OnEnemyDeath;
+                _deckCards[i].DeathPerformed += OnCardConsumed;
             }
         }
 
-        private void OnEnemyDeath(object obj, DeathArgs deathArgs)
+        private void OnCardConsumed(object obj, DeathArgs deathArgs)
         {
-            deathArgs.Sender.DeathPerformed -= OnEnemyDeath;
+            if (deathArgs.Data.Type == LevelCardType.Enemy)
+            {
+                EnemyDeath?.Invoke();
+            }
+            
+            deathArgs.Sender.DeathPerformed -= OnCardConsumed;
         }
 
         private void ChangeGameState()
