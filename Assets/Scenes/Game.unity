@@ -1351,7 +1351,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
   - {fileID: 11400000, guid: ad9b403ced370b3468d26764975c6992, type: 2}
   - {fileID: 11400000, guid: cac35172622252e41aef69ee7934fa49, type: 2}
-  _coinsEffect: {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
+  _possibleEnemyDrop:
+  - {fileID: 11400000, guid: 180c9343c063948859a9915eb73140ba, type: 2}
+  - {fileID: 11400000, guid: ad9b403ced370b3468d26764975c6992, type: 2}
+  - {fileID: 11400000, guid: cac35172622252e41aef69ee7934fa49, type: 2}
+  - {fileID: 11400000, guid: 417f3a37b071a0344842f524f2fec1f1, type: 2}
+  - {fileID: 11400000, guid: f1c886a5a6aab784394a89414520c79c, type: 2}
 --- !u!1001 &1447618394
 PrefabInstance:
   m_ObjectHideFlags: 0

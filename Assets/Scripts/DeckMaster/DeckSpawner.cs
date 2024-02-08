@@ -141,7 +141,7 @@ namespace DeckMaster
         private DeckCard CreateNewEnemyCard(int col, int row, Vector2 position, Transform parent, CardData data)
         {
             var enemy =  _enemyFactory.CreateNewInstance(col, row, position, parent, data);
-            enemy.SetCoin(_itemFactory.SpawnCoins(enemy.transform.position, enemy.Data));
+            enemy.SetCoin(_itemFactory.SpawnDrop(enemy.transform.position, enemy.Data));
 
             return enemy;
         }

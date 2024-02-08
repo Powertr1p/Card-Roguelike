@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cards;
 using Data;
 using DefaultNamespace.Effects;
@@ -7,17 +8,25 @@ namespace DeckMaster.Factory
 {
     public class ItemFactory : EffectCardsFactory<EffectCard>
     {
-        [SerializeField] private Effect _coinsEffect;
+        [SerializeField] private List<Effect> _possibleEnemyDrop;
 
-        public EffectCard SpawnCoins(Vector3 worldPosition, CardData data)
+        public EffectCard SpawnDrop(Vector3 worldPosition, CardData data)
         {
             var instance = base.CreateNewInstance();
             instance.Initialize(new CardData(data.Room, LevelCardType.Item, data.Position));
-            instance.SetEffect(_coinsEffect);
-            instance.InitializeVisuals(_coinsEffect.VisualData);
+
+            var rndEffect = GetRandomDrop();
+
+            instance.SetEffect(rndEffect);
+            instance.InitializeVisuals(rndEffect.VisualData);
             instance.transform.position = worldPosition;
 
             return instance;
+        }
+
+        private Effect GetRandomDrop()
+        {
+            return _possibleEnemyDrop[Random.Range(0, _possibleEnemyDrop.Count)];
         }
     }
 }
