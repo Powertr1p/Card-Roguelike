@@ -17,6 +17,7 @@ namespace DefaultNamespace.Effects
 
         [SerializeField] private int _amount;
         
+        [HideIf("_effectType", Enums.EffectType.Positive)]
         [SerializeField] private bool _ignoreShield = false;
 
         [Header("Visual Data")]
