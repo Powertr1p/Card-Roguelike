@@ -103,14 +103,11 @@ namespace Cards
 
             if (hit && TryInteractWithOverlappedCard(hit))
             {
-                Debug.Log("HIT!!!");
-                
                 SetNewInitialPosition(hit.collider.transform.position);
                 EventTurnEnded?.Invoke();
             }
             else
             {
-                Debug.Log("NO HIT!");
                 PlaceInitialPosition();
             }
         }
