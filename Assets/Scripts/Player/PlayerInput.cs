@@ -121,8 +121,8 @@ namespace DefaultNamespace.Player
 
                 if (horizontalInput != 0 || verticalInput != 0)
                 {
-                    _lastVerticalInput = verticalInput;
-                    _lastHorizontalInput = horizontalInput;
+                    _lastVerticalInput = Mathf.Clamp(verticalInput, -1, 1);
+                    _lastHorizontalInput = Mathf.Clamp(horizontalInput, -1, 1);;
                 }
             }
             
@@ -134,12 +134,12 @@ namespace DefaultNamespace.Player
 
         private bool IsGetKeyUp()
         {
-            return Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow);
+            return Input.GetButtonUp("Vertical") || Input.GetButtonUp("Horizontal");
         }
 
         private bool IsGetKeyDown()
         {
-            return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow);
+            return Input.GetButtonDown("Vertical") || Input.GetButtonDown("Horizontal");
         }
 
         private void Grab(IDragAndDropable dndObject)

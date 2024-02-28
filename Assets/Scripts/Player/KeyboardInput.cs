@@ -41,7 +41,7 @@ namespace Player
             
             var desirePosition = GetTargetCardPosition(horizontalInput, verticalInput);
             var target = _raycaster.GetTarget(desirePosition);
-            
+
             _player.StartDragState();
             _player.transform.position = desirePosition;
             _player.KeyboardDrag(target);
