@@ -1,4 +1,3 @@
-using Cards;
 using UnityEngine;
 
 namespace Data
