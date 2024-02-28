@@ -13,7 +13,6 @@ namespace Cards
         [SerializeField] private Raycaster _raycaster;
 
         public event Action EventTurnEnded;
-        public event Action<Vector2Int> EventPlacing;
 
         private CardPositionChecker _positionChecker;
         private readonly Vector2Int _initialPosition = new Vector2Int(-2, -2);
@@ -55,6 +54,12 @@ namespace Cards
             TrySelectHoverCard();
         }
 
+        public void KeyboardDrag(RaycastHit2D hit)
+        {
+            TryPlaceSelf(hit);
+            _dragBehaviour.ExitGrabState();
+        }
+
         private void TrySelectHoverCard()
         {
             var hit = _raycaster.GetBoxcastNearestHit(transform);
@@ -78,11 +83,9 @@ namespace Cards
                 _lastDragHit.DeselectCard();
             }
         }
-
-        private void TryPlaceSelf()
+        
+        private void TryPlaceSelf(RaycastHit2D hit)
         {
-            var hit = _raycaster.GetBoxcastNearestHit(transform);
-
             if (hit && TryInteractWithOverlappedCard(hit))
             {
                 SetNewInitialPosition(hit.collider.transform.position);
@@ -90,6 +93,24 @@ namespace Cards
             }
             else
             {
+                PlaceInitialPosition();
+            }
+        }
+
+        private void TryPlaceSelf()
+        {
+            var hit = _raycaster.GetBoxcastNearestHit(transform);
+
+            if (hit && TryInteractWithOverlappedCard(hit))
+            {
+                Debug.Log("HIT!!!");
+                
+                SetNewInitialPosition(hit.collider.transform.position);
+                EventTurnEnded?.Invoke();
+            }
+            else
+            {
+                Debug.Log("NO HIT!");
                 PlaceInitialPosition();
             }
         }
@@ -108,8 +129,6 @@ namespace Cards
         {
             if (hit.collider.TryGetComponent(out Card overlappedCard))
             {
-                EventPlacing?.Invoke(overlappedCard.Data.Position);
-                
                 if (CanPlaceCard(overlappedCard))
                 {
                     InteractWithOverlappedCard(overlappedCard);

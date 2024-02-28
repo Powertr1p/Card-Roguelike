@@ -1,5 +1,6 @@
 using System;
 using Cards;
+using DeckMaster;
 using DefaultNamespace.Interfaces;
 using Player;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace DefaultNamespace.Player
 
         public event Action<Vector2> EventCloseUp;
         public event Action<Action> EventReturnCamera;
+        public event Action<float, float> MovePressed;
         
         private bool _isDragging;
         private bool _isCloseUp;
@@ -21,12 +23,51 @@ namespace DefaultNamespace.Player
         private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
+        private float _lastVerticalInput;
+        private float _lastHorizontalInput;
 
         private void Update()
         {
             if (!_isInputEnabled) return;
             if (_cameraScrolling.IsCameraMoving) return;
 
+            TryHandleMouseInput();
+            TryHandleKeyboardInput();
+        }
+
+        private void LateUpdate()
+        {
+            if (!_isInputEnabled) return;
+            if (_cameraScrolling.IsCameraMoving) return;
+            
+            if (!_hasDraggingObject)
+            {
+                _cameraScrolling.ListenToScrollMouse();
+
+                if (Input.GetMouseButton(0))
+                {
+                    if (!_isCloseUp)
+                        _cameraScrolling.StartCameraScrolling();
+                }
+                else if (Input.GetMouseButtonUp(0))
+                {
+                    _cameraScrolling.StopCameraScrolling();
+                }
+            }
+        }
+        
+        public void DisableInput()
+        {
+            _isInputEnabled = false;
+        }
+
+        public void EnableInput()
+        {
+            _isInputEnabled = true;
+        }
+        
+        private void TryHandleMouseInput()
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 if (_isCloseUp)
@@ -71,35 +112,34 @@ namespace DefaultNamespace.Player
             _lastMousePosition = Input.mousePosition;
         }
 
-        private void LateUpdate()
+        private void TryHandleKeyboardInput()
         {
-            if (!_isInputEnabled) return;
-            if (_cameraScrolling.IsCameraMoving) return;
-            
-            if (!_hasDraggingObject)
+            if (IsGetKeyDown())
             {
-                _cameraScrolling.ListenToScrollMouse();
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                float verticalInput = Input.GetAxisRaw("Vertical");
 
-                if (Input.GetMouseButton(0))
+                if (horizontalInput != 0 || verticalInput != 0)
                 {
-                    if (!_isCloseUp)
-                        _cameraScrolling.StartCameraScrolling();
-                }
-                else if (Input.GetMouseButtonUp(0))
-                {
-                    _cameraScrolling.StopCameraScrolling();
+                    _lastVerticalInput = verticalInput;
+                    _lastHorizontalInput = horizontalInput;
                 }
             }
-        }
-        
-        public void DisableInput()
-        {
-            _isInputEnabled = false;
+            
+            if (IsGetKeyUp())
+            {
+                MovePressed?.Invoke(_lastHorizontalInput, _lastVerticalInput);
+            }
         }
 
-        public void EnableInput()
+        private bool IsGetKeyUp()
         {
-            _isInputEnabled = true;
+            return Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow);
+        }
+
+        private bool IsGetKeyDown()
+        {
+            return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow);
         }
 
         private void Grab(IDragAndDropable dndObject)

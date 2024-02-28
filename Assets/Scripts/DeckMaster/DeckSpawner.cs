@@ -21,10 +21,13 @@ namespace DeckMaster
         
         [SerializeField] private Vector2 _offset;
 
+        public List<Card> AllExistedCards => _allExistedCards;
+
         public Vector2 Offset => _offset;
-        
+
         private CardData[,] _currentPreset;
         private List<DeckCard> _firstRow = new List<DeckCard>();
+        private List<Card> _allExistedCards = new List<Card>();
 
         public List<DeckCard> SpawnCards(CardData[,] cards)
         {
@@ -53,11 +56,14 @@ namespace DeckMaster
 
                             if (currentDoor.Room > lastDoor.Room)
                                 lastDoor = currentDoor;
+                            
+                            _allExistedCards.Add(currentDoor);
                         }
                         else
                         {
                             DeckCard card = CreateNewRandomCard(i, j, nextPosition, _firstRoom, cards[i,j]);
                             instancedCards.Add(card);
+                            _allExistedCards.Add(card);
 
                             if (cards[i, j].Room == 1 && cards[i, j].Type != LevelCardType.Unreachable && isFirst)
                             {
@@ -95,6 +101,7 @@ namespace DeckMaster
                     
                     var placement = _placementFactory.CreateNewInstance(_firstRow[i].Data.Position.y - 1, _firstRow[j].Data.Position.x, nextPosition, _firstRoom, data);
                     instancedPlacements.Add(placement);
+                    _allExistedCards.Add(placement);
 
                     nextPosition = new Vector2(nextPosition.x + _offset.x, (_firstRow[i].Data.Position.y - 1) * _offset.y);
                 }
