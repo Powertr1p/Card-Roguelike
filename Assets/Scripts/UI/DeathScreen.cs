@@ -21,6 +21,8 @@ namespace UI
         {
             PrepareObjects();
             
+            //TODO: сделать нормальную секвенцию, черезпонятные аргументы, все таймиинги закэшировать
+            
             StartFillBackground();
             StartLinesAnimation();
             StartPrintingText();
