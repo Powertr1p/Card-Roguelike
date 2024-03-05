@@ -9,6 +9,11 @@ public static class SceneLoader
         await LoadSceneAsync(sceneName);
     }
 
+    public static async void RestartScene()
+    {
+        await LoadSceneAsync(SceneManager.GetActiveScene().name);
+    }
+
     private static async Task LoadSceneAsync(string sceneName)
     {
         Scene previousScene = SceneManager.GetActiveScene();
@@ -19,13 +24,13 @@ public static class SceneLoader
         {
             await UnloadPreviousScene(previousScene.name);
         }
-
+        
         await LoadNewScene(sceneName);
     }
 
     private static async Task ShowLoadingScreen()
     {
-        AsyncOperation operation =  SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
+        AsyncOperation operation = SceneManager.LoadSceneAsync("LoadingScreen", LoadSceneMode.Additive);
 
         while (!operation.isDone)
         {

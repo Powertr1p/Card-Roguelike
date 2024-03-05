@@ -7,6 +7,7 @@ using DeckMaster.StateMachine;
 using DefaultNamespace.Player;
 using JetBrains.Annotations;
 using Player;
+using UI;
 using UnityEngine;
 
 namespace DeckMaster
@@ -18,6 +19,7 @@ namespace DeckMaster
         [SerializeField, NotNull] private DeckSpawner _spawner;
         [SerializeField, NotNull] private CameraScrolling _cameraScrolling;
         [SerializeField, NotNull] private GameRules _gameRules;
+        [SerializeField, NotNull] private DeathScreen _deathScreen;
 
         public event Action EnemyDeath;
         
@@ -48,7 +50,9 @@ namespace DeckMaster
             var converter = new DeckBuilder(GameRulesGetter.Rules.PossibleRooms, GameRulesGetter.Rules.MaxRooms);
             
             _deckCards = _spawner.SpawnCards(converter.GetConcatinatedRooms());
+            
             SubscribeCardsDeath();
+            
             _currentState = new PlayerPositioningState(_input, _deckCards, _player, this, _spawner);
             _currentState =_currentState.Process();
             
@@ -82,7 +86,18 @@ namespace DeckMaster
         
         private void HandlePlayerDeath()
         {
-            //TODO: restart game
+            _deathScreen.AnimationComplete += RestartLevel;
+            _deathScreen.Show();
+        }
+        
+        private void RestartLevel()
+        {
+            _deathScreen.AnimationComplete -= RestartLevel;
+            
+            DelayedExecution.Call(1f, async () =>
+            {
+                SceneLoader.RestartScene();
+            });
         }
     }
 }
