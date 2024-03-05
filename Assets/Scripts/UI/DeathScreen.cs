@@ -14,7 +14,6 @@ namespace UI
         [SerializeField, NotNull] private Image[] _movingBackgroundPanels;
         [SerializeField, NotNull] private TextMeshProUGUI _deathText;
         [SerializeField] private float _linesAnimationDuration = 0.25f;
-        [SerializeField] private string _deathMessage = "You have been slain";
 
         public event Action AnimationComplete;
         
@@ -50,7 +49,7 @@ namespace UI
                 _movingBackgroundPanels[i].DOFillAmount(1f, _linesAnimationDuration).SetDelay(_linesAnimationDuration * 2);
             }
         }
-
+        
         private Tween StartPrintingText()
         {
             return _deathText.DOFade(1f, _linesAnimationDuration).SetDelay(_linesAnimationDuration * 3);
@@ -58,6 +57,8 @@ namespace UI
 
         private Tween ChangeFontColor()
         {
+            _deathText.DOFontSize(_deathText.fontSize + 20f, _linesAnimationDuration * 10f).SetDelay(_linesAnimationDuration * 4);
+            
             return _deathText.DOColor(Color.red, _linesAnimationDuration * 2f).SetDelay(_linesAnimationDuration * 4);
         }
     }

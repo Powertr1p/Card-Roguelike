@@ -20,6 +20,7 @@ namespace DefaultNamespace.Player
         private bool _isCloseUp;
         private bool _hasDraggingObject;
         private bool _isInputEnabled = true;
+        private bool _isForceDisabled = false;
         private IDragAndDropable _currentDraggingObject;
         private Vector3 _lastClickedPosition;
         private Vector3 _lastMousePosition;
@@ -56,13 +57,16 @@ namespace DefaultNamespace.Player
             }
         }
         
-        public void DisableInput()
+        public void DisableInput(bool isForce = false)
         {
+            _isForceDisabled = isForce;
             _isInputEnabled = false;
         }
 
         public void EnableInput()
         {
+            if (_isForceDisabled) return;
+            
             _isInputEnabled = true;
         }
         

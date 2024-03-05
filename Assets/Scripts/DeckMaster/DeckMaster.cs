@@ -20,6 +20,7 @@ namespace DeckMaster
         [SerializeField, NotNull] private CameraScrolling _cameraScrolling;
         [SerializeField, NotNull] private GameRules _gameRules;
         [SerializeField, NotNull] private DeathScreen _deathScreen;
+        [SerializeField] private float _delayDeathUIShow = 1f;
 
         public event Action EnemyDeath;
         
@@ -86,8 +87,12 @@ namespace DeckMaster
         
         private void HandlePlayerDeath()
         {
+            _input.DisableInput(true);
             _deathScreen.AnimationComplete += RestartLevel;
-            _deathScreen.Show();
+
+            StartCoroutine(DelayedExecution.Call(_delayDeathUIShow, _deathScreen.Show));
+
+            //_deathScreen.Show();
         }
         
         private void RestartLevel()
