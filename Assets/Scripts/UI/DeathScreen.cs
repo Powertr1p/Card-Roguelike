@@ -47,7 +47,7 @@ namespace UI
         {
             for (int i = 0; i < _movingBackgroundPanels.Length; i++)
             {
-                _movingBackgroundPanels[i].DOFillAmount(1f, _linesAnimationDuration * 2);
+                _movingBackgroundPanels[i].DOFillAmount(1f, _linesAnimationDuration).SetDelay(_linesAnimationDuration * 2);
             }
         }
 
