@@ -15,6 +15,7 @@ namespace Cards
         [SerializeField] private ParticleSystem _attackParticle;
 
         public event Action<int> CoinsAdded;
+        public event Action OnHealthZero;
         
         private Health _health;
         private TurnEffectsHandler _turnEffectsHandler;
@@ -31,11 +32,13 @@ namespace Cards
         private void OnEnable()
         {
             _turnEffectsHandler.ExecuteTurnEffect += ApplyTurnBasedEffect;
+            _health.HealthValueChanged += HandleHealthValueChanged;
         }
 
         private void OnDisable()
         {
             _turnEffectsHandler.ExecuteTurnEffect -= ApplyTurnBasedEffect;
+            _health.HealthValueChanged -= HandleHealthValueChanged;
         }
 
         public override void Interact(HeroCard interactorCard)
@@ -106,6 +109,14 @@ namespace Cards
         {
             var particle = Instantiate(effect.EffectParticle, transform.position + GameRulesGetter.Rules.VFXOffset, Quaternion.identity);
             particle.Play();
+        }
+        
+        private void HandleHealthValueChanged(int health)
+        {
+            if (health <= 0)
+            {
+                OnHealthZero?.Invoke();
+            }
         }
     }
 }

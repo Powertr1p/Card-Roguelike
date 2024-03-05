@@ -29,11 +29,13 @@ namespace DeckMaster
         private void OnEnable()
         {
             _player.EventTurnEnded += ChangeGameState;
+            _player.OnHealthZero += HandlePlayerDeath;
         }
 
         private void OnDisable()
         {
             _player.EventTurnEnded -= ChangeGameState;
+            _player.OnHealthZero -= HandlePlayerDeath;
         }
 
         private void Awake()
@@ -76,6 +78,11 @@ namespace DeckMaster
             if (!GameRulesGetter.Rules.CameraFollow) return;
             
             _cameraScrolling.SetTarget(_player.transform);
+        }
+        
+        private void HandlePlayerDeath()
+        {
+            //TODO: restart game
         }
     }
 }
