@@ -1994,6 +1994,7 @@ MonoBehaviour:
   _cameraScrolling: {fileID: 519420034}
   _gameRules: {fileID: 11400000, guid: 1e2bbe30d12804ea4911b94e2daf358b, type: 2}
   _deathScreen: {fileID: 1818353140}
+  _delayDeathUIShow: 1
 --- !u!1 &1817061691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,12 +2158,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainContainer: {fileID: 786501184}
   _mainBackground: {fileID: 1023390167}
-  _movingBackgroundPanels:
-  - {fileID: 701199861}
-  - {fileID: 2048746498}
+  _leftBgPanel: {fileID: 701199861}
+  _rightBgPanel: {fileID: 2048746498}
   _deathText: {fileID: 1484530919}
   _linesAnimationDuration: 0.25
-  _deathMessage: You have been slain
 --- !u!1 &1892885410
 GameObject:
   m_ObjectHideFlags: 0

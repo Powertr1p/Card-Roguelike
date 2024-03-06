@@ -11,31 +11,24 @@ namespace UI
     {
         [SerializeField, NotNull] private GameObject _mainContainer;
         [SerializeField, NotNull] private Image _mainBackground;
-        [SerializeField, NotNull] private Image[] _movingBackgroundPanels;
+        [SerializeField, NotNull] private Image _leftBgPanel;
+        [SerializeField, NotNull] private Image _rightBgPanel;
         [SerializeField, NotNull] private TextMeshProUGUI _deathText;
         [SerializeField] private float _linesAnimationDuration = 0.25f;
 
         public event Action AnimationComplete;
+
+        private Sequence _animationSequence;
         
         public void Show()
         {
             PrepareObjects();
-            
-            //TODO: сделать нормальную секвенцию, черезпонятные аргументы, все таймиинги закэшировать
-            
-            StartFillBackground();
-            StartLinesAnimation();
-            StartPrintingText();
-            ChangeFontColor()
-                .OnComplete(() =>
-                {
-                    AnimationComplete?.Invoke();
-                });
+            StartSequence();
         }
 
-        private Tween StartFillBackground()
+        private Tween StartFillBackground(float duration)
         {
-            return _mainBackground.DOFillAmount(1f, _linesAnimationDuration);
+            return _mainBackground.DOFillAmount(1f, duration);
         }
 
         private void PrepareObjects()
@@ -44,24 +37,44 @@ namespace UI
             _mainContainer.SetActive(true);
         }
 
-        private void StartLinesAnimation()
+        private void StartSequence()
         {
-            for (int i = 0; i < _movingBackgroundPanels.Length; i++)
-            {
-                _movingBackgroundPanels[i].DOFillAmount(1f, _linesAnimationDuration).SetDelay(_linesAnimationDuration * 2);
-            }
-        }
-        
-        private Tween StartPrintingText()
-        {
-            return _deathText.DOFade(1f, _linesAnimationDuration).SetDelay(_linesAnimationDuration * 3);
+            _animationSequence = DOTween.Sequence();
+
+            _animationSequence
+                .Append(StartFillBackground(0.25f))
+                .Append(MovePanels(_leftBgPanel, 0.25f))
+                .Append(StartPrintingText(0.25f))
+                .Insert(0.25f, MovePanels(_rightBgPanel, 0.25f))
+                .Insert(0.25f, ChangeFontSize(2.5f))
+                .Insert(0.75f, ChangeTextColor(0.25f))
+                .InsertCallback(1f, OnCompleteCallback);
         }
 
-        private Tween ChangeFontColor()
+        private Tween MovePanels(Image panel, float duration)
         {
-            _deathText.DOFontSize(_deathText.fontSize + 20f, _linesAnimationDuration * 10f).SetDelay(_linesAnimationDuration * 4);
-            
-            return _deathText.DOColor(Color.red, _linesAnimationDuration * 2f).SetDelay(_linesAnimationDuration * 4);
+            return panel.DOFillAmount(1f, duration);
+        }
+        
+        private Tween StartPrintingText(float duration)
+        {
+            return _deathText.DOFade(1f, duration);
+        }
+
+        private Tween ChangeFontSize(float duration)
+        {
+            return _deathText.DOFontSize(_deathText.fontSize + 20f, duration);
+        }
+
+        private Tween ChangeTextColor(float duration)
+        {
+            return _deathText.DOColor(Color.red, duration);
+        }
+
+        private void OnCompleteCallback()
+        {
+            _animationSequence.Kill();
+            AnimationComplete?.Invoke();
         }
     }
 }
