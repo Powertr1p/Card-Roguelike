@@ -14,7 +14,7 @@ namespace UI
         [SerializeField, NotNull] private Image _leftBgPanel;
         [SerializeField, NotNull] private Image _rightBgPanel;
         [SerializeField, NotNull] private TextMeshProUGUI _deathText;
-        [SerializeField] private float _linesAnimationDuration = 0.25f;
+        [SerializeField] private Color _textColor;
 
         public event Action AnimationComplete;
 
@@ -74,7 +74,7 @@ namespace UI
 
         private Tween ChangeTextColor(float duration)
         {
-            return _deathText.DOColor(Color.red, duration);
+            return _deathText.DOColor(_textColor, duration);
         }
 
         private void OnCompleteCallback()

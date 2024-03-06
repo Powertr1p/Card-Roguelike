@@ -20,6 +20,7 @@ namespace DeckMaster
         [SerializeField, NotNull] private CameraScrolling _cameraScrolling;
         [SerializeField, NotNull] private GameRules _gameRules;
         [SerializeField, NotNull] private DeathScreen _deathScreen;
+        [SerializeField, NotNull] private WinScreen _winScreen;
         [SerializeField] private float _delayDeathUIShow = 1f;
 
         public event Action EnemyDeath;
@@ -76,7 +77,7 @@ namespace DeckMaster
 
                 if (deathArgs.Sender.TryGetComponent(out BossCard boss))
                 {
-                   
+                    HandleBossKill();
                 }
             }
             
@@ -88,6 +89,14 @@ namespace DeckMaster
             if (!GameRulesGetter.Rules.CameraFollow) return;
             
             _cameraScrolling.SetTarget(_player.transform);
+        }
+
+        private void HandleBossKill()
+        {
+            _input.DisableInput(true);
+            _winScreen.AnimationComplete += RestartLevel;
+            
+            StartCoroutine(DelayedExecution.Call(_delayDeathUIShow, _winScreen.Show));
         }
         
         private void HandlePlayerDeath()
@@ -101,6 +110,7 @@ namespace DeckMaster
         private void RestartLevel()
         {
             _deathScreen.AnimationComplete -= RestartLevel;
+            _winScreen.AnimationComplete -= RestartLevel;
             
             DelayedExecution.Call(1f, async () =>
             {
