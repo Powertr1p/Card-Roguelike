@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Cards
 {
-    public class PlayerHeroCard : HeroCard, IDragAndDropable
+    public sealed class PlayerHeroCard : HeroCard, IDragAndDropable
     {
         [SerializeField] private DragAndDropObject _dragBehaviour;
         [SerializeField] private Raycaster _raycaster;

@@ -1,9 +1,11 @@
 namespace Cards
 {
-    public sealed class DoorCard : Card
+    public class BossCard : DeckCard
     {
         public override void Interact(HeroCard heroCardConsumer)
         {
+            PerformDeath();
+            SendDeathEvent();
         }
     }
 }

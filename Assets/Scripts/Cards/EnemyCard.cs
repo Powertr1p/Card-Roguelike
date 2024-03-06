@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Cards
 {
     [RequireComponent(typeof(DirectionAttacker))]
-    public class EnemyCard : DeckCard
+    public sealed class EnemyCard : DeckCard
     {
         [SerializeField] private DirectionAttacker _directionAttacker;
         [SerializeField] private EffectCard _coinDrop;

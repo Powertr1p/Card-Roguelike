@@ -73,6 +73,11 @@ namespace DeckMaster
             if (deathArgs.Data.Type == LevelCardType.Enemy)
             {
                 EnemyDeath?.Invoke();
+
+                if (deathArgs.Sender.TryGetComponent(out BossCard boss))
+                {
+                   
+                }
             }
             
             deathArgs.Sender.DeathPerformed -= OnCardConsumed;
