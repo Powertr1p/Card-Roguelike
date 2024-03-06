@@ -53,7 +53,7 @@ namespace DeckMaster.StateMachine
 
         private void MoveToNextState()
         { 
-            NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
+            NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono);
             base.Execute();
             Process();
         }
