@@ -19,11 +19,12 @@ namespace UI
         public event Action AnimationComplete;
 
         private Sequence _animationSequence;
-        
+
         public void Show()
         {
             PrepareObjects();
-            StartSequence();
+            BuildSequence();
+            StartAnimationSequence();
         }
 
         private Tween StartFillBackground(float duration)
@@ -37,18 +38,23 @@ namespace UI
             _mainContainer.SetActive(true);
         }
 
-        private void StartSequence()
+        private void BuildSequence()
         {
-            _animationSequence = DOTween.Sequence();
+            _animationSequence = DOTween.Sequence().SetAutoKill(false);
 
             _animationSequence
                 .Append(StartFillBackground(0.25f))
                 .Append(MovePanels(_leftBgPanel, 0.25f))
                 .Append(StartPrintingText(0.25f))
                 .Insert(0.25f, MovePanels(_rightBgPanel, 0.25f))
-                .Insert(0.25f, ChangeFontSize(2.5f))
                 .Insert(0.75f, ChangeTextColor(0.25f))
+                .Insert(0f, ChangeFontSize(_animationSequence.Duration() + 2f))
                 .InsertCallback(1f, OnCompleteCallback);
+        }
+
+        private void StartAnimationSequence()
+        {
+            _animationSequence.Play();
         }
 
         private Tween MovePanels(Image panel, float duration)
@@ -73,8 +79,8 @@ namespace UI
 
         private void OnCompleteCallback()
         {
-            _animationSequence.Kill();
             AnimationComplete?.Invoke();
+            _animationSequence.Kill();
         }
     }
 }
