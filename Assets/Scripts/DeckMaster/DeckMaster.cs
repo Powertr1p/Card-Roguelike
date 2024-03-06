@@ -91,8 +91,6 @@ namespace DeckMaster
             _deathScreen.AnimationComplete += RestartLevel;
 
             StartCoroutine(DelayedExecution.Call(_delayDeathUIShow, _deathScreen.Show));
-
-            //_deathScreen.Show();
         }
         
         private void RestartLevel()
