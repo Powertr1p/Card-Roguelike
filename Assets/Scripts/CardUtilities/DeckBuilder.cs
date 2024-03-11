@@ -376,23 +376,35 @@ namespace CardUtilities
             var enemyChance = GameRulesGetter.Rules.EnemySpawnChance;
             var itemChance = enemyChance + GameRulesGetter.Rules.ItemSpawnChance;
             var emptyChance = itemChance + GameRulesGetter.Rules.EmptySpawnChance;
+            var blockChance = emptyChance + GameRulesGetter.Rules.BlockSpawnChance;
 
             if (randomValue < enemyChance)
             {
+                Debug.Log("Spawned Enemy");
                 return LevelCardType.Enemy;
             }
-            else if (randomValue < itemChance)
+            
+            if (randomValue < itemChance)
             {
+                Debug.Log("Spawned Item");
                 return LevelCardType.Item;
             }
-            else if (randomValue < emptyChance)
+            
+            if (randomValue < emptyChance)
             {
+                Debug.Log("Spawned Empty");
                 return LevelCardType.Empty;
             }
-            else
+            
+            if (randomValue < blockChance)
             {
+                Debug.Log("Spawned Block");
                 return LevelCardType.Block;
             }
+            
+            Debug.Log("Unreachable (random is miss)");
+
+            return LevelCardType.Unreachable;
         }
     }
 }

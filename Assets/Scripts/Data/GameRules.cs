@@ -92,7 +92,7 @@ namespace Data
         public float OffsetY => _offsetYFromPlayerCard;
         public float OffsetYOnGameStart => _offsetYOnGameStart;
 
-        public float EnemySpawnChance => _emptySpawnChance;
+        public float EnemySpawnChance => _enemySpawnChance;
         public float ItemSpawnChance => _itemSpawnChance;
         public float EmptySpawnChance => _emptySpawnChance;
         public float BlockSpawnChance => _blockSpawnChance;
