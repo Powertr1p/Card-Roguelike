@@ -16,6 +16,7 @@ MonoBehaviour:
   _playerMovingLimit: 1
   _playerMaxHealth: 12
   _overhealWithDamage: 0
+  _isBackTracking: 1
   _backOnCellAnimDuration: 0.3
   _cardScaleOnPlayerHover: {x: 0.8, y: 0.8, z: 0.8}
   _enemyAttackZone: {x: 1, y: 1}
@@ -39,7 +40,7 @@ MonoBehaviour:
   _maxZoomValue: -9
   _minZoomValue: -21
   _offsetYOnGameStart: 3
-  _enemySpawnChance: 0.4
-  _itemSpawnChance: 0.2
-  _emptySpawnChance: 0.3
-  _blockSpawnChance: 0.1
+  _enemySpawnChance: 0.65
+  _itemSpawnChance: 0.33
+  _emptySpawnChance: 0.01
+  _blockSpawnChance: 0.01
