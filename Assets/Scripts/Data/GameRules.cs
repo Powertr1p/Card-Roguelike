@@ -55,7 +55,8 @@ namespace Data
         [BoxGroup("Camera"), PropertyTooltip("$OffsetYOnGameStartTooltip")]
         [SerializeField] private float _offsetYOnGameStart = 3f;
 
-        [BoxGroup("Random")] 
+        [BoxGroup("Random")]
+        [InfoBox("@(_enemySpawnChance + _itemSpawnChance + _emptySpawnChance + _blockSpawnChance)")]
         [SerializeField] private float _enemySpawnChance = 0.1f;
         [BoxGroup("Random")] 
         [SerializeField] private float _itemSpawnChance = 0.1f;

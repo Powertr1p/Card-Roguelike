@@ -29,7 +29,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 602f930b913654e10b363bf3cce860bf, type: 2}
   - {fileID: 11400000, guid: 55f24f6e1083c40d182ed8a9f08eaea7, type: 2}
   - {fileID: 11400000, guid: ca62e39ec2cb84bd69d8f6ed8b2a70dd, type: 2}
-  _maxRooms: 4
+  - {fileID: 11400000, guid: 37199e2347a70e24291bdf23ab6a7f7f, type: 2}
+  - {fileID: 11400000, guid: 21dcbd633a601a848b03da1fe92b1045, type: 2}
+  - {fileID: 11400000, guid: a4a01df1ddfa275499438f2c2796bbdb, type: 2}
+  - {fileID: 11400000, guid: 0b63201a91cb4624db9574b1a5693fc8, type: 2}
+  - {fileID: 11400000, guid: f3c2020f573f4bd4084b19df9e9051d6, type: 2}
+  - {fileID: 11400000, guid: 3edc8382a1298d14c9a7d379303dee17, type: 2}
+  - {fileID: 11400000, guid: 5b1446d7e09ccd547941d60639d4a7ab, type: 2}
+  - {fileID: 11400000, guid: 7f694c4b69eacc34999bc499f1bddb8a, type: 2}
+  _maxRooms: 5
   _delayBetweenCardsOpen: 0.05
   _cardOpenSpeed: 0.35
   _cameraFollow: 0
@@ -40,7 +48,7 @@ MonoBehaviour:
   _maxZoomValue: -9
   _minZoomValue: -21
   _offsetYOnGameStart: 3
-  _enemySpawnChance: 0.65
-  _itemSpawnChance: 0.33
-  _emptySpawnChance: 0.01
+  _enemySpawnChance: 0.45
+  _itemSpawnChance: 0.43
+  _emptySpawnChance: 0.11
   _blockSpawnChance: 0.01
