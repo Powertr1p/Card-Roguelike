@@ -17,8 +17,8 @@ public class Health : MonoBehaviour
         _maxHealth = GameRulesGetter.Rules.PlayerMaxHealth;
 
         _healthPoints = PlayerStatsStorage.Health;
-        _shieldPoints = 0;
-        
+        _shieldPoints = PlayerStatsStorage.Shield;
+
         HealthValueChanged?.Invoke(_healthPoints);
         ShieldValueChanged?.Invoke(_shieldPoints);
     }
@@ -57,12 +57,16 @@ public class Health : MonoBehaviour
     public void IncreaseShield(int amount)
     {
         _shieldPoints += amount;
+        PlayerStatsStorage.Shield = _shieldPoints;
+        
         ShieldValueChanged?.Invoke(_shieldPoints);
     }
     
     public void DecreaseShield(int amount)
     {
         _shieldPoints = Math.Max(_shieldPoints - amount, 0);
+        PlayerStatsStorage.Shield = _shieldPoints;
+        
         ShieldValueChanged?.Invoke(_shieldPoints);
     }
 
