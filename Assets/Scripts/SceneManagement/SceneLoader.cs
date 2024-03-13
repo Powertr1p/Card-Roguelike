@@ -11,9 +11,9 @@ public static class SceneLoader
 
     public static async void RestartScene()
     {
-        await LoadSceneAsync(SceneManager.GetActiveScene().name);
+        await LoadSceneAsync("Game");
     }
-
+    
     private static async Task LoadSceneAsync(string sceneName)
     {
         Scene previousScene = SceneManager.GetActiveScene();

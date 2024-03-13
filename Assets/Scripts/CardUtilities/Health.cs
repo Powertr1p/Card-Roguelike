@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
     {
         _maxHealth = GameRulesGetter.Rules.PlayerMaxHealth;
 
+        Debug.LogError(_maxHealth);
+        
         _healthPoints = _maxHealth;
         _shieldPoints = 0;
         

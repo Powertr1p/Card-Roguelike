@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Cards;
 using CardUtilities;
@@ -96,26 +97,36 @@ namespace DeckMaster
             _input.DisableInput(true);
             _winScreen.AnimationComplete += RestartLevel;
             
-            StartCoroutine(DelayedExecution.Call(_delayDeathUIShow, _winScreen.Show));
+            StartCoroutine(DelayedAction(_winScreen.Show));
         }
-        
+
         private void HandlePlayerDeath()
         {
             _input.DisableInput(true);
             _deathScreen.AnimationComplete += RestartLevel;
 
-            StartCoroutine(DelayedExecution.Call(_delayDeathUIShow, _deathScreen.Show));
+            StartCoroutine(DelayedAction(_deathScreen.Show));
+        }
+
+        private IEnumerator DelayedAction(Action action)
+        {
+            yield return new WaitForSecondsRealtime(_delayDeathUIShow);
+            action?.Invoke();
+        }
+
+        private void RestartLevel()
+        {
+            StartCoroutine(DelayedRestartLevel());
         }
         
-        private void RestartLevel()
+        private IEnumerator DelayedRestartLevel()
         {
             _deathScreen.AnimationComplete -= RestartLevel;
             _winScreen.AnimationComplete -= RestartLevel;
+
+            yield return new WaitForSecondsRealtime(1f);
             
-            DelayedExecution.Call(1f, async () =>
-            {
-                SceneLoader.RestartScene();
-            });
+            SceneLoader.RestartScene();
         }
     }
 }
