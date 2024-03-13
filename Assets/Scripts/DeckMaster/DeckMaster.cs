@@ -46,6 +46,7 @@ namespace DeckMaster
         private void Awake()
         {
             _gameRules.Initialize();
+            PlayerStatsStorage.Initialize();
         }
 
         private void Start()

@@ -1,4 +1,5 @@
 using System;
+using Data;
 using DeckMaster;
 using UnityEngine;
 
@@ -15,9 +16,7 @@ public class Health : MonoBehaviour
     {
         _maxHealth = GameRulesGetter.Rules.PlayerMaxHealth;
 
-        Debug.LogError(_maxHealth);
-        
-        _healthPoints = _maxHealth;
+        _healthPoints = PlayerStatsStorage.Health;
         _shieldPoints = 0;
         
         HealthValueChanged?.Invoke(_healthPoints);
@@ -29,7 +28,10 @@ public class Health : MonoBehaviour
         if (ignoreShield)
         {
             _healthPoints = Math.Max(_healthPoints - amount, 0);
+            PlayerStatsStorage.Health = _healthPoints;
+            
             HealthValueChanged?.Invoke(_healthPoints);
+            
             return;
         }
         
@@ -37,6 +39,8 @@ public class Health : MonoBehaviour
         DecreaseShield(shieldDamage);
     
         _healthPoints = Mathf.Max(_healthPoints - (amount - shieldDamage), 0);
+        PlayerStatsStorage.Health = _healthPoints;
+        
         HealthValueChanged?.Invoke(_healthPoints);
     }
 
