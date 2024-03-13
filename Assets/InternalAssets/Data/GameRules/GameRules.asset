@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd60ebf4b2a4352a5709e4b810c3e5f, type: 3}
   m_Name: GameRules
   m_EditorClassIdentifier: 
-  _visibleZone: {x: 2, y: 2}
+  _visibleZone: {x: 3, y: 3}
   _playerMovingLimit: 1
   _playerMaxHealth: 12
   _overhealWithDamage: 0
