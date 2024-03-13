@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd8ea82b53fc47058643e21387d11252, type: 3}
-  m_Name: RoomData 6
+  m_Name: RoomData 14
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -26,105 +26,60 @@ MonoBehaviour:
       Data: 0|LevelCardType[,], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 30
+      Data: 15
     - Name: ranks
       Entry: 1
-      Data: 6|5
+      Data: 5|3
     - Name: 
       Entry: 3
       Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 1
     - Name: 
       Entry: 3
       Data: 4
     - Name: 
       Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 3
       Data: 0
     - Name: 
       Entry: 3
       Data: 1
     - Name: 
       Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 3
       Data: 1
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 3
     - Name: 
       Entry: 3
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  _grid: {x: 5, y: 6}
-  _doorAlignment: 2
+  _grid: {x: 3, y: 5}
+  _doorAlignment: 1
