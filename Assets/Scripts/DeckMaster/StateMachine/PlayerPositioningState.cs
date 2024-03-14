@@ -61,7 +61,7 @@ namespace DeckMaster.StateMachine
 
         private void MoveToNextState()
         {
-            NextState = new OpenCardsState(Input, DeckCards, Player, Mono);
+            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
             base.Execute();
             Input.EnableInput();
         }

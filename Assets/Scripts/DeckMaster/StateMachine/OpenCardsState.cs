@@ -48,7 +48,7 @@ namespace DeckMaster.StateMachine
 
         private void MoveToNextState()
         {
-            NextState = new CardsAttackState(Input, DeckCards, Player, Mono);
+            NextState = new PlayerTurnState(Input, Spawner, DeckCards, Player, Mono);
             base.Execute();
             Process();
         }
