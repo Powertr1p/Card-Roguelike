@@ -83,7 +83,7 @@ namespace Cards
             yield return new WaitUntil(() => animationEnded);
             
             PerformDeath();
-            SendDeathEvent();
+            SendDeathEvent(_coinDrop);
             
             gameObject.SetActive(false);
             _coinDrop.gameObject.SetActive(true);

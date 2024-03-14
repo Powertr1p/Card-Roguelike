@@ -53,6 +53,8 @@ namespace DeckMaster
 
                             if (currentDoor.Room > lastDoor.Room)
                                 lastDoor = currentDoor;
+                            
+                            instancedCards.Add(currentDoor);
                         }
                         else
                         {

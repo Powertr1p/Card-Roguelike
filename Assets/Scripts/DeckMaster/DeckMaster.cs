@@ -24,6 +24,8 @@ namespace DeckMaster
         [SerializeField, NotNull] private WinScreen _winScreen;
         [SerializeField] private float _delayDeathUIShow = 1f;
 
+        private CardPositionChecker _positionChecker;
+        
         public event Action EnemyDeath;
         
         private List<DeckCard> _deckCards;
@@ -61,6 +63,7 @@ namespace DeckMaster
             _currentState =_currentState.Process();
             
             _cameraScrolling.SetTarget(_player.transform, true);
+            _positionChecker = new CardPositionChecker(_deckCards, _player);
         }
 
         private void SubscribeCardsDeath()
@@ -77,6 +80,11 @@ namespace DeckMaster
             {
                 EnemyDeath?.Invoke();
 
+                if (!ReferenceEquals(deathArgs.SpawnedCard, null))
+                {
+                    _deckCards.Add(deathArgs.SpawnedCard);
+                }
+                
                 if (deathArgs.Sender.TryGetComponent(out BossCard boss))
                 {
                     HandleBossKill();
@@ -88,6 +96,14 @@ namespace DeckMaster
 
         private void ChangeGameState()
         {
+            if (!GameRulesGetter.Rules.IsBackTracking)
+            {
+                if (!_positionChecker.IsAnyCardAroundPlayer())
+                {
+                    HandlePlayerDeath();
+                }
+            }
+            
             if (!GameRulesGetter.Rules.CameraFollow) return;
             
             _cameraScrolling.SetTarget(_player.transform);
@@ -103,6 +119,7 @@ namespace DeckMaster
 
         private void HandlePlayerDeath()
         {
+            PlayerStatsStorage.Health = 0;
             _input.DisableInput(true);
             _deathScreen.AnimationComplete += RestartLevel;
 

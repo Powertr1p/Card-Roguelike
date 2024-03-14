@@ -93,11 +93,11 @@ namespace Cards
             }
         }
 
-        protected void SendDeathEvent()
+        protected void SendDeathEvent(DeckCard spawnedCard = null)
         {
-            DeathHandler(new DeathArgs(_transform.position, CardData, this));
+            DeathHandler(new DeathArgs(_transform.position, CardData, this, spawnedCard));
         }
-        
+
         protected virtual void DeathHandler(DeathArgs args)
         {
             DeathPerformed?.Invoke(this, args);
@@ -109,12 +109,14 @@ namespace Cards
         public Vector3 WorldPosition;
         public CardData Data;
         public DeckCard Sender;
+        public DeckCard SpawnedCard;
 
-        public DeathArgs(Vector3 worldPosition, CardData data, DeckCard sender)
+        public DeathArgs(Vector3 worldPosition, CardData data, DeckCard sender, DeckCard spawnedCard)
         {
             WorldPosition = worldPosition;
             Data = data;
             Sender = sender;
+            SpawnedCard = spawnedCard;
         }
     }
 }
