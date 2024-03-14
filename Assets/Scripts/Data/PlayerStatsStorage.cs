@@ -6,6 +6,8 @@ namespace Data
     {
         public static int Health;
         public static int Shield;
+        public static int Kills;
+        public static int Coins;
 
         public static void Initialize()
         {
@@ -13,6 +15,8 @@ namespace Data
             {
                 Health = GameRulesGetter.Rules.PlayerMaxHealth;
                 Shield = 0;
+                Kills = 0;
+                Coins = 0;
             }
         }
     }

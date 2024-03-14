@@ -76,9 +76,9 @@ namespace Cards
 
         public void AddCoins(int amount, Effect effect)
         {
-            _coins += amount;
+            PlayerStatsStorage.Coins += amount;
             
-            CoinsAdded?.Invoke(_coins);
+            CoinsAdded?.Invoke(PlayerStatsStorage.Coins);
         }
 
         public void TryExecuteTurnEffects()

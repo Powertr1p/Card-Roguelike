@@ -1,4 +1,5 @@
 using Cards;
+using Data;
 using TMPro;
 using UnityEngine;
 
@@ -7,9 +8,9 @@ public class CoinsDisplay : MonoBehaviour
     [SerializeField] private HeroCard _player;
     [SerializeField] private TextMeshProUGUI _coinsText;
 
-    private void Awake()
+    private void Start()
     {
-       UpdateCoinsText(0);
+        UpdateCoinsText(PlayerStatsStorage.Coins);
     }
 
     private void OnEnable()

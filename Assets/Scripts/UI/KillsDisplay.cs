@@ -1,3 +1,4 @@
+using Data;
 using TMPro;
 using UnityEngine;
 
@@ -7,15 +8,7 @@ namespace UI
     {
         [SerializeField] private DeckMaster.DeckMaster _master;
         [SerializeField] private TextMeshProUGUI _killsText;
-
-        private int _killCount;
-
-        private void Awake()
-        {
-            _killCount = 0;
-            UpdateText();
-        }
-
+        
         private void OnEnable()
         {
             _master.EnemyDeath += UpdateVisuals;
@@ -24,6 +17,11 @@ namespace UI
         private void OnDisable()
         {
             _master.EnemyDeath -= UpdateVisuals;
+        }
+        
+        private void Start()
+        {
+            UpdateText();
         }
 
         private void UpdateVisuals()
@@ -34,12 +32,12 @@ namespace UI
 
         private void UpdateText()
         {
-            _killsText.text = _killCount.ToString();
+            _killsText.text = PlayerStatsStorage.Kills.ToString();
         }
 
         private void IncrementKills()
         {
-            _killCount++;
+            PlayerStatsStorage.Kills++;
         }
     }
 }
