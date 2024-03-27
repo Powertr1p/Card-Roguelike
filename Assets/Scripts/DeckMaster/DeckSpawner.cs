@@ -78,6 +78,7 @@ namespace DeckMaster
             }
             
             instancedCards.Add(CreateBoss(lastDoor));
+            instancedCards.Remove(lastDoor);
 
             return instancedCards;
         }
