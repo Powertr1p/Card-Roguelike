@@ -2,10 +2,7 @@
 
 Card-Roguelike — 2D roguelike-игра с карточной механикой, где игрок перемещается по **процедурно генерируемым комнатам**, сражается с врагами и собирает предметы. Игровое поле представлено в виде карт, которые игрок открывает по мере продвижения.
 
-[![Gameplay demo](<img width="539" height="374" alt="{A40E8AD9-A899-4557-AA50-4E50FCD1D2D6}" src="https://github.com/user-attachments/assets/5e36806f-8471-453d-b1d8-aee9086ae867" />
-)]([https://www.youtube.com/watch?v=dQw4w9WgXcQ](https://youtu.be/qgbWs7FbNJE?si=2y84DWTxnSoL_MuF))
-
-https://youtu.be/qgbWs7FbNJE
+[Gameplay demo video](https://youtu.be/qgbWs7FbNJE?si=2y84DWTxnSoL_MuF)
 
 ## Технологический стек
 
