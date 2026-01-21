@@ -1,5 +1,6 @@
 # Card-Roguelike
 MVP of card roguelike game
+<img width="1784" height="1045" alt="{40094025-A4A6-40B2-B651-A23B5B5C243A}" src="https://github.com/user-attachments/assets/7a42ce72-1981-4705-8ca6-45633f55aa20" />
 
 ## Описание проекта
 
