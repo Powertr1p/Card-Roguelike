@@ -1,10 +1,10 @@
-# Card-Roguelike
-MVP of card roguelike game
-<img width="1784" height="1045" alt="{40094025-A4A6-40B2-B651-A23B5B5C243A}" src="https://github.com/user-attachments/assets/7a42ce72-1981-4705-8ca6-45633f55aa20" />
+## Card-Roguelike MVP
 
-## Описание проекта
+Card-Roguelike — 2D roguelike-игра с карточной механикой, где игрок перемещается по **процедурно генерируемым комнатам**, сражается с врагами и собирает предметы. Игровое поле представлено в виде карт, которые игрок открывает по мере продвижения.
 
-Card-Roguelike — это 2D roguelike-игра с карточной механикой, где игрок перемещается по процедурно генерируемым комнатам, сражается с врагами и собирает предметы. Игровое поле представлено в виде карт, которые игрок открывает по мере продвижения.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qgbWs7FbNJE?si=zg3xA5U-XgLvgawA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+https://youtu.be/qgbWs7FbNJE
 
 ## Технологический стек
 
